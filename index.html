@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>开沃 · 数智化新能源大宗物流综合运营平台</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .cover-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .cover-bg .hero-blob-1 {
+      width: 520px;
+      height: 520px;
+      top: -120px;
+      right: -80px;
+    }
+    .cover-bg .hero-blob-2 {
+      width: 440px;
+      height: 440px;
+      bottom: -100px;
+      left: -60px;
+    }
+    .cover-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 28px 64px;
+      position: relative;
+      z-index: 1;
+    }
+    .cover-inner {
+      width: 100%;
+      max-width: 880px;
+      text-align: center;
+    }
+    .cover-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .cover-logo .logo-icon {
+      width: 48px;
+      height: 48px;
+      font-size: 22px;
+    }
+    .cover-logo-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+    .cover-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(102, 126, 234, 0.1);
+      color: #667EEA;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .cover-title {
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+    .cover-subtitle {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+    .cover-portals {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      text-align: left;
+    }
+    .cover-portal {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 32px 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.35s var(--ease-out-expo), box-shadow 0.35s var(--ease-out-expo), border-color 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover-portal::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .cover-portal-planning::before {
+      background: linear-gradient(90deg, #667EEA, #764BA2);
+    }
+    .cover-portal-prd::before {
+      background: linear-gradient(90deg, #56CCF2, #2AF598);
+    }
+    .cover-portal:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-float);
+      border-color: rgba(102, 126, 234, 0.2);
+    }
+    .cover-portal:hover::before {
+      opacity: 1;
+    }
+    .cover-portal-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    .cover-portal-planning .cover-portal-icon {
+      background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.1));
+    }
+    .cover-portal-prd .cover-portal-icon {
+      background: linear-gradient(135deg, rgba(86,204,242,0.15), rgba(42,245,152,0.1));
+    }
+    .cover-portal-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+    .cover-portal-desc {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      flex: 1;
+    }
+    .cover-portal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .cover-portal-tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--bg-alt);
+      color: var(--text-muted);
+    }
+    .cover-portal-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #667EEA;
+      margin-top: 4px;
+    }
+    .cover-portal-prd .cover-portal-action {
+      color: #2AAF7A;
+    }
+    .cover-portal-action svg {
+      transition: transform 0.25s var(--ease-out-expo);
+    }
+    .cover-portal:hover .cover-portal-action svg {
+      transform: translateX(4px);
+    }
+    .cover-footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 720px) {
+      .cover-portals {
+        grid-template-columns: 1fr;
+      }
+      .cover-subtitle {
+        margin-bottom: 36px;
+      }
+    }
+  </style>
+</head>
+<body class="site cover-page">
+  <div class="cover-bg">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+  </div>
+
+  <main class="cover-main">
+    <div class="cover-inner">
+      <div class="cover-logo">
+        <span class="logo-icon">开</span>
+        <span class="cover-logo-text">开沃数智化平台</span>
+      </div>
+      <div class="cover-badge">产品文档中心 · 2026</div>
+      <h1 class="cover-title">
+        数智化新能源大宗物流<br />
+        <span class="gradient-text">综合运营平台</span>
+      </h1>
+      <p class="cover-subtitle">选择专区进入对应文档 · 战略规划与功能需求一站查阅</p>
+
+      <div class="cover-portals">
+        <a href="planning.html" class="cover-portal cover-portal-planning">
+          <div class="cover-portal-icon" aria-hidden="true">📋</div>
+          <h2 class="cover-portal-title">产品规划</h2>
+          <p class="cover-portal-desc">
+            五层产品体系全景：战略层、用户层、架构层、子系统详解与路线规划，定义平台边界与演进路径。
+          </p>
+          <div class="cover-portal-tags">
+            <span class="cover-portal-tag">L1–L5 五层体系</span>
+            <span class="cover-portal-tag">架构全景</span>
+            <span class="cover-portal-tag">2026–2028 路线</span>
+          </div>
+          <span class="cover-portal-action">
+            进入产品规划
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+
+        <a href="docs/prd-ocr-pound-slip/index.html" class="cover-portal cover-portal-prd">
+          <div class="cover-portal-icon" aria-hidden="true">📄</div>
+          <h2 class="cover-portal-title">PRD 文档</h2>
+          <p class="cover-portal-desc">
+            功能模块产品需求文档专区。当前收录 OCR 装卸货磅单识别 PRD，含业务流程、功能需求与验收标准。
+          </p>
+          <div class="cover-portal-tags">
+            <span class="cover-portal-tag">OCR 磅单识别</span>
+            <span class="cover-portal-tag">业务流程图</span>
+            <span class="cover-portal-tag">v1.7</span>
+          </div>
+          <span class="cover-portal-action">
+            进入 PRD 专区
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="cover-footer">
+    开沃 · 数智化新能源大宗物流综合运营平台
+  </footer>
+</body>
+</html>

@@ -1,0 +1,2958 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>开沃 · 数智化新能源大宗物流综合运营平台 · 产品规划</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="site">
+  <div class="read-progress" id="readProgress" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" id="navLogo">
+        <span class="logo-icon">开</span>
+        <span class="logo-text">开沃产品规划</span>
+      </a>
+      <div class="nav-layers" id="navLayers">
+        <a href="#layer-intro" class="nav-layer-tab" data-layer="1">L1 战略</a>
+        <a href="#layer2-intro" class="nav-layer-tab" data-layer="2">L2 用户</a>
+        <a href="#layer3-intro" class="nav-layer-tab" data-layer="3">L3 架构</a>
+        <a href="#layer4-intro" class="nav-layer-tab" data-layer="4">L4 子系统</a>
+        <a href="#layer5-intro" class="nav-layer-tab" data-layer="5">L5 路线</a>
+      </div>
+      <div class="nav-actions">
+        <a href="index.html" class="nav-page-link">← 返回首页</a>
+        <a href="docs/prd-ocr-pound-slip/index.html" class="nav-page-link">PRD 文档 →</a>
+        <button class="nav-menu-btn" id="navMenuBtn" type="button" aria-label="打开目录导航">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <span>目录</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <aside class="sidebar" id="sidebar" aria-label="页面目录">
+    <div class="sidebar-header">
+      <span class="sidebar-title">目录</span>
+      <button class="sidebar-close" id="sidebarClose" type="button" aria-label="关闭目录">×</button>
+    </div>
+    <nav class="doc-nav" id="docNav" aria-label="文档目录"></nav>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="page-wrapper">
+  <header class="hero">
+    <div class="hero-bg">
+      <div class="hero-blob hero-blob-1"></div>
+      <div class="hero-blob hero-blob-2"></div>
+    </div>
+    <div class="container hero-content">
+      <div class="hero-badge">产品规划 · 五层体系 · 2026.07-2028.12</div>
+      <h1 class="hero-title">数智化新能源大宗物流<br /><span class="gradient-text">综合运营平台</span></h1>
+      <p class="hero-subtitle">战略 · 用户 · 架构 · 子系统 · 路线规划</p>
+      <div class="hero-actions">
+        <a href="#layer-intro" class="btn btn-primary">开始阅读</a>
+        <a href="#layer3-blueprint" class="btn btn-secondary">架构全景</a>
+        <a href="#layer5-intro" class="btn btn-secondary">产品路线</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <!-- 战略层总述 -->
+    <section class="section" id="layer-intro">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Layer 1 · Strategy</span>
+          <h2 class="section-title">第一层：战略层</h2>
+          <p class="section-desc">定义平台的边界与灵魂</p>
+        </div>
+        <div class="card card-featured intro-card">
+          <p class="doc-text">本层旨在明确数智化新能源大宗物流综合运营平台的宏观战略方向，从行业大背景与主机厂痛点出发，通过商业论证确立平台价值，为后续的架构设计和功能落地提供最高准则。</p>
+        </div>
+        <div class="layer-nav-grid">
+          <a href="#background" class="layer-nav-item card">
+            <span class="layer-nav-num">01</span>
+            <span class="layer-nav-title">项目背景与宏观趋势</span>
+          </a>
+          <a href="#business-case" class="layer-nav-item card">
+            <span class="layer-nav-num">02</span>
+            <span class="layer-nav-title">商业论证</span>
+          </a>
+          <a href="#roles" class="layer-nav-item card">
+            <span class="layer-nav-num">03</span>
+            <span class="layer-nav-title">业务流程角色与痛点</span>
+          </a>
+          <a href="#positioning" class="layer-nav-item card">
+            <span class="layer-nav-num">04</span>
+            <span class="layer-nav-title">平台定位</span>
+          </a>
+          <a href="#moat" class="layer-nav-item card">
+            <span class="layer-nav-num">05</span>
+            <span class="layer-nav-title">竞争壁垒与护城河</span>
+          </a>
+          <a href="#boundaries" class="layer-nav-item card">
+            <span class="layer-nav-num">06</span>
+            <span class="layer-nav-title">平台边界与"不做什么"</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. 项目背景与宏观趋势 -->
+    <section class="section section-alt" id="background">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">01 · Background</span>
+          <h2 class="section-title">1. 项目背景与宏观趋势</h2>
+        </div>
+        <div class="card doc-card">
+          <p class="doc-text doc-lead">新能源商用车的拐点已至，但作为主机厂，我们正站在"不破不立"的生死十字路口。外部的政策红利与我们内部的增长瓶颈形成了强烈的碰撞：</p>
+
+          <div class="doc-block">
+            <h3 class="doc-h3">主机厂遭遇"卖车难、利润薄"的生死困境（内驱推力）：</h3>
+            <ul class="doc-list">
+              <li>
+                <strong>硬件利润触底与严重同质化：</strong> 商用车市场进入残酷的存量博弈。随着"三电"供应链的高度成熟与透明化，各品牌在底盘和动力参数上的差异微乎其微。单纯依靠"卖铁（硬件）"赚取一锤子买卖差价的传统模式，利润空间已被极致压缩。
+              </li>
+              <li>
+                <strong>高昂的初始成本阻断销售转化：</strong> 尽管碳酸锂价格回落，但重卡庞大的电池组仍让整车价格居高不下。大宗物流客户对现金流极为敏感，"重资产投入"让客户望而却步（买不起、不敢买）。面对大额订单，传统的推销模式彻底失灵。
+              </li>
+            </ul>
+          </div>
+
+          <div class="doc-block">
+            <h3 class="doc-h3">双碳政策与环保倒逼（外部路权约束）：</h3>
+            <ul class="doc-list">
+              <li>
+                <strong>排放比例极度不均：</strong> 环保部与公安交管数据显示，重型货车仅占全国汽车保有量的 约3%，但却排放了超过 85% 的氮氧化物 (NOx) 和 65% 的颗粒物 (PM)。重卡已成为移动源污染治理的"头号靶子"。
+              </li>
+              <li>
+                <strong>环保绩效A级评级的"生死线"：</strong> 目前，全国钢铁、焦化、水泥、煤炭等重点高耗能行业正在被强制推行"环保绩效A级企业"评级。政策明确规定：A级企业在重污染天气期间可免于停产限产，但前提是企业大宗物料的清洁运输（新能源或国六）比例必须达到 80% 甚至核心厂区要求 100%。
+              </li>
+              <li>
+                <strong>路权即生存权：</strong> 不用新能源重卡，物流大客户不仅拿不到钢厂、矿区的承运大单，在部分一二线城市及工业园区，柴油车甚至连厂区大门和城市主干道都进不去。这种"路权约束"将原本的"选修课"变成了物流企业的"必修课"。
+              </li>
+            </ul>
+          </div>
+
+          <div class="doc-block">
+            <h3 class="doc-h3">补能基础设施与运营的"脱轨"（能源孤岛现象）：</h3>
+            <ul class="doc-list">
+              <li>虽然各地在疯狂建桩建站，但对于高频次的大宗物流而言，公用的充换电网络无法满足需求（不仅贵，且排队时间不可控）。车队在场站自己建的桩，往往因为缺乏系统统筹，导致"盲目充电、错过谷电、甚至超负荷拉闸停电"。单纯有车没有配套能源管理，车队根本转不起来。</li>
+            </ul>
+          </div>
+
+          <div class="doc-block">
+            <h3 class="doc-h3">新能源重卡渗透率狂飙（市场爆发验证）：</h3>
+            <ul class="doc-list">
+              <li>
+                <strong>跨越鸿沟的"引爆点"：</strong> 行业数据显示，2025年中国新能源重卡累计销量突破 23.11万辆，同比暴涨 182%，全年整体渗透率逼近 30%。更具历史意义的是，2025年12月单月渗透率历史性突破 53.89%大关。
+              </li>
+              <li>
+                <strong>从"试水"到"结构性替代"：</strong> 进入2026年，渗透率持续稳定在30%以上，行业全面进入"淘汰赛阶段"。过去物流车队买电车是"买两台试试水"，现在则是基于对燃油车二手残值暴跌的恐慌，开始进行车队规模化的结构性替换。
+              </li>
+            </ul>
+          </div>
+
+          <div class="doc-block doc-block-highlight">
+            <h3 class="doc-h3">破局之道（倒逼转型）：</h3>
+            <ul class="doc-list">
+              <li>💡<strong>商业逻辑的彻底重构：</strong> 主机厂必须觉醒，把销售逻辑从"算买车成本"转变为"算TCO（总拥有成本）和运营收益"。我们必须从单一的车辆硬件制造商，倒逼自己转型为"装备 + 能源网络 + 运力调度 + 数据服务"的综合运力服务商。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 商业论证 -->
+    <section class="section" id="business-case">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">02 · Business Case</span>
+          <h2 class="section-title">2. 商业论证：为什么要通过"投/合资运营+数字平台"来做？(Business Case)</h2>
+        </div>
+        <div class="card doc-card">
+          <p class="doc-text doc-lead">面对一台动辄几十万的新能源重卡，传统"一锤子买卖"算不平账。往往一些中小型公司并没有办法短期内拿出对应资本进行独立运营，所以可以通过建立"投合资运营+数字化平台"和"租赁资源"的商业模式将实现从"线性收益"向"网状长尾收益"的跨越。</p>
+
+          <div class="doc-block">
+            <h3 class="doc-h3">对主机厂的收益模型 (OEM Revenue Model)：</h3>
+            <ul class="doc-list">
+              <li>
+                <strong>从"死资产"变"活产能"：</strong> 客户出货源，我们出项目路线资源尽调、出车、出平台、出能源管理方案，直接盘活重卡产能。
+              </li>
+              <li>
+                <strong>重构利润结构（赚全生命周期与能源的钱）：</strong>
+                <ul class="doc-sublist">
+                  <li>车辆硬件利润（买断or租赁） + 运费分成 + 维保后市场锁定。</li>
+                  <li>【新增】能源套利与电池资产收益： 大宗车队日耗电量惊人。通过平台控制车辆在夜间"谷电"低价时段集中充电，在"峰电"时段跑车，合资公司每年可省下数百万电费（实质上的能源差价利润）。同时，平台监控电池SOH，为未来的电池梯次利用或碳资产交易提供权威数据。</li>
+                </ul>
+              </li>
+              <li>
+                <strong>掌握核心数据资产（千金难买）：</strong> 掌握真实的运行轨迹和充放电行为数据，既能反哺研发，更能成为与金融机构谈判降低资金成本的筹码。
+              </li>
+            </ul>
+          </div>
+
+          <div class="doc-block">
+            <h3 class="doc-h3">对物流大客户的价值交付 (Customer Value Delivery)：</h3>
+            <ul class="doc-list">
+              <li>
+                <strong>低风险合规，保住核心生意：</strong> 客户以极低的资金杠杆满足了100%清洁运输要求，保住了主营业务的生命线。
+              </li>
+              <li>
+                <strong>能源与技术兜底，告别"电车恐惧症"：</strong> 主机厂平台下场做"技术和能源保姆"，解决续航焦虑和充电排队问题，让客户只管拿单，不管修车和充换电调度。
+              </li>
+            </ul>
+          </div>
+
+          <div class="doc-block">
+            <h3 class="doc-h3">数字平台的"杠杆效应" (The Platform Leverage)：</h3>
+            <ul class="doc-list">
+              <li>
+                <strong>效率杠杆（抗衡重资产贬值）：</strong> 通过运力调度将单车日均里程从传统的 200km 压榨到 400km 甚至更高。提升20%的车辆出勤率，就能让合资公司的回本周期缩短1.5年。
+              </li>
+              <li>
+                <strong>能源杠杆（精算电费利润）：</strong> 平台通过智能充换电策略，不仅能避开峰电高峰，还能削峰填谷，降低场站电力增容的巨额成本。
+              </li>
+              <li>
+                <strong>安全杠杆（锁死利润黑洞）：</strong> 大宗物流一旦发生重大安全事故，合资公司的利润顷刻归零。平台的主动安全体系直接给资产上了一道物理级的保险单。
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 业务流程角色大类梳理 -->
+    <section class="section section-alt" id="roles">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">03 · Roles & Pain Points</span>
+          <h2 class="section-title">3. 业务流程角色大类梳理与核心痛点分析</h2>
+          <p class="section-desc">在新能源合资运营模式下，我们需要服务五大阵营。只有深刻理解他们"晚上睡不着觉"的痛点，平台才有生命力。</p>
+        </div>
+
+        <div class="roles-grid">
+          <!-- 3.1 -->
+          <div class="card role-card">
+            <div class="role-header">
+              <span class="role-num">3.1</span>
+              <span class="role-tag">破冰与赋能方</span>
+            </div>
+            <h3 class="role-title">主机厂（我们）</h3>
+            <div class="role-section">
+              <h4>角色定位：</h4>
+              <p>项目多维度数据尽调、车辆资源提供方、系统研发方、资产管理方、数据需求方、运营决策占比。</p>
+            </div>
+            <div class="role-section">
+              <h4>核心痛点：</h4>
+              <ul class="doc-list">
+                <li><strong>卖车"算不平账"：</strong> 销售拿着传统宣传册，无法向客户证明"一台贵几十万的电车，靠运营能把本钱赚回来"。</li>
+                <li><strong>车辆售出即失联：</strong> 无法获取真实的电池衰减、电机负荷及司机驾驶习惯数据，车辆迭代犹如盲人摸象。</li>
+                <li><strong>增量利润匮乏：</strong> 车辆卖出后，后续数十年的维保、电池回收、碳资产红利全被第三方吃掉。</li>
+              </ul>
+            </div>
+            <div class="role-section role-needs">
+              <h4>未被满足的需求：</h4>
+              <p>亟需一套【TCO算账与投前模拟沙盘】用于降维打击式拓客；需要掌控全局底层数据以反哺研发，并建立长效收益分润机制。</p>
+            </div>
+          </div>
+
+          <!-- 3.2 -->
+          <div class="card role-card">
+            <div class="role-header">
+              <span class="role-num">3.2</span>
+              <span class="role-tag">货源与出资方</span>
+            </div>
+            <h3 class="role-title">物流大客户 / 核心货主/生产制造企业（货权方）</h3>
+            <div class="role-section">
+              <h4>角色定位：</h4>
+              <p>握有钢厂、矿区、砂石大宗货单，提供初始资金和场地的"金主"。</p>
+            </div>
+            <div class="role-section">
+              <h4>核心痛点：</h4>
+              <ul class="doc-list">
+                <li><strong>环保逼迫下的"试错恐惧"：</strong> 政策逼着换新能源保路权，但极度惧怕电池两三年就衰减报废，导致千万投资打水漂。</li>
+                <li><strong>资金链承压：</strong> 规模化替换几十台上百台重卡，现金流面临断裂风险。</li>
+                <li><strong>怕掉链子丢大单：</strong> 电车一旦因为续航或充电排队导致运力跟不上，钢厂、矿主会立刻将货单转移给其他车队。</li>
+              </ul>
+            </div>
+            <div class="role-section role-needs">
+              <h4>未被满足的需求：</h4>
+              <p>需要车厂下场作为"技术和资产保姆"进行风险兜底；需要明确看到合资模式下的现金流回正节点；需要承诺100%的保供运力。</p>
+            </div>
+          </div>
+
+          <!-- 3.3 -->
+          <div class="card role-card">
+            <div class="role-header">
+              <span class="role-num">3.3</span>
+              <span class="role-tag">运营操盘方</span>
+            </div>
+            <h3 class="role-title">合资公司管理层</h3>
+            <div class="role-section">
+              <h4>角色定位：</h4>
+              <p>每天面临运力调度、成本考核、安全压力的车队队长、调度主管、财务。</p>
+            </div>
+            <div class="role-section">
+              <h4>核心痛点：</h4>
+              <ul class="doc-list">
+                <li><strong>传统的调度就是"瞎指挥"：</strong> 燃油车时代的TMS不管油箱，但电车时代，如果调度不知道车辆剩余电量（SOC）和换电站库存就派单，会导致车辆半路趴窝或在场站死等。（人车闲置率）</li>
+                <li><strong>电费成本的"无底洞"：</strong> 几十台重卡如果在"峰平电价"时段无序集体充电，不仅场站面临跳闸风险，一个月甚至会多出大几十万的巨额电费。</li>
+                <li><strong>车毁人亡的"悬顶之剑"：</strong> 大宗物流高频重载，司机极易疲劳。只要发生一起重大伤亡事故，巨额赔偿和停业整顿将瞬间吞噬合资公司全年的利润。</li>
+              </ul>
+            </div>
+            <div class="role-section role-needs">
+              <h4>未被满足的需求：</h4>
+              <p>亟需一套【融合SOC与电价的智能TMS】进行车能调度；亟需自动化的充电削峰填谷策略；亟需一套能物理级干预危险驾驶的主动安全兜底系统。</p>
+            </div>
+          </div>
+
+          <!-- 3.4 -->
+          <div class="card role-card">
+            <div class="role-header">
+              <span class="role-num">3.4</span>
+              <span class="role-tag">一线执行方</span>
+            </div>
+            <h3 class="role-title">司机与场站人员</h3>
+            <div class="role-section">
+              <h4>角色定位：</h4>
+              <p>开车拉货赚辛苦钱的司机，以及充换电站的站长、库管。</p>
+            </div>
+            <div class="role-section">
+              <h4>核心痛点：</h4>
+              <ul class="doc-list">
+                <li><strong>极度的时间焦虑（充电即停工）：</strong> 司机按趟次、品类、吨数、公里数算工资，最怕到了换电站没满电的电池，或排队充电一等两小时，白白流失赚钱时间。</li>
+                <li><strong>里程与续航焦虑：</strong> 怕半路没电，冬天不敢开暖风，夏天不敢开空调。</li>
+                <li><strong>简单粗暴的安全罚款：</strong> 现有的安全管理往往是"事后看录像扣钱"，缺少事前的温馨提醒和有效的安全技能提升，导致司机产生对抗情绪。</li>
+              </ul>
+            </div>
+            <div class="role-section role-needs">
+              <h4>未被满足的需求：</h4>
+              <p>极简的车机或APP体验（无需思考即可找到有电的桩）；精准的运力与换电预约（随到随换）；有温度的安全提醒（先提醒纠正，后干预评估，取代直接罚款）。</p>
+            </div>
+          </div>
+
+          <!-- 3.5 -->
+          <div class="card role-card">
+            <div class="role-header">
+              <span class="role-num">3.5</span>
+              <span class="role-tag">资金流转与助推方</span>
+            </div>
+            <h3 class="role-title">金融机构（银行/融资租赁/险企）</h3>
+            <div class="role-section">
+              <h4>角色定位：</h4>
+              <p>提供大额购车/建站资金杠杆的资金方，以及承保运营风险的保险机构。</p>
+            </div>
+            <div class="role-section">
+              <h4>核心痛点：</h4>
+              <ul class="doc-list">
+                <li><strong>缺乏优质、合规的绿色资产：</strong> 传统物流行业高度散乱差，现金流极其不稳定。金融机构手握巨额资金（特别是绿色金融/ESG专项信贷），却苦于找不到成规模、可持续的优质绿色资产投放标的。</li>
+                <li><strong>风控难度大，资产不可穿透：</strong> 以往给物流车队放款，金融机构根本不知道车辆是否在真实干活、轨迹在哪、残值掉得有多快。一旦车队跑路或破产，重卡资产贬值极快，成为巨额坏账。</li>
+              </ul>
+            </div>
+            <div class="role-section role-needs">
+              <h4>未被满足的需求：</h4>
+              <p>亟需【批量的绿色资产来源】（车厂主导的合资公司正是绝佳标的）；亟需【真实的底层运营数据】（由车厂平台提供防篡改的运单、电耗和流水数据作为还款能力交叉验证）；亟需车厂提供电池健康度(SOH)监控与【可靠的风险兜底】，消除资产贬值焦虑。</p>
+            </div>
+          </div>
+
+          <!-- 3.6 -->
+          <div class="card role-card">
+            <div class="role-header">
+              <span class="role-num">3.6</span>
+              <span class="role-tag">API对接方</span>
+            </div>
+            <h3 class="role-title">外部网络货运平台/三方信息部 (API对接方)</h3>
+            <div class="role-section">
+              <h4>角色定位：</h4>
+              <p>手握外部海量货源，急需寻找合规、透明的绿电运力来承接业务，是实现平台"资源互换与运力蓄水池"功能的关键流量分发节点</p>
+            </div>
+            <div class="role-section">
+              <h4>核心痛点：</h4>
+              <ul class="doc-list">
+                <li><strong>缺乏优质绿电运力池：</strong> 货主（如国企钢厂、大型矿区）在国家双碳政策下，有着极其严苛的环保绩效评级 KPI（如必须达到 A 级清洁运输比例）。三方平台手握这些利润丰厚的"绿标货单"，却苦于找不到足够规模、合规且稳定的纯电重卡车队来承接，面临"有单没人接"的尴尬。</li>
+                <li><strong>运力失控与数据断层（信任危机）：</strong> 传统模式下，将货单外包给外部车队后，平台就失去了对车辆的掌控。轨迹造假频发、偷货换料难以追查、纸质回单流转极慢且极易丢失，导致三方平台与上游货主的结算对账极度痛苦，经常需要垫付大量资金，风险极高。</li>
+              </ul>
+            </div>
+            <div class="role-section role-needs">
+              <h4>未被满足的需求：</h4>
+              <ul class="doc-list">
+                <li><strong>标准运力输出接口 (API)】：</strong> 平台向网货平台开放合资车队的闲置运力与排班计划。实现跨平台的自动派单、电子围栏核验与自动化运费计价，让网货平台能像调用自家车队一样调度合资运力。</li>
+                <li><strong>【透明化信任接口 (数据穿透)】：</strong> 向三方平台实时输出防篡改的 GPS/北斗轨迹、区块链电子回单 (e-POD) 以及直接从地磅抓取的实重数据。彻底消除双方的信任鸿沟，将原本以"月"为单位的对账周期压缩至"秒"级，实现业务流与资金流的极速核销</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 平台定位 -->
+    <section class="section" id="positioning">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">04 · Positioning</span>
+          <h2 class="section-title">4. 平台定位</h2>
+        </div>
+        <div class="card doc-card">
+          <p class="doc-text doc-lead">这不是一套普通的SaaS软件，而是基于主机厂独特优势打造的"行业级数字大脑"。我们将整体定位细分为内部和外部两个维度，并分别赋予其核心目标、高度策略与价值导向：</p>
+        </div>
+
+        <div class="positioning-grid">
+          <!-- 4.1 -->
+          <div class="card positioning-card">
+            <div class="positioning-label">4.1 内部定位</div>
+            <h3 class="positioning-title">端到端的全链路一体化运营平台</h3>
+            <p class="doc-text">作为主机厂（我们）转型服务商的数字化利器，全面打通"市场获客 -&gt; 项目转化(测算) -&gt; 资产管理 -&gt; 物流运营(车能调度) -&gt; 后市场服务"的业务全链路，实现闭环管理。</p>
+
+            <div class="positioning-block">
+              <h4>核心目标 (Core Objectives)：</h4>
+              <ul class="doc-list">
+                <li>实现从单纯的车辆销售向"市场、资产、运营、售后，目的地高效的消化车辆和提供稳定的售后服务"的综合运力服务商的彻底转型。</li>
+                <li>构建行业首个融合"车辆控制底层数据、充换电调度、运力匹配模型"的三位一体算法平台，沉淀核心数据资产。</li>
+              </ul>
+            </div>
+            <div class="positioning-block">
+              <h4>高度策略 (High-level Strategy)：</h4>
+              <ul class="doc-list">
+                <li><strong>以终为始，降维打击：</strong> 利用主机厂掌握核心底层参数的降维优势，先以投前精准的数据推演打破商务谈判僵局，再以投中运营系统的保供增效锁定长期合作。</li>
+                <li><strong>软硬解耦，双向驱动：</strong> 打破过去硬件迭代与软件升级脱节的困局，利用合资运营平台的规模化车辆数据反哺整车研发，同时不断迭代软件算法以优化硬件能耗表现。</li>
+              </ul>
+            </div>
+            <div class="positioning-block positioning-value">
+              <h4>价值导向 (Value Orientation)：</h4>
+              <p>坚持"用数据打单，用系统管车，用安全保本"的核心价值逻辑。为内部营销和运营团队提供具有绝对说服力和掌控力的武器。</p>
+            </div>
+          </div>
+
+          <!-- 4.2 -->
+          <div class="card positioning-card">
+            <div class="positioning-label">4.2 外部定位</div>
+            <h3 class="positioning-title">双面向综合服务平台</h3>
+            <p class="doc-text">对外构建人、车、货、能、场，财数智化高度协同的生态，充当"产业路由器"。</p>
+
+            <div class="positioning-block">
+              <h4>核心目标 (Core Objectives)：</h4>
+              <ul class="doc-list">
+                <li><strong>面向需求方（货主、物流大客户）：</strong> 提供"一站式绿色运力服务底座"，以保供、降本、安全兜底为核心，解决客户面临的环保路权危机与运力焦虑。</li>
+                <li><strong>面向合作伙伴（司机、车队、补能运营商、金融机构）：</strong> 充当"资源整合与数据开放平台"，实现共赢共生。</li>
+              </ul>
+            </div>
+            <div class="positioning-block">
+              <h4>高度策略 (High-level Strategy)：</h4>
+              <ul class="doc-list">
+                <li><strong>风险兜底与信任穿透：</strong> 车厂下场做"技术和资产保姆"，消除客户对新能源的试错恐惧；同时开放脱敏的底层真实运营数据给金融和保险机构，消除资金端的风控焦虑。</li>
+                <li><strong>生态共赢机制：</strong> 用真实穿透的数据为金融机构增信，用调度算法为补能商提供精准导流预测，用有温度的系统为司机赋能，打造多方共赢的新能源运营生态。</li>
+              </ul>
+            </div>
+            <div class="positioning-block positioning-value">
+              <h4>价值导向 (Value Orientation)：</h4>
+              <p>将冰冷的"合规要求"转化为可见的"经济收益"，将高危的大宗物流转变为"可预测、可干预"的安全闭环，将极速贬值的"重卡死资产"转化为"流动透明的绿色金融资产"。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 竞争壁垒 -->
+    <section class="section section-alt" id="moat">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">05 · Competitive Moat</span>
+          <h2 class="section-title">5. 竞争壁垒与护城河</h2>
+        </div>
+        <div class="card doc-card">
+          <p class="doc-text doc-lead">面对市面上层出不穷的第三方SaaS软件（如G7、满帮等），我们的平台不以"通用管理功能"取胜，而是建立在车厂不可复制的先天基因上：</p>
+        </div>
+        <div class="moat-grid">
+          <div class="card moat-card">
+            <div class="moat-icon">01</div>
+            <h3>极深的数据穿透力与逆向控制权（核心壁垒）</h3>
+            <p class="doc-text">第三方软件只能通过OBD盒子获取表面数据。而我们掌握底层的CAN总线协议，能够直接读取最高精度的BMS（电池管理系统）数据。这让我们在电量预估、能耗模型计算上做到绝对精准。更重要的是，在主动安全干预（如重度疲劳降速）等场景，我们拥有安全可靠的车辆逆向控制权，这是纯软件公司无法触及的命门。</p>
+          </div>
+          <div class="card moat-card">
+            <div class="moat-icon">02</div>
+            <h3>真正的"车-能-网"闭环协同调度</h3>
+            <p class="doc-text">市面上的TMS管不了充电桩，充电场站的APP不管运力派单。我们作为设备提供方，可以原生地打通车机系统、TMS派单逻辑以及合资建设的补能网络。我们可以做到"看电派单"、"预定换电"，实现独一无二的"运力+能源"双层协同优化。</p>
+          </div>
+          <div class="card moat-card">
+            <div class="moat-icon">03</div>
+            <h3>重资产兜底的降维商业打击</h3>
+            <p class="doc-text">纯软件公司靠卖账号（SaaS费）生存，随时可能被替换。我们平台的功能只是"赠品"，我们赚取的是合资公司背后的巨大运营分红、能源差价、以及后市场配件利润。由于我们提供了重资产和底层风险兜底，客户一旦接入，其极高的迁移成本将形成强大的客户粘性。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. 平台边界 -->
+    <section class="section" id="boundaries">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">06 · Boundaries</span>
+          <h2 class="section-title">6. 平台边界与"不做什么"</h2>
+        </div>
+        <div class="card doc-card">
+          <p class="doc-text doc-lead">明确我们不做什么，才能集中兵力攻克最核心的业务难题。本平台坚守以下底线：</p>
+          <ul class="boundary-list">
+            <li class="boundary-item">
+              <span class="boundary-icon">✕</span>
+              <div>
+                <strong>不触碰核心商务边界：</strong> 平台提供高效的运力调度和计费工具，但绝对不越界去干预客户与货主的运费定价和承运合同。 平台不做破坏客户基本盘的"撮合交易平台"。
+              </div>
+            </li>
+            <li class="boundary-item">
+              <span class="boundary-icon">✕</span>
+              <div>
+                <strong>不做大而全的无车承运人（网络货运）：</strong> 我们深耕长包期、线路固定的合资大宗物流。不盲目去市场上整合零散的"黄牛货源"或散户司机。
+              </div>
+            </li>
+            <li class="boundary-item">
+              <span class="boundary-icon">✕</span>
+              <div>
+                <strong>不自研基础底层基础设施：</strong> 诸如底层电子地图（高德/四维）、常规视频流云存储（阿里云/腾讯云）、基础财务ERP等模块，全部采用API接入成熟的第三方服务。我们将核心研发资源集中投入到："大宗TCO算账模型"、"车能协同调度算法"和"驾驶行为AI大模型" 这三大核心杀手锏上
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 第二层：用户层 ========== -->
+    <div class="layer-divider">
+      <div class="container">
+        <div class="layer-divider-line"></div>
+      </div>
+    </div>
+
+    <section class="section section-alt" id="layer2-intro">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Layer 2 · Users</span>
+          <h2 class="section-title">第二层：用户层</h2>
+          <p class="section-desc">全景用户画像与全链路场景地图</p>
+        </div>
+        <div class="card card-featured intro-card">
+          <p class="doc-text">本层旨在将宏观战略落实到具体的执行者身上。围绕"车厂下场、项目尽调、投合资运营"的业务模式，我们以全生命周期 (Market-to-Cash-to-Asset) 为主轴，梳理了从获客到售后的核心角色。明确不同角色在平台上"能看什么、能干什么、最怕什么"，这是构建庞大系统功能架构的基石。</p>
+        </div>
+        <div class="layer-nav-grid">
+          <a href="#layer2-matrix" class="layer-nav-item card">
+            <span class="layer-nav-num">01</span>
+            <span class="layer-nav-title">账号体系与端产品矩阵</span>
+          </a>
+          <a href="#layer2-phase1" class="layer-nav-item card">
+            <span class="layer-nav-num">02</span>
+            <span class="layer-nav-title">第一阶段：市场获客与破冰期</span>
+          </a>
+          <a href="#layer2-phase2" class="layer-nav-item card">
+            <span class="layer-nav-num">03</span>
+            <span class="layer-nav-title">第二阶段：项目管理与转化</span>
+          </a>
+          <a href="#layer2-phase3" class="layer-nav-item card">
+            <span class="layer-nav-num">04</span>
+            <span class="layer-nav-title">第三阶段：运营与资产管理</span>
+          </a>
+          <a href="#layer2-phase4" class="layer-nav-item card">
+            <span class="layer-nav-num">05</span>
+            <span class="layer-nav-title">第四阶段：物流运营与执行期</span>
+          </a>
+          <a href="#layer2-phase5" class="layer-nav-item card">
+            <span class="layer-nav-num">06</span>
+            <span class="layer-nav-title">第五阶段：后市场服务期</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. 账号体系与端产品矩阵 -->
+    <section class="section" id="layer2-matrix">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">01 · Product Matrix</span>
+          <h2 class="section-title">1. 账号体系与端产品矩阵总览</h2>
+        </div>
+        <div class="card doc-card">
+          <p class="doc-text doc-lead">为了满足跨端、跨组织的多角色协同需求，平台将分为以下几大端产品：</p>
+          <ul class="doc-list matrix-list">
+            <li><strong>车厂全局决策端 (APP/H5/Web/数据大屏)：</strong> 供车厂专家、BD、资方、碳交易员使用的全盘视角与资产、营收、利润测算工具。</li>
+            <li><strong>合资公司智运管家 (PC SaaS/Web)：</strong> 调度、安全员、财务、车队长等中后台操盘手的高效管理工作台。</li>
+            <li><strong>边缘作业与协同终端 (APP/车机/小程序/PDA)：</strong> 供司机（自有/外协）、装卸员、维保技师使用，强调极简交互、防呆设计与物联网直连。</li>
+          </ul>
+        </div>
+        <div class="matrix-cards">
+          <div class="card matrix-card">
+            <div class="matrix-card-icon matrix-icon-1">厂</div>
+            <h3>车厂全局决策端</h3>
+            <p class="matrix-platform">APP / H5 / Web / 数据大屏</p>
+            <p class="doc-text">供车厂专家、BD、资方、碳交易员使用的全盘视角与资产、营收、利润测算工具。</p>
+          </div>
+          <div class="card matrix-card">
+            <div class="matrix-card-icon matrix-icon-2">运</div>
+            <h3>合资公司智运管家</h3>
+            <p class="matrix-platform">PC SaaS / Web</p>
+            <p class="doc-text">调度、安全员、财务、车队长等中后台操盘手的高效管理工作台。</p>
+          </div>
+          <div class="card matrix-card">
+            <div class="matrix-card-icon matrix-icon-3">端</div>
+            <h3>边缘作业与协同终端</h3>
+            <p class="matrix-platform">APP / 车机 / 小程序 / PDA</p>
+            <p class="doc-text">供司机（自有/外协）、装卸员、维保技师使用，强调极简交互、防呆设计与物联网直连。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 全生命周期角色画像 -->
+    <section class="section section-alt" id="layer2-scenarios">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">02 · Scenarios</span>
+          <h2 class="section-title">2. 全生命周期角色画像与每日业务场景</h2>
+        </div>
+
+        <!-- 第一阶段 -->
+        <div class="phase-block" id="layer2-phase1">
+          <div class="phase-header card">
+            <span class="phase-num">第一阶段</span>
+            <h3 class="phase-title">市场获客与破冰期</h3>
+            <p class="phase-goal"><strong>核心目标：</strong> 用数据打消疑虑，促成合资落地。</p>
+          </div>
+          <div class="scenario-table-wrap card">
+            <table class="scenario-table">
+              <thead>
+                <tr>
+                  <th>角色名称</th>
+                  <th>核心诉求与痛点 (深挖)</th>
+                  <th>关键业务场景 (Day-in-the-Life)</th>
+                  <th>所需核心功能/权限</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="role-name">生态业务市场团队</td>
+                  <td>
+                    <p><strong>诉求：</strong> 手握"算账利器"，打破客户对高价电车的抗拒，快速签单。</p>
+                    <p><strong>痛点：</strong> 拿着传统PPT卖车根本行不通；电车初始成本高，算不清几年回本，谈判极度被动。</p>
+                  </td>
+                  <td>拜访前，在系统输入客户的运输线路等其他维度期望数据。系统自动生成包含油电差价、能耗和回本、盈利周期的《合资运营收益模拟报告》，用于向客户路演。</td>
+                  <td>TCO（总体拥有成本）测算沙盘、CRM、合资收益预测模型。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">技术支持专家</td>
+                  <td>
+                    <p><strong>诉求：</strong> 方案精准落地，不挖坑。</p>
+                    <p><strong>痛点：</strong> 如果测算失误（比如高估了载重上坡的电量），会导致后期运营车辆天天抛锚。</p>
+                  </td>
+                  <td>地图图谱数据核实后，调用平台历史相似路况的真实能耗数据，验证BD方案的电耗可行性，规划补能的最佳路线,建设场站</td>
+                  <td>高程路线能耗仿真模型、历史能耗数据库调取。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">潜在合作客户 (甲方高管)</td>
+                  <td>
+                    <p><strong>诉求：</strong> 1.综合成本绝对低于柴油车；2.满足极端的保供服务标准；3.符合环保评级要求。4.现金流困扰</p>
+                    <p><strong>痛点：</strong> 商业本质是逐利，环保只是门票。最怕电车买来"运费倒挂"，或因充电排队导致工厂断料停产。</p>
+                  </td>
+                  <td>审阅BD发送的线上合作提案，调整沙盘中的出资比例参数，重点核对新模式下的吨公里成本和保供服务。若意向客户出于现金流考量，可拓展为租赁业务</td>
+                  <td>只读版TCO沙盘（侧重成本对比）、资源保供协议确认。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 第二阶段 -->
+        <div class="phase-block" id="layer2-phase2">
+          <div class="phase-header card">
+            <span class="phase-num">第二阶段</span>
+            <h3 class="phase-title">项目管理与转化</h3>
+            <p class="phase-goal"><strong>核心目标：</strong> 资产与人员平稳过渡，软硬件无缝就绪。</p>
+          </div>
+          <div class="scenario-table-wrap card">
+            <table class="scenario-table">
+              <thead>
+                <tr>
+                  <th>角色名称</th>
+                  <th>核心诉求与痛点 (深挖)</th>
+                  <th>关键业务场景 (Day-in-the-Life)</th>
+                  <th>所需核心功能/权限</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="role-name">交付实施与培训经理（单多人）</td>
+                  <td>
+                    <p><strong>诉求：</strong> 快速让没文化的司机用起来，系统顺利初始化。</p>
+                    <p><strong>痛点：</strong> 给几十个习惯了燃油车且有抵触情绪的老司机装APP、激活车机极其繁琐，现场教学成本极高。</p>
+                  </td>
+                  <td>批量导入司机和车辆信息，一键分配车机账号。在发车现场使用调试APP快速标定车内的ADAS摄像头。</td>
+                  <td>账号批量激活工具、车载硬件标定与自检诊断。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">资产管理</td>
+                  <td>
+                    <p><strong>诉求：</strong>车辆过户、上牌、发运</p>
+                    <p>挂车采购</p>
+                  </td>
+                  <td>锁单 → 主挂车同步发运 → 在途追踪 → 导出上牌资料包办铁牌</td>
+                  <td>
+                    <p>主挂协同采购发运矩阵</p>
+                    <p>车籍资料OCR电子档案袋</p>
+                    <p>资产状态机强管控</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="role-name">市场</td>
+                  <td>
+                    <p><strong>诉求：</strong>工商税务开户速办</p>
+                    <p>运力/租赁合同账期背靠背</p>
+                    <p><strong>痛点：</strong>多线并发，盖章流程易失控</p>
+                    <p>前线承诺与落地条款断层</p>
+                  </td>
+                  <td>催办执照 → 线上签署运力合同 → 触发内部租赁审批流</td>
+                  <td>
+                    <p>项目里程碑甘特图</p>
+                    <p>电子签章与账期防断裂校验</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="role-name">金融</td>
+                  <td>
+                    <p><strong>诉求：</strong>极速满足条件，资方放款；资产足额抵押保全</p>
+                    <p><strong>痛点：</strong></p>
+                    <p>资方要证才放款 vs 车厂要钱才给证的死锁</p>
+                    <p>合资方关联债务穿透难</p>
+                  </td>
+                  <td>归集合同与合格证 → 打包通过API推送资方 → 锁定车辆产权</td>
+                  <td>
+                    <p>融资资质一键打包审查接口</p>
+                    <p>资金放款里程碑与交付绑定</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="role-name">运营</td>
+                  <td>
+                    <p><strong>诉求：</strong>司机/路线/场站提前就位</p>
+                    <p>扫除路权、涵洞、坡度障碍</p>
+                    <p><strong>痛点：</strong>实地路况/能耗与售前沙盘不符</p>
+                    <p>司机招募断档/从业资格过期</p>
+                  </td>
+                  <td>实地跑单采集坡度修正算法 → 招募司机 → 预分配充电账户</td>
+                  <td>
+                    <p>移动端路测打点与能耗修正系统</p>
+                    <p>车/人/站三绿灯准入Checklist</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 第三阶段 -->
+        <div class="phase-block" id="layer2-phase3">
+          <div class="phase-header card">
+            <span class="phase-num">第三阶段</span>
+            <h3 class="phase-title">运营与资产管理</h3>
+            <p class="phase-goal"><strong>核心目标：</strong> 闭环租赁账单，锁定重资产的数字履历与长尾残值。</p>
+          </div>
+          <div class="scenario-table-wrap card">
+            <table class="scenario-table">
+              <thead>
+                <tr>
+                  <th>角色名称</th>
+                  <th>核心诉求与痛点 (深挖)</th>
+                  <th>关键业务场景 (Day-in-the-Life)</th>
+                  <th>所需核心功能/权限</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="role-name">资产租赁与合同管理员</td>
+                  <td>
+                    <p><strong>诉求：</strong> 租金按时回款，合同账期清晰可见。</p>
+                    <p><strong>痛点：</strong> 管理几十上百台重卡的租赁合同，各种账期、利率混杂。依靠人工Excel算租金极易算错，经常漏掉催收导致坏账。</p>
+                  </td>
+                  <td>录入车辆租赁参数。系统每月自动执行租金计算，并向承租方发送账单。进入逾期工作台，对欠款车辆触发自动催收提醒。</td>
+                  <td>租赁合同管理（合同录入、租金计算、自动催收、逾期管理）。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">车辆资产与残值评估师</td>
+                  <td>
+                    <p><strong>诉求：</strong> 穿透硬件外壳，看透资产"底子"，实现退役价值最大化。</p>
+                    <p><strong>痛点：</strong> 缺乏底层数据，盲目评估极易导致资产贱卖；电池报废处理不当不仅亏钱还有安全隐患。</p>
+                  </td>
+                  <td>输入车架号，调阅这台车的数字档案（看修过几次、电池SOH衰减曲线）。据此决定：整车推向二手车市场，或将电池组拆解进行储能梯次利用。</td>
+                  <td>车辆全生命周期档案（车辆/电池/维修/事故/运营信息）、车辆残值管理（残值评估、二手车处置、电池梯次利用）。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">资方风控/审计员</td>
+                  <td>
+                    <p><strong>诉求：</strong> 确保信贷/抵押资产安全，现金流真实可视。</p>
+                    <p><strong>痛点：</strong> 物流账本造假严重。怕车队实际没活干或者车辆被跨省变卖，导致信贷变坏账。</p>
+                  </td>
+                  <td>登录资方专属看板，交叉核对车辆GPS轨迹、日均电耗和不可篡改的运费流水，动态评估合资公司的真实还款能力。</td>
+                  <td>资产轨迹电子围栏、不可篡改的账单/里程视图。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">保险理赔与精算员</td>
+                  <td>
+                    <p><strong>诉求：</strong> 基于真实风险动态定价，杜绝骗保。</p>
+                    <p><strong>痛点：</strong> 大宗物流出险率极高且常遇骗保，传统重卡车险连年亏损。</p>
+                  </td>
+                  <td>获取平台脱敏的"车队安全健康分"，给予次年保费折扣。事故发生时，通过API直接调取前15秒的DMS录像定损。</td>
+                  <td>动态保费评估接口、事故视频/轨迹快速调取。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">碳资产/ESG交易员</td>
+                  <td>
+                    <p><strong>诉求：</strong> 将环保达标转化为真金白银的收益。</p>
+                    <p><strong>痛点：</strong> 缺乏权威、连续、符合国际认证标准的减排数据支撑，无法在碳市场挂牌交易。</p>
+                  </td>
+                  <td>一键导出符合CCER（国家核证自愿减排量）标准的《新能源替代碳减排台账》，提交至碳交易所。</td>
+                  <td>区块链存证的碳减排核算模块。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 第四阶段 -->
+        <div class="phase-block" id="layer2-phase4">
+          <div class="phase-header card phase-header-highlight">
+            <span class="phase-num">第四阶段</span>
+            <h3 class="phase-title">物流运营与执行期</h3>
+            <p class="phase-note">(系统最高频使用的核心环节)</p>
+            <p class="phase-goal"><strong>核心目标：</strong> 多拉快跑不抛锚，无死角的安全与协同管控。</p>
+          </div>
+          <div class="scenario-table-wrap card">
+            <table class="scenario-table">
+              <thead>
+                <tr>
+                  <th>角色名称</th>
+                  <th>核心诉求与痛点 (深挖)</th>
+                  <th>关键业务场景 (Day-in-the-Life)</th>
+                  <th>所需核心功能/权限</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="role-name">合资公司调度主管</td>
+                  <td>
+                    <p><strong>诉求：</strong> 车辆少排队、多跑趟。</p>
+                    <p><strong>痛点：</strong> 电车调度是"地狱难度"。如果不看车辆SOC（电量）和换电站库存就瞎派单，会导致车辆半路趴窝，被货主骂死。</p>
+                  </td>
+                  <td>看大屏派单。系统自动过滤电量不足的车辆，安排满电车辆跑重载干线，低电量车辆优先指派去换电站或跑短途。</td>
+                  <td>融合SOC的智能TMS排班、异常运单快速改派。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">合资公司安全管理员</td>
+                  <td>
+                    <p><strong>诉求：</strong> 掐断事故苗头，事后追责有依据。</p>
+                    <p><strong>痛点：</strong> 每天被海量的ADAS假报警（狼来了）淹没；事后冰冷的扣钱导致司机逆反心理极重。</p>
+                  </td>
+                  <td>盯着预警墙。系统过滤掉轻度警告，只弹出"严重疲劳/抽烟"。安全员直接发起语音对讲强制干预，并记录入档。</td>
+                  <td>AI过滤预警墙、云端语音对讲强插、事故工单。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">合资公司财务/结算员</td>
+                  <td>
+                    <p><strong>诉求：</strong> 告别扯皮，各方数据对得平。</p>
+                    <p><strong>痛点：</strong> 大宗物流趟次多，扣款（违章、充电费）混杂。月底和货主、司机三方对账简直是一场噩梦。</p>
+                  </td>
+                  <td>月底系统自动将运单、自动过磅数据和充电扣费对撞，一键生成三方无争议的工资单、承运费结算单。</td>
+                  <td>多源规则计费引擎、智能对账与发票开具。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">重卡司机 (自有/外协)</td>
+                  <td>
+                    <p><strong>诉求：</strong> 安全赚钱，别让我排队傻等。</p>
+                    <p><strong>痛点：</strong> 极度抗拒繁琐的APP；最怕冬天不敢开暖风的"里程虚标焦虑"和换电站排队两小时。</p>
+                  </td>
+                  <td>车机收到大字导航及充电路线。途中触发轻微违规收到语音提醒。休息间隙通过小程序查看赚了多少钱。</td>
+                  <td>极简接单/大字导航、找桩/换电站拥堵情况查看。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">地磅/门禁操作员</td>
+                  <td>
+                    <p><strong>诉求：</strong> 秩序井然，防作弊篡改。</p>
+                    <p><strong>痛点：</strong> 手工抄表极易被司机"买通作弊"或填错；拥堵时司机狂按喇叭，现场极其混乱。</p>
+                  </td>
+                  <td>车辆过磅免下车。系统通过车牌识别直连地磅API，自动将精准重量回传TMS生成电子磅单，道闸自动放行。</td>
+                  <td>车辆/磅房自动识别直连、防作弊抓拍上传。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">异常客服/纠纷仲裁专员</td>
+                  <td>
+                    <p><strong>诉求：</strong> 快速定损定责，平息客诉。</p>
+                    <p><strong>痛点：</strong> 货主说晚点，司机说没电，车厂说车没坏，多方扯皮极其耗费精力。</p>
+                  </td>
+                  <td>输入运单号，一键调取该趟任务的全景快照（轨迹+SOC变化+视频+磅单），5分钟内界定责任方。</td>
+                  <td>全量运行快照一键溯源系统。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 第五阶段 -->
+        <div class="phase-block" id="layer2-phase5">
+          <div class="phase-header card">
+            <span class="phase-num">第五阶段</span>
+            <h3 class="phase-title">后市场服务期</h3>
+            <p class="phase-goal"><strong>核心目标：</strong> 以养代修，异常故障快速兜底与赋能。</p>
+          </div>
+          <div class="scenario-table-wrap card">
+            <table class="scenario-table">
+              <thead>
+                <tr>
+                  <th>角色名称</th>
+                  <th>核心诉求与痛点 (深挖)</th>
+                  <th>关键业务场景 (Day-in-the-Life)</th>
+                  <th>所需核心功能/权限</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="role-name">合资公司车队长/车管</td>
+                  <td>
+                    <p><strong>诉求：</strong> 极高出勤率，消灭非计划停工。</p>
+                    <p><strong>痛点：</strong> 几十台车保险年检全靠Excel极易逾期；最怕车辆带病作业导致彻底趴窝。</p>
+                  </td>
+                  <td>接收平台基于车辆里程和运行时间的"预防性维保建议"，一键向服务站发起维保预约；处理系统自动发出的保险逾期警告。</td>
+                  <td>维保预约管理、预防性维保预警、保险/年检提醒。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">服务站/维保车间主管</td>
+                  <td>
+                    <p><strong>诉求：</strong> 工位运转高效，结算清晰不扯皮。</p>
+                    <p><strong>痛点：</strong> 维保车辆扎堆进站导致工位瘫痪；给车队修完车后，修理费对账审批极其漫长。</p>
+                  </td>
+                  <td>在后台查看车队提交的预约请求，合理排班分配技师工位。维修完成后，通过系统提交闭环的维修工单及费用，直连车队财务审批。</td>
+                  <td>维修工单流转管理、工位排班调度、维修结算台账。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">主机厂售后/技术专家</td>
+                  <td>
+                    <p><strong>诉求：</strong> 远程精准定位故障，指导一线修复。</p>
+                    <p><strong>痛点：</strong> 新能源"三电系统"犹如黑盒，线下技师水平参差不齐，容易误判导致"过度维修"或迟迟修不好。</p>
+                  </td>
+                  <td>接收到车辆高危故障报警，在云端调取事发前1分钟的底层BMS数据帧和历史DTC故障码，进行远程会诊，将维修方案直接下发给现场技师。</td>
+                  <td>车辆云端诊断平台、底层BMS数据穿透、远程OTA支持。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">一线维保技师/外出救援队</td>
+                  <td>
+                    <p><strong>诉求：</strong> 知道坏在哪，带对工具，一次修好。</p>
+                    <p><strong>痛点：</strong> 高压系统极度危险，最怕到了几十公里外的矿区抛锚现场，才发现没带对诊断仪或特定线束，白跑一趟。</p>
+                  </td>
+                  <td>接收APP派发的救援服务单。单据内附带技术专家解析过的故障原因，技师带上特定的高压绝缘工具和配件直奔车辆抛锚GPS坐标。</td>
+                  <td>移动维修端APP、一键救援服务接收、电子维修手册查阅。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">高压备件/库管人员</td>
+                  <td>
+                    <p><strong>诉求：</strong> 核心件不断供，库存资金少积压。</p>
+                    <p><strong>痛点：</strong> 电机控制器、高压线束等零配件极其昂贵，不敢乱囤；一旦缺件，车辆就得停运干等好几天。</p>
+                  </td>
+                  <td>系统根据同批次车辆的历史故障率模型，预测下个月需集中更换一批水泵，自动向库管发起配件调拨预警建议。</td>
+                  <td>备件库存管理、预测性调拨看板、出入库扫码。</td>
+                </tr>
+                <tr>
+                  <td class="role-name">充换电站管理 / 运维工程师</td>
+                  <td>
+                    <p><strong>诉求：</strong> 安全可控问题，设备高使用率，场站流转高效</p>
+                    <p><strong>痛点：</strong> 电网超负荷跳闸危机，"占位不充"引发冲突，设备"瞎子式"管理</p>
+                  </td>
+                  <td>大批重卡集中进站插枪，总功率瞬间飙升。现有系统无法动态调控，极易导致供电变压器拉闸，造成全站瘫痪甚至面临消防巨额罚款</td>
+                  <td>硬件物联与反向控制台、场站微电网柔性分配、排队与占位管理</td>
+                </tr>
+                <tr>
+                  <td class="role-name">车队能源核算专员 </td>
+                  <td>
+                    <p><strong>诉求：</strong>用电成本最低化、资金账户绝对安全、自动化财务清算</p>
+                    <p><strong>痛点：</strong>尖峰充电"吞噬利润、灰产电卡、电能倒卖、三方对账与扣款工作过繁杂</p>
+                  </td>
+                  <td>专员批量导入下个月最新"峰谷平时段电价字典"。随后，系统跑批揪出3笔"非绑定车辆异常充电（车架号与账户不符）"，专员一键冻结违规司机结算。下午，自动生成带有精确电价分布的三方对账单，并直接发送给上级签批</td>
+                  <td>峰谷电价套利策略库、无感鉴权防作弊系统、多源业财对账引擎</td>
+                </tr>
+                <tr>
+                  <td class="role-name">合资公司培训讲师/HR</td>
+                  <td>
+                    <p><strong>诉求：</strong> 落实安全教育，规避交管局重罚。</p>
+                    <p><strong>痛点：</strong> 把司机全叫回来开会不仅耽误赚钱，效果还极差。</p>
+                  </td>
+                  <td>司机触发违规后，系统自动强制派发指定微课。必须在小程序完成在线考试并合格，否则被限制接单。</td>
+                  <td>安全培训体系（派课、防作弊考试、驾驶信用分）。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 第三层：全平台功能与架构全景蓝图 ========== -->
+    <div class="layer-divider">
+      <div class="container">
+        <div class="layer-divider-line"></div>
+      </div>
+    </div>
+
+    <section class="section" id="layer3-intro">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Layer 3 · Architecture</span>
+          <h2 class="section-title">第三层：全平台功能与架构全景蓝图</h2>
+        </div>
+        <div class="card card-featured intro-card">
+          <p class="doc-text">本层旨在将前两层的战略目标与全生命周期用户诉求，转化为可落地的软件功能模块与系统骨架。平台整体采用"云-管-端"中台化架构，划分为六大核心层级，确保业务链路的高效运转与未来生态的无缝接入。</p>
+        </div>
+        <div class="layer-nav-grid layer-nav-grid-6">
+          <a href="#layer3-blueprint" class="layer-nav-item card">
+            <span class="layer-nav-num">全景</span>
+            <span class="layer-nav-title">架构全景蓝图</span>
+          </a>
+          <a href="#layer3-31" class="layer-nav-item card">
+            <span class="layer-nav-num">3.1</span>
+            <span class="layer-nav-title">触点交互层线</span>
+          </a>
+          <a href="#layer3-32" class="layer-nav-item card">
+            <span class="layer-nav-num">3.2</span>
+            <span class="layer-nav-title">平台核心业务链路</span>
+          </a>
+          <a href="#layer3-33" class="layer-nav-item card">
+            <span class="layer-nav-num">3.3</span>
+            <span class="layer-nav-title">基础支撑与后市场</span>
+          </a>
+          <a href="#layer3-34" class="layer-nav-item card">
+            <span class="layer-nav-num">3.4</span>
+            <span class="layer-nav-title">数据挖掘与中台层</span>
+          </a>
+          <a href="#layer3-35" class="layer-nav-item card">
+            <span class="layer-nav-num">3.5</span>
+            <span class="layer-nav-title">AI 赋能层</span>
+          </a>
+          <a href="#layer3-36" class="layer-nav-item card">
+            <span class="layer-nav-num">3.6</span>
+            <span class="layer-nav-title">金融与生态支持层</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 架构全景图 -->
+    <section class="section section-alt" id="layer3-blueprint">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Blueprint</span>
+          <h2 class="section-title">全平台架构全景蓝图</h2>
+          <p class="section-desc">六大核心层级 · 云-管-端中台化架构</p>
+        </div>
+        <div class="card blueprint-card">
+          <div class="arch-diagram" aria-label="全平台功能与架构全景蓝图">
+            <!-- SVG 连接线 -->
+            <svg class="arch-svg" viewBox="0 0 1200 680" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#9E9EA8"/>
+                </marker>
+              </defs>
+              <!-- 金融层 → 数据层 -->
+              <path d="M120,130 L120,560 L180,560" stroke="#FFB347" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.6"/>
+              <!-- AI层 → 核心业务层 -->
+              <path d="M600,200 L600,260" stroke="#667EEA" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.6"/>
+              <!-- 触点层 → 核心业务层 -->
+              <path d="M1080,200 L1080,260 L900,260" stroke="#56CCF2" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.6"/>
+              <!-- 核心业务层 → 基础支撑层 -->
+              <path d="M600,380 L600,420" stroke="#764BA2" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.6"/>
+              <!-- 基础支撑层 → 数据层 -->
+              <path d="M600,510 L600,550" stroke="#34C759" stroke-width="1.5" fill="none" marker-end="url(#arrow)" opacity="0.6"/>
+              <!-- AI调度引擎 → 数据层 (虚线) -->
+              <path d="M480,200 L480,560 L420,560" stroke="#667EEA" stroke-width="1.5" stroke-dasharray="6,4" fill="none" marker-end="url(#arrow)" opacity="0.45"/>
+            </svg>
+
+            <!-- 顶层三列 -->
+            <div class="arch-row arch-row-top">
+              <div class="arch-zone arch-zone-finance">
+                <div class="arch-zone-header">
+                  <span class="arch-zone-title">金融与生态支持层</span>
+                  <span class="arch-zone-sub">生态共赢</span>
+                </div>
+                <div class="arch-modules arch-modules-col">
+                  <div class="arch-module">保险精算与理赔协同</div>
+                  <div class="arch-module">车辆/设备融资通道</div>
+                  <div class="arch-module">供应链保理金融</div>
+                </div>
+              </div>
+
+              <div class="arch-zone arch-zone-ai">
+                <div class="arch-zone-header">
+                  <span class="arch-zone-title">AI 赋能层</span>
+                  <span class="arch-zone-sub">智慧大脑</span>
+                </div>
+                <div class="arch-modules arch-modules-grid-3">
+                  <div class="arch-module">全维度成本与能耗算法</div>
+                  <div class="arch-module arch-module-highlight">智能运输调度引擎</div>
+                  <div class="arch-module">前瞻技术预研 L4 接口</div>
+                  <div class="arch-module">车能协同调度引擎</div>
+                  <div class="arch-module">电力预测与交易模型</div>
+                  <div class="arch-module">人本风控大模型</div>
+                </div>
+              </div>
+
+              <div class="arch-zone arch-zone-touch">
+                <div class="arch-zone-header">
+                  <span class="arch-zone-title">触点交互层</span>
+                  <span class="arch-zone-sub">多端协同数字触角</span>
+                </div>
+                <div class="arch-modules arch-modules-col">
+                  <div class="arch-module">
+                    <span class="arch-module-name">协同作业端</span>
+                    <span class="arch-module-desc">地磅/门禁 PDA/小程序</span>
+                  </div>
+                  <div class="arch-module">
+                    <span class="arch-module-name">大宗司机端</span>
+                    <span class="arch-module-desc">APP/车机/小程序</span>
+                  </div>
+                  <div class="arch-module">
+                    <span class="arch-module-name">移动运营管理端</span>
+                    <span class="arch-module-desc">APP/小程序</span>
+                  </div>
+                  <div class="arch-module">
+                    <span class="arch-module-name">生态与合作伙伴端</span>
+                    <span class="arch-module-desc">PC Web</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 平台核心业务链路 -->
+            <div class="arch-zone arch-zone-core">
+              <div class="arch-zone-header arch-zone-header-center">
+                <span class="arch-zone-title">平台核心业务链路</span>
+                <span class="arch-zone-sub">四大中心闭环运转</span>
+              </div>
+              <div class="arch-modules arch-modules-row-4">
+                <div class="arch-center">
+                  <span class="arch-center-name">物流运输智运中心</span>
+                  <span class="arch-center-tag">TMS</span>
+                  <span class="arch-center-desc">智派运力/智能调度/结算</span>
+                </div>
+                <div class="arch-center">
+                  <span class="arch-center-name">市场转化管理中心</span>
+                  <span class="arch-center-desc">尽调/CRM/项目全流程</span>
+                </div>
+                <div class="arch-center">
+                  <span class="arch-center-name">资产价值管理中心</span>
+                  <span class="arch-center-desc">一车一档/租赁/残值</span>
+                </div>
+                <div class="arch-center">
+                  <span class="arch-center-name">补能与能源管理中心</span>
+                  <span class="arch-center-desc">场站/充电闭环/服务清分</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 基础支撑与后市场 -->
+            <div class="arch-zone arch-zone-support">
+              <div class="arch-zone-header arch-zone-header-center">
+                <span class="arch-zone-title">基础支撑与后市场服务层</span>
+                <span class="arch-zone-sub">安全与维保底座</span>
+              </div>
+              <div class="arch-modules arch-modules-row-3">
+                <div class="arch-module">后市场维保生态管家</div>
+                <div class="arch-module">车联网基础服务 IoT</div>
+                <div class="arch-module">主动安全管控闭环</div>
+              </div>
+            </div>
+
+            <!-- 数据挖掘与中台层 -->
+            <div class="arch-zone arch-zone-data">
+              <div class="arch-zone-header arch-zone-header-center">
+                <span class="arch-zone-title">数据挖掘与中台层</span>
+                <span class="arch-zone-sub">数字基座</span>
+              </div>
+              <div class="arch-modules arch-modules-row-2">
+                <div class="arch-data-block">
+                  <span class="arch-data-label">四大数据体系</span>
+                  <span class="arch-data-items">市场/运营/业务/财务</span>
+                </div>
+                <div class="arch-data-block">
+                  <span class="arch-data-label">五大核心数据库</span>
+                  <span class="arch-data-items">货源/物流公司/司机/车辆/场站</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 图例 -->
+            <div class="arch-legend">
+              <span class="arch-legend-item"><span class="arch-legend-line arch-legend-solid"></span>业务数据流</span>
+              <span class="arch-legend-item"><span class="arch-legend-line arch-legend-dashed"></span>算法 ↔ 数据反馈</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3.1 触点交互层线 -->
+    <section class="section" id="layer3-31">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">3.1 · Touchpoints</span>
+          <h2 class="section-title">3.1 触点交互层线</h2>
+        </div>
+        <div class="card doc-card">
+          <p class="doc-text doc-lead">本层是系统在各类工作场景下的数字触角，强调"敏捷、防呆与多端协同"。</p>
+          <ul class="doc-list">
+            <li><strong>大宗司机端 (APP/车机/小程序)：</strong> 极简导航、一键接单、扫码/无感充电、安全预警播报、微课学习。</li>
+            <li><strong>移动运营管理端 (APP/小程序)：</strong> 针对管理层/调度/车队长的"移动指挥中台"，支持异常秒批、实时大盘查看、在途车辆巡航、维保一键预约。</li>
+            <li><strong>协同作业端 (地磅/门禁 PDA/小程序)：</strong> 自动化签到打卡、地磅数据 API 直连回传、无纸化交接 (ePOD)。</li>
+            <li><strong>生态与合作伙伴端 (PC Web)：</strong> 货主企业看板、资方风控大屏、服务站工单接收台、政府合规监管数据推送接口。</li>
+          </ul>
+        </div>
+        <div class="touchpoint-grid">
+          <div class="card touchpoint-card">
+            <span class="touchpoint-icon tp-icon-1">司</span>
+            <h3>大宗司机端</h3>
+            <p class="touchpoint-platform">APP / 车机 / 小程序</p>
+            <p class="doc-text">极简导航、一键接单、扫码/无感充电、安全预警播报、微课学习。</p>
+          </div>
+          <div class="card touchpoint-card">
+            <span class="touchpoint-icon tp-icon-2">管</span>
+            <h3>移动运营管理端</h3>
+            <p class="touchpoint-platform">APP / 小程序</p>
+            <p class="doc-text">针对管理层/调度/车队长的"移动指挥中台"，支持异常秒批、实时大盘查看、在途车辆巡航、维保一键预约。</p>
+          </div>
+          <div class="card touchpoint-card">
+            <span class="touchpoint-icon tp-icon-3">协</span>
+            <h3>协同作业端</h3>
+            <p class="touchpoint-platform">地磅 / 门禁 PDA / 小程序</p>
+            <p class="doc-text">自动化签到打卡、地磅数据 API 直连回传、无纸化交接 (ePOD)。</p>
+          </div>
+          <div class="card touchpoint-card">
+            <span class="touchpoint-icon tp-icon-4">生</span>
+            <h3>生态与合作伙伴端</h3>
+            <p class="touchpoint-platform">PC Web</p>
+            <p class="doc-text">货主企业看板、资方风控大屏、服务站工单接收台、政府合规监管数据推送接口。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3.2 平台核心业务链路 -->
+    <section class="section section-alt" id="layer3-32">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">3.2 · Core Business</span>
+          <h2 class="section-title">3.2 平台核心业务链路</h2>
+        </div>
+        <div class="card doc-card">
+          <p class="doc-text doc-lead">本层串联合资项目的完整生命周期，四大中心闭环运转。</p>
+        </div>
+        <div class="center-grid">
+          <div class="card center-card">
+            <div class="center-badge center-market">Market</div>
+            <h3>市场转化管理中心 (Market)</h3>
+            <ul class="doc-list">
+              <li>
+                <strong>项目尽调工具：</strong>货源评估、补能条件评估、政策补贴测算、ROI 自动计算。
+              </li>
+              <li>
+                <strong>CRM 客户管理：</strong>客户信息、跟进记录、商机管理、合同管理。
+              </li>
+              <li>
+                <strong>项目全流程追踪：</strong>尽调 → 立项 → 车辆交付 → 运营 → 回款全节点管控。
+              </li>
+            </ul>
+          </div>
+          <div class="card center-card">
+            <div class="center-badge center-asset">Asset</div>
+            <h3>资产价值管理中心 (Asset)</h3>
+            <ul class="doc-list">
+              <li>
+                <strong>全生命周期档案 (一车一档)：</strong>车辆信息、电池 BMS 信息、维修记录、事故记录、运营数据。
+              </li>
+              <li>
+                <strong>租赁合同管理：</strong>合同参数录入、租金自动计算、自动催收提醒、逾期限制风控。
+              </li>
+              <li>
+                <strong>车辆残值管理：</strong>基于 SOH 的残值动态评估、二手车处置审批、电池梯次利用流转。
+              </li>
+            </ul>
+          </div>
+          <div class="card center-card">
+            <div class="center-badge center-tms">TMS</div>
+            <h3>物流运输智运中心 (TMS)</h3>
+            <ul class="doc-list">
+              <li>
+                <strong>货源与运力管理：</strong>货源发布/审核/分配、运力池分级池管理。
+              </li>
+              <li>
+                <strong>智能调度工作台：</strong>融合 SOC (剩余电量) 的自动派单、路线规划、异常改派处理。
+              </li>
+              <li>
+                <strong>过程可视化管控：</strong>实时 GPS 定位、轨迹回放、电子围栏防作弊。
+              </li>
+              <li>
+                <strong>智能结算中心：</strong>多源规则运费自动计算、三方无缝对账、在线开票与付款。
+              </li>
+            </ul>
+          </div>
+          <div class="card center-card">
+            <div class="center-badge center-energy">Energy</div>
+            <h3>补能与能源管理中心 (Energy)</h3>
+            <ul class="doc-list">
+              <li>
+                <strong>充电站资产管理：</strong>场站信息库、充电桩实时状态、峰谷平价格策略管理。
+              </li>
+              <li>
+                <strong>充电服务闭环：</strong>扫码/一键充电控制、充电过程电压/电流监控、异常断电保护。
+              </li>
+              <li>
+                <strong>能源账务清分：</strong>自动对账、跨域多方分账打款、发票归集管理。
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3.3 基础支撑与后市场服务层 -->
+    <section class="section" id="layer3-33">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">3.3 · Infrastructure</span>
+          <h2 class="section-title">3.3 基础支撑与后市场服务层</h2>
+        </div>
+        <div class="card doc-card">
+          <p class="doc-text doc-lead">本层为前线业务提供物理级、硬件级的安全保障与持续运转能力。</p>
+          <ul class="doc-list">
+            <li><strong>车联网基础服务 (IoT)：</strong> 车机 CAN 数据深度采集、远程启停控制、车辆状态自检预警。</li>
+            <li><strong>主动安全管控闭环：</strong> DMS 疲劳监测、ADAS 碰撞/偏航报警、语音强插干预、在线安全培训考试 (千人千面)。</li>
+            <li><strong>后市场维保生态管家：</strong> 预防性维保预警、维保预约派发、维修工单在线流转结算、高压配件库存与调拨、一键抛锚救援调度。</li>
+          </ul>
+        </div>
+        <div class="support-grid">
+          <div class="card support-card">
+            <h3>车联网基础服务 (IoT)</h3>
+            <p class="doc-text">车机 CAN 数据深度采集、远程启停控制、车辆状态自检预警。</p>
+          </div>
+          <div class="card support-card">
+            <h3>主动安全管控闭环</h3>
+            <p class="doc-text">DMS 疲劳监测、ADAS 碰撞/偏航报警、语音强插干预、在线安全培训考试 (千人千面)。</p>
+          </div>
+          <div class="card support-card">
+            <h3>后市场维保生态管家</h3>
+            <p class="doc-text">预防性维保预警、维保预约派发、维修工单在线流转结算、高压配件库存与调拨、一键抛锚救援调度。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3.4 数据挖掘与中台层 -->
+    <section class="section section-alt" id="layer3-34">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">3.4 · Data Platform</span>
+          <h2 class="section-title">3.4 数据挖掘与中台层</h2>
+        </div>
+        <div class="card doc-card">
+          <p class="doc-text doc-lead">本层沉淀核心数据资产，构建平台的"数字基座"。</p>
+          <div class="doc-block">
+            <h3 class="doc-h3">四大数据体系：</h3>
+            <ul class="doc-list">
+              <li><strong>市场数据</strong> (行业趋势/竞品/项目)。</li>
+              <li><strong>运营数据</strong> (运力/货源/补能/轨迹)。</li>
+              <li><strong>业务数据</strong> (销售/合同/资产状态)。</li>
+              <li><strong>财务数据</strong> (收支利润/现金流预警)。</li>
+            </ul>
+          </div>
+          <div class="doc-block">
+            <h3 class="doc-h3">五大核心数据库：</h3>
+            <p class="doc-text">货源库、物流公司库、司机人才信用库、车辆/IoT 运行库、场站/能源分布库。</p>
+          </div>
+        </div>
+        <div class="data-dual-grid">
+          <div class="card data-panel">
+            <h3>四大数据体系</h3>
+            <div class="data-tags">
+              <span class="data-tag">市场数据<br /><small>行业趋势/竞品/项目</small></span>
+              <span class="data-tag">运营数据<br /><small>运力/货源/补能/轨迹</small></span>
+              <span class="data-tag">业务数据<br /><small>销售/合同/资产状态</small></span>
+              <span class="data-tag">财务数据<br /><small>收支利润/现金流预警</small></span>
+            </div>
+          </div>
+          <div class="card data-panel">
+            <h3>五大核心数据库</h3>
+            <ul class="db-list">
+              <li>货源库</li>
+              <li>物流公司库</li>
+              <li>司机人才信用库</li>
+              <li>车辆/IoT 运行库</li>
+              <li>场站/能源分布库</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3.5 AI 赋能层 -->
+    <section class="section" id="layer3-35">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">3.5 · AI Engine</span>
+          <h2 class="section-title">3.5 AI 赋能层</h2>
+        </div>
+        <div class="card doc-card">
+          <p class="doc-text doc-lead">本层是平台的大脑，负责降本增效的核心计算。</p>
+          <ul class="doc-list">
+            <li><strong>智能运输调度引擎：</strong> 基于货源与运力分布的最优匹配、降低空驶率。</li>
+            <li><strong>车能协同调度引擎：</strong> 融合剩余续航与场站排队拥挤度的补能路径最优解。</li>
+            <li><strong>全维度成本与能耗算法：</strong> 能耗异常诊断模型、轮胎部件磨损预测。</li>
+            <li><strong>电力预测与交易模型：</strong> 场站用电负荷精准预测、峰谷电价差自动套利策略。</li>
+            <li><strong>人本风控大模型：</strong> 司机驾驶行为特征画像、不良行为纠正闭环。</li>
+            <li><strong>前瞻技术预研接口：</strong> 封闭矿区/钢厂内部的 L4 级无人驾驶调度指令预留。</li>
+          </ul>
+        </div>
+        <div class="ai-grid">
+          <div class="card ai-card">
+            <h3>智能运输调度引擎</h3>
+            <p class="doc-text">基于货源与运力分布的最优匹配、降低空驶率。</p>
+          </div>
+          <div class="card ai-card">
+            <h3>车能协同调度引擎</h3>
+            <p class="doc-text">融合剩余续航与场站排队拥挤度的补能路径最优解。</p>
+          </div>
+          <div class="card ai-card">
+            <h3>全维度成本与能耗算法</h3>
+            <p class="doc-text">能耗异常诊断模型、轮胎部件磨损预测。</p>
+          </div>
+          <div class="card ai-card">
+            <h3>电力预测与交易模型</h3>
+            <p class="doc-text">场站用电负荷精准预测、峰谷电价差自动套利策略。</p>
+          </div>
+          <div class="card ai-card">
+            <h3>人本风控大模型</h3>
+            <p class="doc-text">司机驾驶行为特征画像、不良行为纠正闭环。</p>
+          </div>
+          <div class="card ai-card">
+            <h3>前瞻技术预研接口</h3>
+            <p class="doc-text">封闭矿区/钢厂内部的 L4 级无人驾驶调度指令预留。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3.6 金融与生态支持层 -->
+    <section class="section section-alt" id="layer3-36">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">3.6 · Finance &amp; Ecosystem</span>
+          <h2 class="section-title">3.6 金融与生态支持层</h2>
+        </div>
+        <div class="card doc-card">
+          <p class="doc-text doc-lead">本层将物流运营转化为金融资产，实现生态共赢。</p>
+          <ul class="doc-list">
+            <li><strong>车辆/设备融资通道：</strong> 牵引车/挂车经营性租赁对接、车电分离租赁确权接口、充电站基建融资。</li>
+            <li><strong>供应链保理金融：</strong> 凭借不可篡改的运费流水，对接运费保理、应收账款及预付款融资接口。</li>
+            <li><strong>保险精算与理赔协同：</strong> 车辆/货物/雇主责任险一键投保、车联网主动安全数据抵扣保费、一键视频调取快速定损理赔。</li>
+          </ul>
+        </div>
+        <div class="finance-grid">
+          <div class="card finance-card">
+            <h3>车辆/设备融资通道</h3>
+            <p class="doc-text">牵引车/挂车经营性租赁对接、车电分离租赁确权接口、充电站基建融资。</p>
+          </div>
+          <div class="card finance-card">
+            <h3>供应链保理金融</h3>
+            <p class="doc-text">凭借不可篡改的运费流水，对接运费保理、应收账款及预付款融资接口。</p>
+          </div>
+          <div class="card finance-card">
+            <h3>保险精算与理赔协同</h3>
+            <p class="doc-text">车辆/货物/雇主责任险一键投保、车联网主动安全数据抵扣保费、一键视频调取快速定损理赔。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ========== 第四层：子系统功能与架构 ========== -->
+    <div class="layer-divider">
+      <div class="container">
+        <div class="layer-divider-line"></div>
+      </div>
+    </div>
+
+    <section class="section" id="layer4-intro">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Layer 4 · Subsystems</span>
+          <h2 class="section-title">第四层：子系统功能与架构</h2>
+        </div>
+        <div class="layer-nav-grid">
+          <a href="#layer4-market" class="layer-nav-item card">
+            <span class="layer-nav-num">01</span>
+            <span class="layer-nav-title">市场转化管理中心</span>
+          </a>
+          <a href="#layer4-asset" class="layer-nav-item card">
+            <span class="layer-nav-num">02</span>
+            <span class="layer-nav-title">资产价值管理中心</span>
+          </a>
+          <a href="#layer4-tms" class="layer-nav-item card">
+            <span class="layer-nav-num">03</span>
+            <span class="layer-nav-title">物流运输智运中心</span>
+          </a>
+          <a href="#layer4-safety" class="layer-nav-item card">
+            <span class="layer-nav-num">04</span>
+            <span class="layer-nav-title">安全与后市场服务中心</span>
+          </a>
+          <a href="#layer4-energy" class="layer-nav-item card">
+            <span class="layer-nav-num">05</span>
+            <span class="layer-nav-title">补能与能源生态中心</span>
+          </a>
+        </div>
+        <div class="section-toolbar">
+          <span class="section-toolbar-label">L4 功能模块较长，可折叠浏览</span>
+          <div class="section-toolbar-actions">
+            <button type="button" class="toolbar-btn" id="expandAll">展开全部模块</button>
+            <button type="button" class="toolbar-btn" id="collapseAll">收起全部模块</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section section-alt" id="layer4-market">
+      <div class="container">
+        <div class="section-header layer4-subsys-header">
+          <span class="section-tag">Market · 市场转化</span>
+          <h2 class="section-title">市场转化管理中心 - 详细功能架构</h2>
+        </div>
+
+        <div class="card subsys-position">
+          <p><strong>系统定位：</strong> 赋能主机厂前线销售、售前专家与交付团队。用数据仿真打通拓客阻碍，用沙盘推演实现精准立项，用全流程工作流保障资产平稳交付与运营冷启动。</p>
+        </div>
+
+        <div class="subsys-diagram">
+          <p class="subsys-diagram-title">市场转化管理中心 · 功能架构流程图</p>
+          <div class="subsys-diagram-inner">
+            <div class="flow-grid flow-grid-market">
+              <div class="flow-block flow-block-policy">
+                <div class="flow-block-title">政策补贴与知识引擎</div>
+                <div class="flow-steps flow-steps-h">
+                  <span class="flow-step">区域政策数据库</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">电价策略字典</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">经典案例与话术库</span>
+                </div>
+              </div>
+              <div class="flow-block flow-block-sandbox">
+                <div class="flow-block-title">售前尽调与智算沙盘</div>
+                <div class="flow-steps flow-steps-h">
+                  <span class="flow-step">路网与高程仿真引擎</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">能源与能耗评估器</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">ROI与TCO自动算账模型</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">商业计划书一键生成</span>
+                </div>
+              </div>
+              <div class="flow-block flow-block-project">
+                <div class="flow-block-title">项目立项与全流程交付</div>
+                <div class="flow-steps flow-steps-h">
+                  <span class="flow-step">项目里程碑工作台</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">车辆资产交付管理</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">车联网软硬件初始化</span>
+                </div>
+              </div>
+              <div class="flow-block flow-block-crm">
+                <div class="flow-block-title">大宗客户与商机管理</div>
+                <div class="flow-steps">
+                  <span class="flow-step">客户画像与档案库</span>
+                  <span class="flow-step">商机漏斗与线索转化</span>
+                  <span class="flow-step">合同与协议管理</span>
+                </div>
+              </div>
+            </div>
+            <div class="flow-connections">
+              <span class="flow-conn-tag">电价/补贴/路径参数赋能</span>
+              <span class="flow-conn-tag">政策/合规依据</span>
+              <span class="flow-conn-tag">话术/案例赋能压力</span>
+              <span class="flow-conn-tag">客户画像/现状数据</span>
+              <span class="flow-conn-tag">收益报告支撑谈判</span>
+              <span class="flow-conn-tag">沙盘推演结论/项目立项方案</span>
+              <span class="flow-conn-tag">合同/签约客户档案</span>
+              <span class="flow-conn-tag">车辆交付/开通数据回传</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>1. 大宗客户与商机管理模块</h3>
+          <p class="module-intro">摒弃通用 CRM 的繁琐，专为"重资产合资落地"定制，深度挖掘客户运输底盘数据。</p>
+          <div class="sub-module">
+            <h4>1.1 客户画像与档案库</h4>
+            <ul class="doc-list">
+              <li><strong>基础信息：</strong> 企业资质、工商信息、环保评级现状（如：是否面临保A级压力）。</li>
+              <li><strong>业务底盘盘点：</strong> 现有车队规模（自有/外协比例）、主营运输货品（煤炭/砂石/钢铁）、目前主力车型及平均油耗。</li>
+              <li><strong>合资意向探盘：</strong> 客户出资意愿度、场地资源提供能力、对 TCO（总拥有成本）的敏感度标签。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>1.2 商机漏斗与线索转化</h4>
+            <ul class="doc-list">
+              <li><strong>阶段管理：</strong> 线索获取 → 初步接洽 → 线路尽调 → 沙盘推演 → 商务谈判 → 合同签约。</li>
+              <li><strong>跟进记录仪：</strong> 拜访日志、干系人图谱（决策者/业务主管/财务主管）、竞争对手（其他新能源品牌）入局情况录入。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>1.3 合同与协议管理</h4>
+            <ul class="doc-list">
+              <li><strong>模板库管理：</strong> 合资运营协议、资源保供合同、车辆租赁（融租）合同标准模板。</li>
+              <li><strong>电子签与归档：</strong> 关键协议的线上签批流转、版本控制、区块链存证防篡改。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>2. 售前尽调与智算沙盘模块</h3>
+          <p class="module-intro">本子系统的"杀手锏"。通过真实物理法则与大数据结合，生成让客户无法拒绝的收益报告。</p>
+          <div class="sub-module">
+            <h4>2.1 路网与高程仿真引擎</h4>
+            <ul class="doc-list">
+              <li><strong>线路绘制工具：</strong> BD/售前在地图上绘制客户的真实起发/目的矿区或钢厂。</li>
+              <li><strong>路况与坡度提取：</strong> 调用高精地图接口，自动提取沿途高程落差、重载上坡/下坡路段比例（电车重载下坡可动能回收，这是省电的关键）。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>2.2 能源与能耗评估器</h4>
+            <ul class="doc-list">
+              <li><strong>历史相似度匹配：</strong> 自动从平台底座调取与当前尽调路线、货品、季节相似的已运营车辆"真实能耗数据（kWh/km）"作为基准。</li>
+              <li><strong>充电网点勘测：</strong> 沿途现有公用充换电站分布查询、电网扩容余量（供电局变压器容量）评估。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>2.3 ROI 与 TCO 自动算账模型</h4>
+            <ul class="doc-list">
+              <li><strong>油电差价计算：</strong> 录入当地当前柴油价格 vs 峰平谷电价（结合排班自动测算用电比例）。</li>
+              <li><strong>全生命周期成本对比：</strong> 自动对比"柴油车 vs 电车"在 3年/5年 周期内的购车首付、保险、保养频次成本、路权罚款成本。</li>
+              <li><strong>碳资产收益预估：</strong> 自动换算新能源替代产生的碳减排量，并按当前碳市场行情预估潜在收益。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>2.4 商业计划书一键生成</h4>
+            <ul class="doc-list">
+              <li><strong>动态报表：</strong> 将上述所有沙盘数据一键打包，生成图文并茂的《XX项目合资运营收益推演与建站规划书》(PDF/Web 链接)，支持多套参数方案对比。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>3. 项目立项与全流程交付追踪</h3>
+          <p class="module-intro">合资敲定后，监控从"纸面合同"到"车轮转动"的重资产履约进度。</p>
+          <div class="sub-module">
+            <h4>3.1 项目里程碑工作台</h4>
+            <ul class="doc-list">
+              <li><strong>节点可视化管理：</strong> 进度看板（立项审批 → 资金拨付 → 场站建设 → 车辆排产/发运 → 交付标定 → 司机入职 → 跑通首单）。</li>
+              <li><strong>卡点自动预警：</strong> 当某节点（如：供电局建站审批卡住）超过 SLA 时效，自动向项目负责人及管理层发送红灯告警。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>3.2 车辆资产交付管理</h4>
+            <ul class="doc-list">
+              <li><strong>车架号 (VIN) 批量绑定：</strong> 从主机厂 ERP 拉取发车清单，与合资项目批量绑定。</li>
+              <li><strong>合规材料收集夹：</strong> 购车发票、合格证、营运证、保险单扫描件的统一上传与审核。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>3.3 车联网软硬件初始化 (IoT &amp; Hardware Initialization)</h4>
+            <ul class="doc-list">
+              <li><strong>车机账号开通：</strong> 批量生成并下发车辆专属软账号。</li>
+              <li><strong>主动安全标定验收：</strong> 记录交付现场对 DMS（防疲劳）、ADAS（防碰撞）摄像头的物理标定结果及上线测试日志。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>4. 政策补贴与知识引擎</h3>
+          <p class="module-intro">支撑尽调沙盘与 BD 赋能的基础数据中心。</p>
+          <div class="sub-module">
+            <h4>4.1 区域政策数据库</h4>
+            <ul class="doc-list">
+              <li><strong>购车补贴查询：</strong> 各地针对新能源重卡的置换补贴、运营补贴政策参数（按城市维度维护）。</li>
+              <li><strong>路权限制库：</strong> 收集各厂区/市区的最新环保限行通告，用于向客户施加"路权即生存权"的紧迫感。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>4.2 电价策略字典</h4>
+            <ul class="doc-list">
+              <li>实时维护全国各省市的工业用电"尖、峰、平、谷"时段划分及费率标准。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>4.3 经典案例与话术库</h4>
+            <ul class="doc-list">
+              <li>内部沉淀的成功破冰话术、客户抗拒点应对指南、跨行业的标杆运营案例库，赋能新 BD 快速上手。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 资产价值管理中心 -->
+    <section class="section" id="layer4-asset">
+      <div class="container">
+        <div class="section-header layer4-subsys-header">
+          <span class="section-tag">Asset · 资产价值</span>
+          <h2 class="section-title">资产价值管理中心 - 详细功能架构</h2>
+        </div>
+
+        <div class="card subsys-position">
+          <p><strong>系统定位：</strong> 锁定合资公司的核心资产价值，穿透车辆全生命周期，实现从采购入库、租赁算账到退役处置的端到端账务闭环，为金融兜底和资方风控提供不可篡改的数据支撑。</p>
+        </div>
+
+        <div class="subsys-diagram">
+          <p class="subsys-diagram-title">资产价值管理中心 · 功能架构流程图</p>
+          <div class="subsys-diagram-inner">
+            <div class="flow-grid flow-grid-asset">
+              <div class="flow-block flow-block-asset">
+                <div class="flow-block-title">车辆全生命周期数字档案</div>
+                <div class="flow-steps flow-steps-h">
+                  <span class="flow-step">基础属性与合规档案</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">电池健康度实时追踪</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">维保与事故溯源</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">累计产值大盘</span>
+                </div>
+              </div>
+              <div class="flow-block flow-block-asset">
+                <div class="flow-block-title">残值评估与退役处置</div>
+                <div class="flow-steps flow-steps-h">
+                  <span class="flow-step">动态残值评估模型</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">二手车处置竞价审批</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">动力电池梯次利用/报废追踪</span>
+                </div>
+              </div>
+              <div class="flow-block flow-block-asset">
+                <div class="flow-block-title">租赁与合同账务管理</div>
+                <div class="flow-steps flow-steps-h">
+                  <span class="flow-step">租赁合同录入与台账</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">租金智能核算与账单派发</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">逾期催收与资产风控工作台</span>
+                </div>
+              </div>
+            </div>
+            <div class="flow-connections">
+              <span class="flow-conn-tag">SOH衰减/维修事故/出险档案 →</span>
+              <span class="flow-conn-tag">全生命周期数据作为估值因子 →</span>
+              <span class="flow-conn-tag">车辆基础参数/累计里程/产值 →</span>
+              <span class="flow-conn-tag">逾期风险状态/履约约束 →</span>
+              <span class="flow-conn-tag">← 评估/预定结果</span>
+              <span class="flow-conn-tag">← 处置审批需求</span>
+              <span class="flow-conn-tag">← 合规档案/电池数据回写</span>
+              <span class="flow-conn-tag flow-conn-tag-dashed">← 远程限制/风控指令（依赖 IoT）</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>1. 车辆全生命周期数字档案</h3>
+          <p class="module-intro">这不仅仅是一个设备台账，而是一辆车从下线到报废的"数字孪生身份证"。</p>
+          <div class="sub-module">
+            <h4>1.1 基础属性与合规档案</h4>
+            <ul class="doc-list">
+              <li><strong>核心参数：</strong> VIN 码、电机型号、电池包容量/品牌、额定载重、上牌城市。</li>
+              <li><strong>合规材料电子件：</strong> 购车发票、整车合格证、营运证、行驶证的高清扫描存档及到期预警。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>1.2 电池健康度实时追踪</h4>
+            <ul class="doc-list">
+              <li><strong>SOH 衰减曲线：</strong> 基于物联网接口，实时绘制单车电池健康度 (State of Health) 衰减折线图。</li>
+              <li><strong>充放电异常记录：</strong> 记录历史中发生过的过充、过放、高温充电等可能损伤电池的行为画像。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>1.3 维保与事故溯源</h4>
+            <ul class="doc-list">
+              <li><strong>维修记录链：</strong> 自动归集车辆在售后系统中的所有工单（更换了哪些核心零部件）。</li>
+              <li><strong>事故与出险档案：</strong> 记录重大碰撞时间、定损金额、保险理赔单据，为二手车估值提供硬性折损依据。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>1.4 累计产值大盘</h4>
+            <ul class="doc-list">
+              <li>汇聚车辆全生命周期的总行驶里程、总耗电量、总创收运费金额，计算出单车的"历史真实 ROI"。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>2. 租赁与合同账务管理</h3>
+          <p class="module-intro">将复杂的"车电分离"、"融资租赁"、"经营性租赁"等金融模式转化为自动运转的计费规则。</p>
+          <div class="sub-module">
+            <h4>2.1 租赁合同录入与台账</h4>
+            <ul class="doc-list">
+              <li><strong>计费模型配置：</strong> 支持按月固定租金、按里程阶梯计费（如：每月保底5000km，超出部分按0.5元/km收费）、车电分离双轨计费规则设置。</li>
+              <li><strong>履约期管理：</strong> 起租日、到期日、免租期设置，自动生成合同到期前 60 天倒计时看板。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>2.2 租金智能核算与账单派发</h4>
+            <ul class="doc-list">
+              <li><strong>自动算费：</strong> 每月/每季度初，系统依据合同规则及历史里程自动跑批，生成租金结算单。</li>
+              <li><strong>多方对账单：</strong> 一键生成发送给合资公司财务、资方、车厂的三方对账单据。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>2.3 逾期催收与资产风控工作台</h4>
+            <ul class="doc-list">
+              <li><strong>逾期阶梯预警：</strong> 逾期 3 天（发送短信提示） → 逾期 7 天（APP 内强弹窗警告） → 逾期 15 天（触发高危风控状态）。</li>
+              <li><strong>物理级风控限制：</strong> 经审批后，对严重恶意拖欠租金的车辆下发远程指令：限制车辆最高时速或限制非安全路段启动（防跑路/防跨省转卖）。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>3. 残值评估与退役处置模块</h3>
+          <p class="module-intro">消灭新能源重卡"买得起卖不掉"的行业痛点，让二手变现透明化。</p>
+          <div class="sub-module">
+            <h4>3.1 动态残值评估模型</h4>
+            <ul class="doc-list">
+              <li><strong>多因子估值引擎：</strong> 融合行驶总里程、电池真实 SOH 值、事故折损率及当前市场二手行情，自动测算出车辆当前"预估残值"。</li>
+              <li><strong>残值趋势预测：</strong> 模拟预测未来 1-3 年的车辆残值走势，帮助管理层选定最佳的"车辆淘汰置换时机"。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>3.2 二手车处置竞价审批</h4>
+            <ul class="doc-list">
+              <li><strong>待处置资产池：</strong> 将达到设定标准（如运营满 5 年或 SOH 低于 70%）的车辆自动划入待处置池。</li>
+              <li><strong>残值处置审批流：</strong> 发起报废或拍卖流程，需经过车厂专家组、合资公司财务总监的多级线上审批。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>3.3 动力电池梯次利用/报废追踪</h4>
+            <ul class="doc-list">
+              <li><strong>退役流向登记：</strong> 明确退役电池是进入了"储能电站（梯次利用）"还是"专业拆解厂（报废回收）"。</li>
+              <li><strong>合规环保报告：</strong> 生成符合国家工信部溯源管理要求的电池退役报表，防止非法倒卖引发的环保责任追溯风险。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 物流运输智运中心 -->
+    <section class="section section-alt" id="layer4-tms">
+      <div class="container">
+        <div class="section-header layer4-subsys-header">
+          <span class="section-tag">TMS · 智运中心</span>
+          <h2 class="section-title">物流运输智运中心- 详细功能架构</h2>
+        </div>
+
+        <div class="card subsys-position">
+          <p><strong>系统定位：</strong> 整个合资运营平台跳动的"心脏"。以极其扎实的主数据底座为支撑，彻底告别传统车队的"人工喊话调度"，新创"车-能-货"三位一体的协同算法。实现从货源发单、排队过磅、在途管控到多源对账的 100% 数字化无感流转。</p>
+        </div>
+
+        <div class="subsys-diagram">
+          <p class="subsys-diagram-title">物流运输智运中心 · 功能架构流程图</p>
+          <div class="subsys-diagram-inner">
+            <div class="flow-grid flow-grid-tms">
+              <div class="flow-block flow-block-transit">
+                <div class="flow-block-title">全量在途管控与无感作业执行</div>
+                <div class="flow-steps flow-steps-h">
+                  <span class="flow-step">移动协同端执行</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">物联网直连与可视化追踪</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">场站地磅直连与区块链电子回单</span>
+                </div>
+              </div>
+              <div class="flow-block flow-block-master">
+                <div class="flow-block-title">主数据与订单管理底座</div>
+                <div class="flow-steps flow-steps-h">
+                  <span class="flow-step">组织、路由与地理信息</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">运力池与资源档案管理</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">订单接入与智能清洗</span>
+                </div>
+              </div>
+              <div class="flow-block flow-block-billing">
+                <div class="flow-block-title">多源复合计费与智能结算中心</div>
+                <div class="flow-steps">
+                  <span class="flow-step">计费引擎与多维运价本</span>
+                  <span class="flow-step">自动化台账对撞与清分</span>
+                  <span class="flow-step">票款税协同流水线</span>
+                </div>
+              </div>
+              <div class="flow-block flow-block-insight">
+                <div class="flow-block-title">数据洞察与生态协同门户</div>
+                <div class="flow-steps">
+                  <span class="flow-step">运营大盘与 KPI 仪表盘</span>
+                  <span class="flow-step">碳中和 / ESG 数据追踪</span>
+                  <span class="flow-step">多端协同服务门户</span>
+                </div>
+              </div>
+              <div class="flow-block flow-block-dispatch">
+                <div class="flow-block-title">车能协同智能调度引擎</div>
+                <div class="flow-steps">
+                  <span class="flow-step">运力预判与分配策略</span>
+                  <span class="flow-step">基于 SOC (剩余电量) 的多约束路径规划</span>
+                  <span class="flow-step">厂区虚拟排队与多式联运协同</span>
+                </div>
+              </div>
+            </div>
+            <div class="flow-connections">
+              <span class="flow-conn-tag">执行反馈触发结算计费 →</span>
+              <span class="flow-conn-tag">← 结算单据/电子回单异常记录</span>
+              <span class="flow-conn-tag">合同条款与运价模型支撑 →</span>
+              <span class="flow-conn-tag">任务驱动与路径指令支撑 →</span>
+              <span class="flow-conn-tag">财务与成本数据支撑分析 →</span>
+              <span class="flow-conn-tag">承运商评价与优化策略 →</span>
+              <span class="flow-conn-tag">← 调度任务/规划路径</span>
+              <span class="flow-conn-tag">← 实时位置与 SOC 作业状态反馈</span>
+              <span class="flow-conn-tag">← 结算完成成本入账数据</span>
+              <span class="flow-conn-tag">← 订单状态与司机数据</span>
+              <span class="flow-conn-tag">← 全勤履约体系支撑</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>1. 主数据与订单管理底座</h3>
+          <p class="module-intro">构建透明、合规、高内聚的业务底盘，将海量的运力与复杂的矿区/钢厂货单精准解耦。</p>
+          <div class="sub-module">
+            <h4>1.1 组织、路由与地理信息</h4>
+            <ul class="doc-list">
+              <li><strong>组织与权限：</strong> 支持多合资公司、多部门、多角色，实现菜单/按钮/数据级的 RBAC 细粒度权限管控。</li>
+              <li><strong>地址与路由网络：</strong> 发货地/收货地/场站自动地理编码；支持标准线路、转运节点、多式联运路径模板配置；灵活定义厂区/矿区复杂电子围栏。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>1.2 运力池与资源档案管理</h4>
+            <ul class="doc-list">
+              <li><strong>运输资源池：</strong> 建立详尽的车辆档案（车牌、载重、核心：能耗类型与电池标称容量）；承运商/车队档案（合同条款、评级、结款方式）。</li>
+              <li><strong>司机人才库：</strong> 包含资质（营运证/驾照）、驾驶经验、违章记录、历史安全评分以及车辆绑定关系。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>1.3 订单接入与智能清洗</h4>
+            <ul class="doc-list">
+              <li><strong>多端需求接入：</strong> 手动录入、Excel 批量导入，或通过 API/EDI 自动拉取货主企业 ERP/OMS 的发货指令。</li>
+              <li><strong>订单预处理：</strong> 地址标准化校验，运输模式初判（整车/拼载/多式联运），订单的智能合并（同线路窗口）与拆分（多卸货点）。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>2. 车能协同智能调度引擎</h3>
+          <p class="module-intro">本系统的绝对核心壁垒。融合传统 VRP/TSP 算法与新能源电池物理特性，打破"瞎指挥"，让每一度电都转化为精准的运力。</p>
+          <div class="sub-module">
+            <h4>2.1 运力预判与分配策略</h4>
+            <ul class="doc-list">
+              <li><strong>智能承运匹配：</strong> 根据成本、时效、KPI 自动匹配最优运力模式；支持基于合同费率自动派单至"自有保供重卡"、"协办车队"或"应急散户"。</li>
+              <li><strong>预调度与模拟沙盘：</strong> 基于历史趋势与预测货量，提前锁定运力资源，生成备选调度方案。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>2.2 基于 SOC (剩余电量) 的多约束路径规划</h4>
+            <ul class="doc-list">
+              <li><strong>电量/路况双约束匹配：</strong> 系统在派单时，自动抓取车辆当前真实 SOC 值。过滤掉低电量车辆，将重载爬坡的干线任务派给满电车，将低电量车精准引导至换电站附近的短途闭环线路。</li>
+              <li><strong>动态路径优化 (VRP/TSP)：</strong> 综合考虑实时路况、限行区域、司机法定工作时长，以及沿途充电桩/换电站的排队状态，规划最优提送货及补能路线。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>2.3 厂区虚拟排队与多式联运协同</h4>
+            <ul class="doc-list">
+              <li><strong>多式联运拼载：</strong> 结合大宗货物的班期（船期、班列）自动倒推提货 deadline，实现干线搭配支线的高效接驳。</li>
+              <li><strong>排队热力图与防拥堵：</strong> 结合矿区装卸货点和换电站的实时热力数据，电子排号错峰派单，避免几十台重卡在同一个厂区"死等"耗电。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>3. 全量在途管控与无感作业执行</h3>
+          <p class="module-intro">消灭纸质单据，堵死大宗物流装卸货环节的所有"作弊黑洞"，实现真正的精益化过程管控。</p>
+          <div class="sub-module">
+            <h4>3.1 移动协同端执行</h4>
+            <ul class="doc-list">
+              <li><strong>司机/现场操作 APP：</strong> 极简 UI 设计支持语音交互。包含任务推送、抢单/指派响应、集成高德/百度货车专业导航。</li>
+              <li><strong>无接触扫码作业：</strong> 提货/签收扫码验证，异常情况（货损、拒收、交通管制）拍照一键上报与升级处理。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>3.2 物联网直连与可视化追踪</h4>
+            <ul class="doc-list">
+              <li><strong>轨迹渲染与 ETA：</strong> GPS/北斗高频轨迹实时渲染，结合路况智能计算预计到达时间 (ETA)，延误自动预警。</li>
+              <li><strong>异常风控报警：</strong> 偏航、未按时签收、或在非服务区异常停留（防偷煤/换料作弊），系统自动触发最高级别告警并推送至大屏。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>3.3 场站地磅直连与区块链电子回单</h4>
+            <ul class="doc-list">
+              <li><strong>地磅 API 防篡改：</strong> 车辆触发围栏自动过闸。上磅后直接从传感器抓取"皮重/毛重"回传，彻底杜绝人为篡改重量。</li>
+              <li><strong>区块链 e-POD：</strong> 结合签名、现场照片、OCR 识别与 GPS 时间戳，生成防抵赖的电子回签单，直接流转至财务。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>4. 多源复合计费与智能结算中心</h3>
+          <p class="module-intro">将每月令财务崩溃的"三方对账噩梦"，转化为系统一键跑批的自动化流水线。</p>
+          <div class="sub-module">
+            <h4>4.1 计费引擎与多维运价本</h4>
+            <ul class="doc-list">
+              <li><strong>灵活计费公式：</strong> 支持按重量/里程/整车/分段阶梯配置；支持一口价或成本加成模式。</li>
+              <li><strong>动态附加费：</strong> 自动核算等时费、压夜费；支持大宗物流特有的"燃油/电价波动联动调价机制"。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>4.2 自动化台账对撞与清分</h4>
+            <ul class="doc-list">
+              <li><strong>多源对撞引擎：</strong> 系统自动将"TMS 订单预估费" vs "地磅实际净重" vs "补能扣款单" vs "安全理赔罚款"进行底层对撞，差异自动高亮。</li>
+              <li><strong>内外两套账本：</strong> 自动分离计算"应付承运商/司机账单"与"应收货主账单"，支持内外价差核算。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>4.3 票款税协同流水线</h4>
+            <ul class="doc-list">
+              <li><strong>在线对账与付款：</strong> 提供多周期（按单/周/月）对账确认流程。对接网银 API 发起自动付款，对接开票系统实现回款核销。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>5. 数据洞察与生态协同门户</h3>
+          <p class="module-intro">将沉淀的物流数据转化为业务改进的指南针，并向外部生态伙伴开放协作能力。</p>
+          <div class="sub-module">
+            <h4>5.1 运营大盘与 KPI 仪表盘</h4>
+            <ul class="doc-list">
+              <li><strong>管理者驾驶舱：</strong> 实时洞察在途运单、今日发运量、月度成本趋势、单车利润率。</li>
+              <li><strong>多维考评体系：</strong> 时效类（准时到达率）、质量类（货损率/回单率）、成本类（吨公里成本）追踪；自动生成承运商计分卡以优化未来派单。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>5.2 碳中和 / ESG 数据追踪</h4>
+            <ul class="doc-list">
+              <li>基于真实车辆电耗与替代的燃油车行驶里程，精确核算温室气体减排量，自动生成符合审计标准的 ESG 运输碳排放报告。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>5.3 多端协同服务门户</h4>
+            <ul class="doc-list">
+              <li><strong>货主门户 (Web/小程序)：</strong> 支持大客户在线批量下单、在途轨迹追踪、对账单线上签批确认及异常投诉理赔。</li>
+              <li><strong>承运商/车队门户：</strong> 提供任务接收池、运力挂靠审核、电子回单集中上传及对账开票看板。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 安全与后市场服务中心 -->
+    <section class="section" id="layer4-safety">
+      <div class="container">
+        <div class="section-header layer4-subsys-header">
+          <span class="section-tag">Safety · 安全后市场</span>
+          <h2 class="section-title">安全与后市场服务中心- 详细功能架构</h2>
+        </div>
+
+        <div class="card subsys-position">
+          <p><strong>系统定位：</strong> 守护重卡资产的"两把锁"。一把锁防物理层面的车祸伤亡（主动安全），一把锁防高压三电系统的非计划性停工（后市场维保）。利用主机厂独有的底层数据穿透权，实现从"盲人摸象式维修"向"透明化、预测式健康管理"的跨越。</p>
+        </div>
+
+        <div class="subsys-diagram">
+          <p class="subsys-diagram-title">安全与后市场服务中心 · 功能架构流程图</p>
+          <div class="subsys-diagram-inner">
+            <div class="flow-grid flow-grid-safety">
+              <div class="flow-block flow-block-safety">
+                <div class="flow-block-title">主动安全与AI预警大脑</div>
+                <div class="flow-steps">
+                  <span class="flow-step">多源硬件汇聚与协议解析</span>
+                  <span class="flow-step">AI 预警过滤与分级引擎</span>
+                  <span class="flow-step">极危场景强制干预与事故重构</span>
+                  <span class="flow-step">预警工单与申诉闭环</span>
+                </div>
+              </div>
+              <div class="flow-block flow-block-safety">
+                <div class="flow-block-title">云端诊断与预防性维保预警</div>
+                <div class="flow-steps">
+                  <span class="flow-step">高压三电远程专家会诊台</span>
+                  <span class="flow-step">预防性维保规则引擎</span>
+                </div>
+              </div>
+              <div class="flow-block flow-block-safety">
+                <div class="flow-block-title">高压备件供应链与逆向物流</div>
+                <div class="flow-steps">
+                  <span class="flow-step">核心三电扫码流转记录</span>
+                  <span class="flow-step">预测性调拨与轻量级</span>
+                  <span class="flow-step">旧件回收与逆向物流</span>
+                </div>
+              </div>
+              <div class="flow-block flow-block-safety">
+                <div class="flow-block-title">司机数字化培训与信用体系</div>
+                <div class="flow-steps">
+                  <span class="flow-step">千人千面在线安全微课</span>
+                  <span class="flow-step">司机安全信用积分模型</span>
+                </div>
+              </div>
+              <div class="flow-block flow-block-safety">
+                <div class="flow-block-title">维修工单与极速救援闭环</div>
+                <div class="flow-steps">
+                  <span class="flow-step">极速抛锚救援调度</span>
+                  <span class="flow-step">车间透明维修工作流</span>
+                  <span class="flow-step">标准工时与费用结算审批</span>
+                  <span class="flow-step">三包索赔管理</span>
+                </div>
+              </div>
+            </div>
+            <div class="flow-connections">
+              <span class="flow-conn-tag">事故数据触发深度诊断 →</span>
+              <span class="flow-conn-tag">违规/预警记录触发定向培训 →</span>
+              <span class="flow-conn-tag flow-conn-tag-dashed">← 预警模型反馈培训内容</span>
+              <span class="flow-conn-tag">备件供应与库存支撑 →</span>
+              <span class="flow-conn-tag">旧件回款/备件消耗数据 →</span>
+              <span class="flow-conn-tag">维保需求/故障工单 →</span>
+              <span class="flow-conn-tag">维修履历更新车辆健康档案 →</span>
+              <span class="flow-conn-tag">知识库/标准工时指导 →</span>
+              <span class="flow-conn-tag flow-conn-tag-dashed">信用分输出至调度系统 →</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>1. 主动安全与 AI 预警大脑</h3>
+          <p class="module-intro">打破传统的"事后看录像扣钱"模式，建立"毫秒级感知 - 云端过滤 - 物理级干预 - 申诉闭环"的完整防线。</p>
+          <div class="sub-module">
+            <h4>1.1 多源硬件汇聚与协议解析</h4>
+            <ul class="doc-list">
+              <li><strong>全量物联接入：</strong> 支持国家部委标准协议（JT/T 808、1078、32960 等），接入车机 ADAS（前向碰撞/车道偏离/盲区监测）和 DMS（打哈欠/闭眼/抽烟/玩手机/左顾右盼）。</li>
+              <li><strong>低延迟视频推流：</strong> 预警触发时，毫秒级拉起车内/车外 4 路摄像头的高清实时视频推流，确保后台管理人员"所见即现场"。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>1.2 AI 预警过滤与分级引擎</h4>
+            <ul class="doc-list">
+              <li><strong>AI 降噪防"狼来了"：</strong> 利用云端视觉大模型，二次过滤因光线突变、路面颠簸引起的硬件设备误报，降低安全员无效工作量。</li>
+              <li><strong>多维动态定级：</strong> 不再单一依靠硬件报警。结合车辆当前速度（如：时速 80km 闭眼 vs 时速 10km 闭眼）、路况（高速 vs 矿区内部道路），动态判定报警等级（轻度/中度/极危）。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>1.3 极危场景强制干预与事故重构</h4>
+            <ul class="doc-list">
+              <li><strong>阶梯式干预策略：</strong>
+                <ul class="doc-list">
+                  <li><strong>轻/中度：</strong> 车机自动下发 TTS 语音播报（"张师傅，您已连续驾驶3小时，请就近休息"）。</li>
+                  <li><strong>极危级：</strong> 工单强弹至后台安全员大屏，一键开启双向视频强喊话；极端情况下（需授权），向底层 CAN 网关下发限制车速与降扭指令。</li>
+                </ul>
+              </li>
+              <li><strong>黑匣子事故重构：</strong> 一旦发生碰撞报警，系统自动锁存事故发生前 15 秒至后 5 秒的 3D 轨迹图、油门/刹车踏板深度、转向角、速度及多路视频，生成防篡改的《事故电子鉴定书》。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>1.4 预警工单与申诉闭环</h4>
+            <ul class="doc-list">
+              <li><strong>处理工作流：</strong> 报警产生 → 系统归档/人工核实 → 生成安全违规记录。</li>
+              <li><strong>司机申诉通道：</strong> 司机可在小程序内对处罚记录发起申诉（如：因躲避前车急刹导致的碰撞预警），由人工仲裁，保证管理的人性化。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>2. 云端诊断与预防性维保预警</h3>
+          <p class="module-intro">变"坏了才修、抛锚死等"为"以养代修"。发挥车厂直连优势，将维保服务前置。</p>
+          <div class="sub-module">
+            <h4>2.1 高压三电远程专家会诊台</h4>
+            <ul class="doc-list">
+              <li><strong>DTC 故障码实时解析：</strong> 实时抓取并翻译车辆底层 DTC 故障码，匹配云端《电子维修知识库》，直接给出初步排查指南。</li>
+              <li><strong>BMS 数据帧穿透：</strong> 允许车厂售后技术专家在云端直接调取案发时段的 BMS（电池管理系统）底层数据帧（如：单体电芯压差、温度极值波形图），辅助线下技师精准定位。</li>
+              <li><strong>OTA 远程升级管理：</strong> 针对非硬件类软件缺陷，支持云端批量下发 VCU/BMS 的固件升级包，免去车辆进站烦恼。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>2.2 预防性维保规则引擎</h4>
+            <ul class="doc-list">
+              <li><strong>动态维保计划：</strong> 告别死板的"按里程保养"。系统基于电机的实际高负荷运行时长、电池充放电循环次数、刹车片磨损模型，生成千车千面的个性化保养建议清单。</li>
+              <li><strong>自动派单与产能匹配：</strong> 临近保养周期，系统向车队长发送预警，并展示周边服务站的"当前拥挤度/空闲工位"，支持一键预约进站。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>3. 维修工单与极速救援闭环</h3>
+          <p class="module-intro">解决"维修慢、结算扯皮、保修索赔难"的三大顽疾，打造透明车间。</p>
+          <div class="sub-module">
+            <h4>3.1 极速抛锚救援调度</h4>
+            <ul class="doc-list">
+              <li><strong>一键 SOS：</strong> 司机在小程序一键上报抛锚故障（支持照片/视频/语音）。</li>
+              <li><strong>智能派工：</strong> 系统自动获取车辆 GPS 精确坐标，计算距离最近的社会服务站或"移动补能车/维修车"，将带诊断结果的急修单派发至技师 APP。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>3.2 车间透明维修工作流</h4>
+            <ul class="doc-list">
+              <li><strong>接车与环检：</strong> 技师使用 PDA/APP 扫码接车，拍照上传车辆外观擦碰、仪表盘状态（电子接车单）。</li>
+              <li><strong>工单流转管控：</strong> 派工 → 领料 → 维修作业（关键高压拆解步骤要求拍照打卡） → 完工质检试车。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>3.3 标准工时与费用结算审批</h4>
+            <ul class="doc-list">
+              <li><strong>标准工时费率库：</strong> 内置车厂认证的标准维修工时表库及配件价格指导体系，杜绝服务站"漫天要价"与"过度维修"。</li>
+              <li><strong>无纸化对账：</strong> 维修完毕后，电子账单附带更换废件照片，自动流转至合资公司车管/财务端进行在线秒批付款。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>3.4 三包索赔管理</h4>
+            <ul class="doc-list">
+              <li>自动判断故障部件是否在保修期/保修里程内。支持服务站一键将符合条件的维修单转化为"向主机厂索赔单"，加速服务站资金回笼。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>4. 高压备件供应链与逆向物流管理</h3>
+          <p class="module-intro">高压配件极度昂贵，平衡"防断货停工"与"防库存资金积压"的矛盾。</p>
+          <div class="sub-module">
+            <h4>4.1 核心三电扫码流转记录</h4>
+            <ul class="doc-list">
+              <li><strong>一物一码追溯：</strong> 对电机控制器 (MCU)、高压线束、电池模组进行唯一二维码/RFID 管理，精确记录"批次号-装配车辆 VIN 码-维修替换记录"，为质量索赔和缺陷召回提供铁证。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>4.2 预测性调拨与轻量级</h4>
+            <ul class="doc-list">
+              <li><strong>多级仓储管理：</strong> 涵盖中央大仓 → 区域中心仓 → 服务站前置仓的多级库存透视。</li>
+              <li><strong>智能补货预警：</strong> 结合平台预测性维保模型及同批次车辆历史故障发生率（如威布尔分布模型），提前测算下个月某地区的零配件消耗量，自动触发跨区域调拨指令。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>4.3 旧件回收与逆向物流</h4>
+            <ul class="doc-list">
+              <li><strong>旧件必须强制回收：</strong> 新能源电池和电机属于环保严控及高价值资产。系统建立严格的"旧件交回换新件"核销机制。</li>
+              <li><strong>旧件状态评估：</strong> 记录退役部件是流向"残值梯次利用中心"还是"专业环保报废厂"。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>5. 司机数字化培训与信用体系</h3>
+          <p class="module-intro">将冰冷的"罚款单"转化为有温度的"赋能教育"，保障合规，提升运力池质量。</p>
+          <div class="sub-module">
+            <h4>5.1 千人千面在线安全微课</h4>
+            <ul class="doc-list">
+              <li><strong>触发式定向派课：</strong> 打通前序预警数据。若司机 A 近期"违规超速"频繁，系统自动向其派发《重卡盲区与限速防线》微视频；若司机 B "疲劳驾驶"多，则派发《防疲劳小妙招》。</li>
+              <li><strong>人脸核身与防刷课：</strong> 司机在线学习需不定时弹出人脸识别验证（活体检测），杜绝手机放一边刷课时长的作弊行为。课后必须通过标准化在线答题测试。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>5.2 司机安全信用积分模型</h4>
+            <ul class="doc-list">
+              <li><strong>动态积分大盘：</strong> 基于满分 100 分制，融合事故率（扣大分）、预警触发频次（扣小分）、在线考试成绩（加分）、出勤率等数据，实时计算每位司机的"个人信用驾驶分"。</li>
+              <li><strong>与业务调度刚性挂钩：</strong>
+                <ul class="doc-list">
+                  <li><strong>评优激励：</strong> 绿码司机（90分以上）优先派发高单价、好跑的高速干线运单，或获得充电折扣券。</li>
+                  <li><strong>风控熔断：</strong> 红码司机（60分以下，或未完成强制培训）的账号将被系统自动冻结，TMS 拒绝为其派单，直至其完成线下脱产安全教育。</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 补能与能源生态中心 -->
+    <section class="section section-alt" id="layer4-energy">
+      <div class="container">
+        <div class="section-header layer4-subsys-header">
+          <span class="section-tag">Energy · 补能能源</span>
+          <h2 class="section-title">补能与能源生态中心 - 详细功能架构</h2>
+        </div>
+
+        <div class="card subsys-position">
+          <p><strong>系统定位：</strong> 纯电重卡车队的"超级能量大管家"。不仅要让车能充上电，更要通过算法与电网的"峰谷平"机制博弈，把每月的巨额电费成本打下来，实现能源套利。</p>
+        </div>
+
+        <div class="subsys-diagram">
+          <p class="subsys-diagram-title">补能与能源生态中心 · 功能架构流程图</p>
+          <div class="subsys-diagram-inner">
+            <div class="flow-grid flow-grid-energy">
+              <div class="flow-block flow-block-energy">
+                <div class="flow-block-title">场站资产与设备物联大盘</div>
+                <div class="flow-steps">
+                  <span class="flow-step">场站数字地图与基础档案</span>
+                  <span class="flow-step">快充桩/换电站状态看板</span>
+                  <span class="flow-step">换电站电池组库存动态</span>
+                </div>
+              </div>
+              <div class="flow-block flow-block-energy">
+                <div class="flow-block-title">峰谷电价策略与微电网调度</div>
+                <div class="flow-steps">
+                  <span class="flow-step">时段电价字典配置</span>
+                  <span class="flow-step">削峰填谷智能调度算法</span>
+                  <span class="flow-step">负荷平滑防跳闸</span>
+                </div>
+              </div>
+              <div class="flow-block flow-block-energy">
+                <div class="flow-block-title">充电/换电无感作业引擎</div>
+                <div class="flow-steps">
+                  <span class="flow-step">即插即充与无感鉴权</span>
+                  <span class="flow-step">充放电过程异常熔断</span>
+                </div>
+              </div>
+              <div class="flow-block flow-block-energy">
+                <div class="flow-block-title">能源账务清分与多方对账</div>
+                <div class="flow-steps flow-steps-h">
+                  <span class="flow-step">自动计费与订单池</span>
+                  <span class="flow-step-arrow">→</span>
+                  <span class="flow-step">多方结算与自动清分</span>
+                </div>
+              </div>
+            </div>
+            <div class="flow-block flow-block-external">
+              <div class="flow-block-title">物流运输智运中心（外部协同）</div>
+              <div class="flow-steps flow-steps-h">
+                <span class="flow-step">明日派车计划/排班</span>
+                <span class="flow-step-arrow">↔</span>
+                <span class="flow-step">换电站槽位预留/拥堵预警</span>
+              </div>
+            </div>
+            <div class="flow-connections">
+              <span class="flow-conn-tag">场站负荷/变压器容量 →</span>
+              <span class="flow-conn-tag">实时负荷数据支撑调度 →</span>
+              <span class="flow-conn-tag">桩状态/电池库存实时更新 →</span>
+              <span class="flow-conn-tag">设备档案/白名单支撑鉴权 →</span>
+              <span class="flow-conn-tag">延时充电/降功率调度指令 →</span>
+              <span class="flow-conn-tag">电价策略与调度算法支撑 →</span>
+              <span class="flow-conn-tag">充电交易订单快照 →</span>
+              <span class="flow-conn-tag">换电站槽位预留 →</span>
+              <span class="flow-conn-tag">← 明日派车计划/排班</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>1. 场站资产与设备物联大盘</h3>
+          <p class="module-intro">将分散在各个矿区、高速旁、物流园的充换电站，整合为一张可视化的能源网络。</p>
+          <div class="sub-module">
+            <h4>1.1 场站数字地图与基础档案</h4>
+            <ul class="doc-list">
+              <li><strong>场站建档：</strong> 记录站点经纬度、配变电总容量（kVA）、主承包方、营业时间。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>1.2 换电站电池组库存动态</h4>
+            <ul class="doc-list">
+              <li><strong>满电可用数量预警：</strong> 实时读取换电站内"已充满可用"、"正在充电中"的电池数量。若可用电池不足，自动向 TMS 发送拥堵预警，拦截后续换电车辆。</li>
+              <li><strong>站内充电功率动态分配：</strong> 根据换电站排队情况，自动调节仓内不同电池的充电功率（急用的满功率快充，不急的慢充护电池）。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>2. 充电/换电无感作业引擎</h3>
+          <p class="module-intro">司机不用下车，不用复杂的扫码，像开燃油车进加油站一样顺滑。</p>
+          <div class="sub-module">
+            <h4>2.1 即插即充与无感鉴权</h4>
+            <ul class="doc-list">
+              <li><strong>白名单白卡机制：</strong> 基于车辆底盘 VIN 码或车机底层 MAC 地址，插枪/驶入换电通道后自动完成身份识别与防盗刷校验。</li>
+              <li><strong>充电启动控制流：</strong> 校验通过后，云端下发启动指令给充电桩，自动开启最大安全功率输出。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>2.2 充放电过程异常熔断</h4>
+            <ul class="doc-list">
+              <li><strong>BMS 实时心跳监控：</strong> 毫秒级抓取充电过程中的单体电芯最高温度、电压/电流波形。</li>
+              <li><strong>防热失控物理熔断：</strong> 一旦监测到温度异常飙升或电压压差过大，系统绕过常规流程，直接向充电桩下发底层"紧急切断"指令，防止自燃。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>3. 峰谷电价策略与微电网调度</h3>
+          <p class="module-intro">本中心的"利润放大器"。将司机的随意充电，转化为系统统筹的套利充电。</p>
+          <div class="sub-module">
+            <h4>3.1 时段电价字典配置</h4>
+            <ul class="doc-list">
+              <li>对接各省市发改委/供电局的"尖、峰、平、谷"时段划分字典及对应费率，支持未来 30 天电价走势的预配置。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>3.2 削峰填谷智能调度算法</h4>
+            <ul class="doc-list">
+              <li><strong>夜间集中谷电管理：</strong> 结合 TMS 明日的派车计划，对于夜间停放在场站的车辆，即便插上枪也不立即充电，而是由系统统一延时到凌晨（谷电时段）自动启动充电，并在早班发车前全部充满。</li>
+              <li><strong>负荷平滑防跳闸：</strong> 当场站同时充电的车辆过多，总功率逼近电网变压器上限时，系统自动对部分非紧急车辆进行"柔性降功率"，避免整个场站拉闸停电。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card module-block">
+          <h3>4. 能源账务清分与多方对账</h3>
+          <p class="module-intro">彻底解决传统车队"司机拿加油卡倒卖套现"的贪腐黑洞，实现资金闭环。</p>
+          <div class="sub-module">
+            <h4>4.1 自动计费与订单池</h4>
+            <ul class="doc-list">
+              <li><strong>组合计费规则：</strong> 基础电费 + 场站服务费自动叠加；支持针对内部合资车队设置"专属折扣价"或"月结模式"。</li>
+              <li><strong>交易订单快照：</strong> 每笔充电订单绑定具体的司机、车架号、起止时间、电价时段构成明细。</li>
+            </ul>
+          </div>
+          <div class="sub-module">
+            <h4>4.2 多方结算与自动清分</h4>
+            <ul class="doc-list">
+              <li>每月自动将充电费用从司机运费提成中划扣（与 TMS 结算模块对撞）。</li>
+              <li>生成标准对账单，对接第三方分账网关，将资金分别清分给电网（电费）和建站资方（服务费）。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+<!-- Layer 5: 产品路线规划 - 插入 index.html 的 </main> 之前 -->
+
+    <!-- 第五层：产品路线规划 · 总览 -->
+    <section class="section" id="layer5-intro">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Layer 5 · Roadmap</span>
+          <h2 class="section-title">第五层：产品路线规划</h2>
+        </div>
+        <div class="card intro-card">
+          <p class="doc-text">数智化新能源大宗物流平台剩余产品路线图（2026.07-2028.12）</p>
+          <p class="doc-text">基于企业级系统开发的客观规律（硬件对接周期、算法训练数据积累、跨部门协同节奏、业务落地验证周期），将原 12 个月规划拉长至 30 个月，分为短期（运营闭环攻坚，9 个月）、中期（数据能力深化，9 个月）、长期（生态金融升级，12 个月）三个阶段。每个阶段明确 "核心目标 - 建设原则 - 详细功能清单 - 关键里程碑 - 量化收益"，确保功能落地与业务扩张节奏完全匹配</p>
+        </div>
+        <div class="layer5-phase-timeline">
+          <a href="#layer5-short" class="card layer5-phase-card">
+            <span class="layer5-phase-label">短期</span>
+            <span class="layer5-phase-date">2026.07-2027.03</span>
+            <span class="layer5-phase-desc">运营闭环攻坚</span>
+          </a>
+          <a href="#layer5-mid" class="card layer5-phase-card">
+            <span class="layer5-phase-label">中期</span>
+            <span class="layer5-phase-date">2027.04-2027.12</span>
+            <span class="layer5-phase-desc">数据能力深化</span>
+          </a>
+          <a href="#layer5-long" class="card layer5-phase-card">
+            <span class="layer5-phase-label">长期</span>
+            <span class="layer5-phase-date">2028.01-2028.12</span>
+            <span class="layer5-phase-desc">生态金融升级</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. 短期规划 -->
+    <section class="section section-alt" id="layer5-short">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Phase 01 · Short-term</span>
+          <h2 class="section-title">1. 短期规划：运营闭环攻坚期（2026.07-2027.03）</h2>
+        </div>
+        <div class="card doc-card">
+          <p class="doc-text">用 9 个月时间解决首批合资项目的 "生存级痛点"，实现 "订单 - 调度 - 补能 - 结算 - 安全 - 资产" 六大核心环节的全流程数字化闭环。本阶段拒绝 "大而全"，所有功能必须可落地、可验证、直接产生经济效益，确保首批 5-8 个合资项目实现单月盈亏平衡。</p>
+        </div>
+        <div class="card doc-card">
+          <h3 class="doc-subtitle">阶段建设原则</h3>
+          <ol class="doc-list doc-list-num">
+            <li>优先补全 "已上线功能的致命短板"，再拓展新能力</li>
+            <li>所有算法功能先做 "规则版"，再迭代 "AI 版"</li>
+            <li>硬件对接优先支持自有车型，逐步兼容第三方车型</li>
+            <li>每 2 周一个迭代，每月一次业务验证，快速迭代优化</li>
+          </ol>
+        </div>
+        <div class="roadmap-table-wrap card">
+          <table class="roadmap-table">
+            <thead>
+              <tr>
+                <th>模块名称</th>
+                <th>子模块</th>
+                <th>具体功能点</th>
+                <th>开发周期</th>
+                <th>依赖项</th>
+                <th>核心价值</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td rowspan="5"><strong>一、已完成功能效率优化专项（贯穿全阶段）</strong></td>
+              <td>计费模板与规则</td>
+              <td>1. 100 + 模板批量导入 / 导出 / 复制<br>2. 计费规则模拟测试工具<br>3. 异常计费阈值预警（超 ±20% 自动高亮）<br>4. 阶梯计费自动计算（里程 / 重量 / 时间）<br>5. 历史订单计费规则一键复用</td>
+              <td>2026.07-2026.08</td>
+              <td>现有计费引擎</td>
+              <td>计费配置效率提升 80%，错账率降至 0.1% 以下</td>
+            </tr>
+            <tr>
+              <td>合同管理</td>
+              <td>1. OCR 合同关键信息自动提取（金额 / 账期 / 运价）<br>2. 合同条款与计费规则自动联动<br>3. 合同全生命周期审批流（起草 - 签署 - 归档）<br>4. 到期 / 履约节点多级预警（60/30/7 天）<br>5. 合同执行台账自动生成</td>
+              <td>2026.07-2026.09</td>
+              <td>电子签系统 API</td>
+              <td>合同处理效率提升 70%，违约风险降低 60%</td>
+            </tr>
+            <tr>
+              <td>司机与车辆管理</td>
+              <td>1. 司机 / 车辆信息批量导入与账号批量分配<br>2. 资质到期自动预警与接单限制<br>3. 车辆与司机一键解绑 / 绑定<br>4. 离职司机账号自动冻结与订单转移<br>5. 车辆基础健康看板（里程 / 油耗 / 故障）</td>
+              <td>2026.08-2026.09</td>
+              <td>现有人员管理模块</td>
+              <td>人员车辆管理效率提升 60%，资质逾期率降为 0</td>
+            </tr>
+            <tr>
+              <td>运输订单与调度</td>
+              <td>1. Excel 订单批量导入与智能清洗<br>2. 同线路订单自动合单 / 多卸货点自动拆单<br>3. 订单模板保存与一键生成<br>4. 异常订单自动标记与派单<br>5. 调度大屏实时语音提醒与异常高亮</td>
+              <td>2026.08-2026.10</td>
+              <td>现有订单模块</td>
+              <td>订单处理效率提升 50%，调度员人均管理车辆从 20 台→35 台</td>
+            </tr>
+            <tr>
+              <td>装卸货与高速路</td>
+              <td>1. 装卸货点电子围栏自动生成与批量导入<br>2. 围栏触发自动签到 / 签退与订单状态更新<br>3. 装卸货点拥堵热力图与错峰派单<br>4. 高速实时路况融合与 ETA 动态更新<br>5. 高速过路费自动计算与成本核算</td>
+              <td>2026.09-2026.10</td>
+              <td>高德 / 百度地图 API</td>
+              <td>装卸货等待时间减少 30%，路线规划准确率提升至 95%</td>
+            </tr>
+            <tr>
+              <td rowspan="3"><strong>二、补能与能源管理中心（P0 最高优先级）</strong></td>
+              <td>基础能源作业层</td>
+              <td>1. VIN 码无感鉴权即插即充<br>2. 充电过程实时监控（电压 / 电流 / 电芯温度）<br>3. 异常充电自动熔断保护（防热失控）<br>4. 换电站电池库存实时监控与满电预警<br>5. 充电桩 / 换电站故障自动报警与工单派单</td>
+              <td>2026.07-2026.09</td>
+              <td>充电桩硬件协议对接</td>
+              <td>司机充电操作时间减少 80%，充电安全事故率降为 0</td>
+            </tr>
+            <tr>
+              <td>峰谷电价调度层</td>
+              <td>1. 全国工业用电尖峰平谷时段字典（自动更新）<br>2. 夜间谷电集中充电（结合次日派车计划）<br>3. 场站总功率超限柔性降功率（防跳闸）<br>4. 补能路线智能推荐（SOC + 排队 + 距离）<br>5. 换电站预约与虚拟排队</td>
+              <td>2026.09-2026.11</td>
+              <td>TMS 派车计划数据</td>
+              <td>单场站月电费成本降低 20%-25%，充电排队时间减少 50%</td>
+            </tr>
+            <tr>
+              <td>能源账务防作弊层</td>
+              <td>1. 充电订单自动生成与司机运费自动扣减<br>2. 电网 / 建站方自动分账与发票管理<br>3. 非绑定车辆充电拦截<br>4. 异常充电行为预警（倒卖电能 / 跨场站充电）<br>5. 能源成本统计报表（按场站 / 车辆 / 司机）</td>
+              <td>2026.11-2027.01</td>
+              <td>TMS 结算模块</td>
+              <td>能源账务处理效率提升 90%，贪腐漏洞 100% 封堵</td>
+            </tr>
+            <tr>
+              <td rowspan="3"><strong>三、物流运输智运中心（结算与执行闭环）</strong></td>
+              <td>电子回单与作业执行</td>
+              <td>1. 地磅数据 API 直连与自动回传<br>2. 区块链电子回单（签名 + GPS + 时间戳存证）<br>3. 装卸货拍照上传与异常上报<br>4. 场站无感过闸（车牌识别自动放行）<br>5. 电子回单自动流转至财务</td>
+              <td>2026.07-2026.09</td>
+              <td>地磅硬件 API</td>
+              <td>纸质单据使用率降为 0，回单流转时间从 2 天→实时</td>
+            </tr>
+            <tr>
+              <td>智能结算中心</td>
+              <td>1. 多源数据自动对撞（订单 / 地磅 / 充电 / 罚款）<br>2. 内外两套账本自动分离与核算<br>3. 等时费 / 压夜费 / 油电联动费自动计算<br>4. 在线对账确认与网银自动付款<br>5. 对接开票系统自动开票与核销</td>
+              <td>2026.09-2026.12</td>
+              <td>电子回单模块</td>
+              <td>月底三方对账时间从 3 天→4 小时，结算准确率 99.9%</td>
+            </tr>
+            <tr>
+              <td>异常处理中心</td>
+              <td>1. 延误 / 偏航 / 货损 / 故障自动预警<br>2. 异常工单自动派单与处理进度追踪<br>3. 异常责任一键判定（轨迹 + 视频 + SOC 数据）<br>4. 异常成本自动核算与分摊<br>5. 异常统计分析报表</td>
+              <td>2026.12-2027.02</td>
+              <td>主动安全模块</td>
+              <td>异常处理响应时间从 1 小时→10 分钟，纠纷率降低 70%</td>
+            </tr>
+            <tr>
+              <td rowspan="2"><strong>四、主动安全管控基础版</strong></td>
+              <td>硬件接入与基础预警</td>
+              <td>1. ADAS/DMS 设备数据接入（JT/T 808/1078）<br>2. 基础报警类型支持（前向碰撞 / 车道偏离 / 疲劳）<br>3. 报警实时推送至安全员大屏<br>4. 报警记录自动归档与查询<br>5. 司机端语音提醒</td>
+              <td>2026.08-2026.10</td>
+              <td>车联网硬件对接</td>
+              <td>安全事件覆盖率 100%，基础预警响应时间≤30 秒</td>
+            </tr>
+            <tr>
+              <td>分级干预与闭环</td>
+              <td>1. 报警等级分级（轻度 / 中度 / 极危）<br>2. 阶梯式干预（语音提醒→安全员喊话→降速）<br>3. 事故前 15 秒视频自动锁存<br>4. 安全工单处理闭环<br>5. 司机申诉通道</td>
+              <td>2026.10-2026.12</td>
+              <td>基础预警模块</td>
+              <td>重大安全事故预警响应时间从 10 分钟→10 秒</td>
+            </tr>
+            <tr>
+              <td rowspan="2"><strong>五、资产价值管理中心（基础版）</strong></td>
+              <td>车辆全生命周期档案</td>
+              <td>1. 车辆基础信息与合规材料电子存档<br>2. 电池 SOH 实时追踪与衰减曲线绘制<br>3. 维修 / 事故 / 出险记录自动归集<br>4. 保险 / 年检到期自动预警<br>5. 车辆累计产值与 ROI 统计</td>
+              <td>2026.09-2026.11</td>
+              <td>车联网数据</td>
+              <td>资产档案查询时间从 1 小时→10 秒，资产穿透率 100%</td>
+            </tr>
+            <tr>
+              <td>租赁账务管理</td>
+              <td>1. 多种租赁模式支持（固定租金 / 按里程 / 车电分离）<br>2. 租金自动计算与账单自动派发<br>3. 逾期多级预警（短信→弹窗→限制接单）<br>4. 租赁台账自动生成<br>5. 租金回款统计分析</td>
+              <td>2026.11-2027.02</td>
+              <td>合同管理模块</td>
+              <td>租赁账务处理效率提升 80%，逾期率降低 40%</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card doc-card">
+          <h3 class="doc-subtitle">关键里程碑</h3>
+          <ul class="doc-list">
+            <li>2026.08.31：无感充电上线、区块链电子回单上线</li>
+            <li>2026.10.31：基础峰谷电价调度上线、主动安全基础预警上线</li>
+            <li>2026.12.31：智能结算中心上线、能源防作弊系统上线</li>
+            <li>2027.02.28：异常处理中心上线、租赁账务管理上线</li>
+            <li>2027.03.31：首批 8 个合资项目全流程数字化闭环验证完成</li>
+          </ul>
+        </div>
+        <div class="card doc-card">
+          <h3 class="doc-subtitle">量化收益指标</h3>
+          <ul class="doc-list">
+            <li>运营效率：工作人员人均效率提升 50%，调度员人均管理车辆从 20 台→35 台</li>
+            <li>成本降低：单车月电费成本降低 20%-25%，车辆非计划停工率降低 20%</li>
+            <li>风险管控：重大安全事故预警覆盖率 100%，资产穿透率 100%</li>
+            <li>业务验证：首批 8 个合资项目实现单月盈亏平衡</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 中期规划 -->
+    <section class="section" id="layer5-mid">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Phase 02 · Mid-term</span>
+          <h2 class="section-title">2.中期规划：数据能力深化期（2027.04-2027.12）</h2>
+        </div>
+        <div class="card doc-card">
+          <h3 class="doc-subtitle">核心战略目标</h3>
+          <p class="doc-text">用 9 个月时间构建主机厂专属的数据壁垒，实现从 "人工决策" 到 "数据驱动决策" 的转变。本阶段重点建设数据中台与 AI 算法引擎，沉淀核心数据资产，同时完善市场转化与后市场服务能力，支撑合资项目从 "单项目盈利" 向 "规模化复制" 升级。</p>
+        </div>
+        <div class="card doc-card">
+          <h3 class="doc-subtitle">阶段建设原则</h3>
+          <ul class="doc-list">
+            <li>数据先行：先完成数据治理与标准化，再建设上层 AI 应用</li>
+            <li>算法迭代：基于真实运营数据持续优化模型，逐步替代人工规则</li>
+            <li>能力复用：所有数据与算法能力以 API 形式开放，支撑各业务模块</li>
+            <li>业务协同：市场、运营、售后、研发部门深度参与数据建设</li>
+          </ul>
+        </div>
+        <div class="roadmap-table-wrap card">
+          <table class="roadmap-table">
+            <thead>
+              <tr>
+                <th>模块名称</th>
+                <th>子模块</th>
+                <th>具体功能点</th>
+                <th>开发周期</th>
+                <th>依赖项</th>
+                <th>核心价值</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td rowspan="2"><strong>一、数据挖掘与中台层</strong></td>
+              <td>数据治理与标准化</td>
+              <td>1. 五大核心数据库建设（货源 / 物流 / 司机 / 车辆 / 场站）<br>2. 四大数据体系构建（市场 / 运营 / 业务 / 财务）<br>3. 数据清洗、去重、标准化规则引擎<br>4. 数据质量监控与告警体系<br>5. 元数据管理与数据血缘追踪</td>
+              <td>2027.04-2027.06</td>
+              <td>短期阶段所有业务数据</td>
+              <td>跨部门数据获取时间从 3 天→1 小时，数据准确率≥95%</td>
+            </tr>
+            <tr>
+              <td>统一数据服务平台</td>
+              <td>1. 标准化数据 API 接口网关<br>2. 数据权限管控（菜单 / 按钮 / 数据级）<br>3. 数据可视化自助分析工具<br>4. 数据导出与报表自动生成<br>5. 数据脱敏与安全管理</td>
+              <td>2027.06-2027.08</td>
+              <td>数据治理模块</td>
+              <td>数据需求响应时间从 1 周→1 天，数据安全合规率 100%</td>
+            </tr>
+            <tr>
+              <td rowspan="4"><strong>二、AI 赋能层（核心算法引擎）</strong></td>
+              <td>车能协同调度引擎</td>
+              <td>1. 基于 SOC 的多约束路径规划算法<br>2. 换电站排队时长预测模型<br>3. 最优补能路线推荐算法<br>4. 车辆能耗精准预测模型（坡度 / 载重 / 温度）<br>5. 场站充电负荷预测模型</td>
+              <td>2027.04-2027.07</td>
+              <td>数据中台、TMS 模块</td>
+              <td>空驶率降低 15%，单车日均里程从 300km→380km</td>
+            </tr>
+            <tr>
+              <td>智能运输调度引擎</td>
+              <td>1. 货源与运力最优匹配算法<br>2. 预调度模拟沙盘（提前 1-3 天）<br>3. 异常改派自动推荐算法<br>4. 司机工作时长合规调度<br>5. 多式联运协同调度</td>
+              <td>2027.07-2027.09</td>
+              <td>车能协同引擎、订单模块</td>
+              <td>调度员人均管理车辆从 35 台→60 台，订单准时率提升至 98%</td>
+            </tr>
+            <tr>
+              <td>人本风控大模型</td>
+              <td>1. 司机驾驶行为画像模型<br>2. 不良驾驶行为识别与纠正<br>3. 司机疲劳度预测模型<br>4. 安全风险分级评估模型<br>5. 千人千面安全培训推荐</td>
+              <td>2027.09-2027.11</td>
+              <td>主动安全模块、数据中台</td>
+              <td>安全事故发生率降低 40%，司机违规率降低 50%</td>
+            </tr>
+            <tr>
+              <td>成本与能耗算法</td>
+              <td>1. 单车全生命周期成本核算模型<br>2. 轮胎 / 刹车片磨损预测模型<br>3. 能耗异常诊断模型<br>4. 峰谷电价套利优化模型<br>5. 备件需求预测模型</td>
+              <td>2027.11-2027.12</td>
+              <td>资产模块、能源模块</td>
+              <td>备件库存周转率提升 25%，综合运营成本降低 10%</td>
+            </tr>
+            <tr>
+              <td rowspan="4"><strong>三、市场转化管理中心（TCO 智算沙盘）</strong></td>
+              <td>售前尽调工具</td>
+              <td>1. 路网与高程仿真引擎（坡度 / 弯道提取）<br>2. 历史相似线路能耗匹配<br>3. 沿途充换电站与电网容量评估<br>4. 区域政策与补贴自动测算<br>5. 环保评级与路权压力分析</td>
+              <td>2027.04-2027.06</td>
+              <td>数据中台、地图 API</td>
+              <td>单项目尽调时间从 7 天→2 天，尽调准确率提升至 85%</td>
+            </tr>
+            <tr>
+              <td>TCO 与 ROI 算账模型</td>
+              <td>1. 柴油车 vs 电车全生命周期成本对比<br>2. 油电差价与碳资产收益预估<br>3. 合资模式现金流回正节点测算<br>4. 多参数方案对比（出资比例 / 租赁期限）<br>5. 敏感性分析（油价 / 电价 / 运费波动）</td>
+              <td>2027.06-2027.08</td>
+              <td>尽调工具模块</td>
+              <td>客户谈判转化率提升 30%，项目测算误差≤10%</td>
+            </tr>
+            <tr>
+              <td>项目全流程管理</td>
+              <td>1. 项目里程碑可视化管理<br>2. 卡点自动预警与升级处理<br>3. 车辆交付与车联网初始化<br>4. 项目运营数据实时监控<br>5. 项目复盘与经验沉淀</td>
+              <td>2027.08-2027.10</td>
+              <td>CRM 模块、资产模块</td>
+              <td>项目交付周期缩短 20%，项目成功率提升至 90%</td>
+            </tr>
+            <tr>
+              <td>CRM 与知识引擎</td>
+              <td>1. 客户画像与档案管理<br>2. 商机漏斗与线索转化追踪<br>3. 经典案例与话术库<br>4. 区域政策与路权数据库<br>5. 竞争对手分析</td>
+              <td>2027.10-2027.12</td>
+              <td>项目管理模块</td>
+              <td>销售团队人均产出提升 25%，新员工上手时间缩短 50%</td>
+            </tr>
+            <tr>
+              <td rowspan="3"><strong>四、后市场维保服务中心（标准版）</strong></td>
+              <td>云端诊断与预防性维保</td>
+              <td>1. DTC 故障码实时解析与知识库匹配<br>2. BMS 数据帧穿透与远程专家会诊<br>3. 基于运行数据的个性化维保计划<br>4. 维保预约与服务站工位调度<br>5. OTA 远程升级管理</td>
+              <td>2027.04-2027.07</td>
+              <td>车联网模块、资产模块</td>
+              <td>车辆非计划停工率降低 30%，维修准确率提升至 90%</td>
+            </tr>
+            <tr>
+              <td>维修工单与救援闭环</td>
+              <td>1. 一键 SOS 救援与智能派工<br>2. 透明维修工作流（接车 - 维修 - 结算）<br>3. 标准工时与配件价格管理<br>4. 三包索赔自动处理<br>5. 维修满意度评价</td>
+              <td>2027.07-2027.09</td>
+              <td>预防性维保模块</td>
+              <td>维修等待时间缩短 40%，客户满意度提升至 90%</td>
+            </tr>
+            <tr>
+              <td>高压备件供应链管理</td>
+              <td>1. 核心三电部件一物一码追溯<br>2. 多级库存透视与智能补货预警<br>3. 预测性备件调拨<br>4. 旧件回收与逆向物流管理<br>5. 备件成本统计分析</td>
+              <td>2027.09-2027.11</td>
+              <td>维修工单模块</td>
+              <td>备件缺货率降低 30%，库存资金占用减少 20%</td>
+            </tr>
+            <tr>
+              <td rowspan="2"><strong>五、主动安全管控升级版</strong></td>
+              <td>AI 预警过滤与优化</td>
+              <td>1. 基于大模型的误报过滤（光线 / 颠簸 / 遮挡）<br>2. 动态报警等级判定（速度 / 路况 / 场景）<br>3. 多传感器融合预警（摄像头 + 雷达 + CAN 数据）<br>4. 预警模型持续自学习<br>5. 安全事件统计与根因分析</td>
+              <td>2027.04-2027.06</td>
+              <td>短期主动安全模块</td>
+              <td>安全员无效工作量减少 80%，误报率降至 5% 以下</td>
+            </tr>
+            <tr>
+              <td>司机培训与信用体系</td>
+              <td>1. 触发式定向安全微课<br>2. 人脸核身防刷课与在线考试<br>3. 司机安全信用积分模型<br>4. 信用分与派单 / 奖惩挂钩<br>5. 安全培训效果评估</td>
+              <td>2027.06-2027.08</td>
+              <td>人本风控大模型</td>
+              <td>司机安全意识提升 60%，培训效果提升 50%</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card doc-card">
+          <h3 class="doc-subtitle">关键里程碑</h3>
+          <div class="doc-plain-list">
+            <p class="doc-text">2027.06.30：数据中台基础版上线、TCO 尽调工具上线</p>
+            <p class="doc-text">2027.08.31：车能协同调度引擎上线、云端诊断系统上线</p>
+            <p class="doc-text">2027.10.31：智能运输调度引擎上线、项目全流程管理上线</p>
+            <p class="doc-text">2027.11.30：人本风控大模型上线、备件供应链管理上线</p>
+            <p class="doc-text">2027.12.31：中期所有功能上线，支撑 30 个以上合资项目运营</p>
+          </div>
+        </div>
+        <div class="card doc-card">
+          <h3 class="doc-subtitle">量化收益指标</h3>
+          <div class="doc-plain-list">
+            <p class="doc-text">运营效率：调度员人均管理车辆从 35 台→60 台，整体运营效率提升 80%</p>
+            <p class="doc-text">成本降低：综合运营成本降低 15%，备件库存周转率提升 25%</p>
+            <p class="doc-text">收入增长：客户谈判转化率提升 30%，后市场服务收入占比达 15%</p>
+            <p class="doc-text">数据价值：投前测算准确率提升至 90%，数据驱动决策占比达 70%</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 长期规划 -->
+    <section class="section section-alt" id="layer5-long">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Phase 03 · Long-term</span>
+          <h2 class="section-title">3.长期规划：生态金融升级期（2028.01-2028.12）</h2>
+        </div>
+        <div class="card doc-card">
+          <h3 class="doc-subtitle">核心战略目标</h3>
+          <p class="doc-text">用 12 个月时间完成从 "工具平台" 到 "产业路由器" 的转型，打通 "物流 - 能源 - 金融 - 碳资产" 全链路价值闭环。本阶段重点建设生态开放平台与金融服务能力，将平台能力输出给上下游合作伙伴，构建主机厂主导的新能源大宗物流生态，实现从 "赚运营钱" 到 "赚生态钱" 的跨越。</p>
+        </div>
+        <div class="card doc-card">
+          <h3 class="doc-subtitle">阶段建设原则</h3>
+          <ul class="doc-list">
+            <li>生态共赢：开放平台能力，不与合作伙伴争利</li>
+            <li>合规先行：所有金融与碳资产功能严格遵守国家法律法规</li>
+            <li>技术前瞻：布局 L4 级无人驾驶与车路协同等前沿技术</li>
+            <li>价值闭环：每个生态能力都要有明确的商业模式与收益点</li>
+          </ul>
+        </div>
+        <div class="roadmap-table-wrap card">
+          <table class="roadmap-table">
+            <thead>
+              <tr>
+                <th>模块名称</th>
+                <th>子模块</th>
+                <th>具体功能点</th>
+                <th>开发周期</th>
+                <th>依赖项</th>
+                <th>核心价值</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td rowspan="3"><strong>一、金融与生态支持层</strong></td>
+              <td>车辆与设备融资通道</td>
+              <td>1. 经营性租赁 / 融资租赁对接<br>2. 车电分离租赁确权与管理<br>3. 充电站基建融资对接<br>4. 金融机构风控数据接口<br>5. 还款能力动态评估</td>
+              <td>2028.01-2028.04</td>
+              <td>资产模块、数据中台</td>
+              <td>资金成本降低 15%，项目融资成功率提升至 95%</td>
+            </tr>
+            <tr>
+              <td>供应链金融服务</td>
+              <td>1. 运费保理融资对接<br>2. 应收账款质押融资<br>3. 预付款融资<br>4. 供应链金融风控模型<br>5. 资金流与业务流自动匹配</td>
+              <td>2028.04-2028.06</td>
+              <td>结算模块、数据中台</td>
+              <td>合作伙伴现金流压力缓解 40%，生态粘性大幅提升</td>
+            </tr>
+            <tr>
+              <td>保险精算与理赔协同</td>
+              <td>1. 基于车联网数据的 UBI 动态保费<br>2. 一键投保与保单管理<br>3. 事故视频快速调取与定损<br>4. 理赔自动处理与赔款支付<br>5. 保险风险精算模型</td>
+              <td>2028.06-2028.08</td>
+              <td>主动安全模块、资产模块</td>
+              <td>车险成本降低 20%，理赔时效从 7 天→24 小时</td>
+            </tr>
+            <tr>
+              <td rowspan="2"><strong>二、碳资产管理模块</strong></td>
+              <td>碳减排数据核算</td>
+              <td>1. 基于真实电耗的碳减排量精准核算<br>2. 符合 CCER 标准的碳减排台账<br>3. 区块链存证的碳数据溯源<br>4. 碳减排量实时统计与展示<br>5. ESG 报告自动生成</td>
+              <td>2028.01-2028.03</td>
+              <td>数据中台、能源模块</td>
+              <td>碳数据合规率 100%，满足国际 ESG 审计要求</td>
+            </tr>
+            <tr>
+              <td>碳资产交易与管理</td>
+              <td>1. 碳资产挂牌交易对接<br>2. 碳资产价值评估<br>3. 碳交易流程管理<br>4. 碳收益自动分配<br>5. 碳政策与市场行情监控</td>
+              <td>2028.03-2028.06</td>
+              <td>碳减排核算模块</td>
+              <td>新增碳资产交易收入，单车年碳收益≥5000 元</td>
+            </tr>
+            <tr>
+              <td rowspan="3"><strong>三、生态开放平台</strong></td>
+              <td>多端协同生态门户</td>
+              <td>1. 货主企业服务门户（下单 / 追踪 / 对账）<br>2. 承运商服务门户（接单 / 结算 / 管理）<br>3. 金融机构风控门户<br>4. 政府监管数据报送门户<br>5. 合作伙伴 API 管理平台</td>
+              <td>2028.01-2028.05</td>
+              <td>所有业务模块</td>
+              <td>生态合作伙伴接入效率提升 80%，客户体验大幅改善</td>
+            </tr>
+            <tr>
+              <td>外部系统对接</td>
+              <td>1. 与主流网络货运平台 API 对接（满帮 / G7）<br>2. 与货主企业 ERP/OMS 系统对接<br>3. 与银行 / 支付系统对接<br>4. 与碳交易所系统对接<br>5. 与政府监管平台对接</td>
+              <td>2028.05-2028.09</td>
+              <td>生态门户模块</td>
+              <td>实现跨平台数据互通，业务协同效率提升 60%</td>
+            </tr>
+            <tr>
+              <td>标准运力输出</td>
+              <td>1. 标准化运力 API 接口<br>2. 运力池与排班计划开放<br>3. 跨平台自动派单<br>4. 电子围栏与轨迹核验<br>5. 自动化运费计价</td>
+              <td>2028.09-2028.11</td>
+              <td>调度模块、订单模块</td>
+              <td>闲置运力利用率提升 30%，新增外部运力收入</td>
+            </tr>
+            <tr>
+              <td rowspan="2"><strong>四、前瞻技术预研与落地</strong></td>
+              <td>L4 级无人驾驶接口</td>
+              <td>1. 封闭矿区 / 钢厂内部无人驾驶调度接口<br>2. 无人车与有人车混合调度<br>3. 无人车补能自动调度<br>4. 无人车远程监控与干预<br>5. 车路协同数据接入</td>
+              <td>2028.03-2028.08</td>
+              <td>调度模块、能源模块</td>
+              <td>为未来无人驾驶规模化落地预留技术底座</td>
+            </tr>
+            <tr>
+              <td>微电网与储能协同</td>
+              <td>1. 场站储能系统接入与管理<br>2. 光储充一体化调度<br>3. 电网需求响应参与<br>4. 虚拟电厂运营<br>5. 能源交易与套利优化</td>
+              <td>2028.08-2028.12</td>
+              <td>能源管理模块</td>
+              <td>能源成本再降低 10%，新增能源交易收入</td>
+            </tr>
+            <tr>
+              <td rowspan="3"><strong>五、平台能力全面升级</strong></td>
+              <td>资产价值管理升级版</td>
+              <td>1. 基于全生命周期数据的动态残值评估<br>2. 二手车处置竞价平台<br>3. 动力电池梯次利用管理<br>4. 电池回收与环保合规管理<br>5. 资产证券化支持</td>
+              <td>2028.01-2028.06</td>
+              <td>中期资产模块</td>
+              <td>车辆残值提升 15%，电池梯次利用收益最大化</td>
+            </tr>
+            <tr>
+              <td>全局决策与指挥中心</td>
+              <td>1. 车厂级全局数据大屏<br>2. 多项目运营对比分析<br>3. 集团级财务与利润分析<br>4. 风险预警与决策支持<br>5. 战略规划模拟沙盘</td>
+              <td>2028.06-2028.10</td>
+              <td>数据中台、所有业务模块</td>
+              <td>集团决策效率提升 50%，风险管控能力全面升级</td>
+            </tr>
+            <tr>
+              <td>系统性能与安全升级</td>
+              <td>1. 支持 10000 + 车辆同时在线<br>2. 毫秒级数据响应<br>3. 异地多活容灾备份<br>4. 等保三级认证升级<br>5. 数据安全与隐私保护</td>
+              <td>2028.10-2028.12</td>
+              <td>所有系统模块</td>
+              <td>系统可用性≥99.99%，满足大规模业务扩张需求</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card doc-card">
+          <h3 class="doc-subtitle">关键里程碑</h3>
+          <ul class="doc-list">
+            <li>2028.03.31：碳减排核算系统上线、车辆融资通道上线</li>
+            <li>2028.06.30：碳资产交易系统上线、供应链金融服务上线</li>
+            <li>2028.08.31：生态开放平台上线、L4 无人驾驶接口上线</li>
+            <li>2028.10.31：全局决策指挥中心上线、保险协同系统上线</li>
+            <li>2028.12.31：所有长期功能上线，支撑 100 个以上合资项目运营</li>
+          </ul>
+        </div>
+        <div class="card doc-card">
+          <h3 class="doc-subtitle">量化收益指标</h3>
+          <ul class="doc-list">
+            <li>收入结构：硬件收入占比降至 50%，运营 / 能源 / 后市场 / 金融 / 碳资产收入占比达 50%</li>
+            <li>生态价值：接入生态合作伙伴 50+，外部运力收入占比达 20%</li>
+            <li>成本优势：综合运营成本比行业平均水平低 30%</li>
+            <li>行业地位：成为新能源大宗物流领域头部综合运力服务商</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="logo-icon">开</span>
+        <span>开沃 · 数智化新能源大宗物流综合运营平台 · 产品规划</span>
+      </div>
+      <p class="footer-copy">© 2026 开沃产品团队 · 五层产品规划 · 仅供内部评审使用</p>
+    </div>
+  </footer>
+  </div><!-- /.page-wrapper -->
+
+  <button class="back-top" id="backTop" type="button" aria-label="回到顶部">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script src="app.js"></script>
+</body>
+</html>

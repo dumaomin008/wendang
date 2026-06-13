@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OCR 装卸货磅单识别 · PRD 预览</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>
+    .prd-preview-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: var(--nav-height);
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .prd-preview-nav-inner {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0 20px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    @media (min-width: 1100px) {
+      .prd-preview-nav-inner {
+        padding-right: 28px;
+      }
+    }
+    .prd-preview-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .prd-preview-body {
+      max-width: var(--prose-width);
+      margin: 0 auto;
+      padding: calc(var(--nav-height) + 40px) 28px 80px;
+    }
+    .prd-preview-body.prd-flow-wide {
+      max-width: min(1200px, 96vw);
+    }
+    .prd-preview-body h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .prd-preview-body h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .prd-preview-body h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 1.75rem 0 0.75rem;
+    }
+    .prd-preview-body h4 { font-size: 1rem; font-weight: 600; margin: 1.25rem 0 0.5rem; }
+    .prd-preview-body p, .prd-preview-body li { color: var(--text-primary); margin-bottom: 0.65rem; }
+    .prd-preview-body ul, .prd-preview-body ol { padding-left: 1.4rem; margin-bottom: 1rem; }
+    .prd-preview-body blockquote {
+      margin: 1rem 0;
+      padding: 12px 20px;
+      border-left: 4px solid #667EEA;
+      background: var(--bg-alt);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      color: var(--text-secondary);
+    }
+    .prd-preview-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.5rem;
+      font-size: 14px;
+      background: var(--surface);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+    .prd-preview-body th, .prd-preview-body td {
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .prd-preview-body th {
+      background: var(--bg-alt);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .prd-preview-body pre {
+      background: #1A1A1E;
+      color: #E8E8ED;
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.55;
+      margin: 1rem 0;
+    }
+    .prd-preview-body code {
+      font-family: 'SF Mono', Menlo, monospace;
+      font-size: 0.9em;
+    }
+    .prd-preview-body p code, .prd-preview-body li code {
+      background: var(--bg-alt);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .prd-preview-body hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+    .prd-preview-body .mermaid {
+      margin: 1.25rem 0 1.75rem;
+      padding: 24px 16px;
+      background: linear-gradient(180deg, #FAFAFC 0%, var(--surface) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      overflow-x: auto;
+      min-height: 80px;
+    }
+    .prd-preview-body details {
+      margin: 1.5rem 0;
+      padding: 16px 20px;
+      background: var(--bg-alt);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+    .prd-preview-body details summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-secondary);
+      user-select: none;
+    }
+    .prd-preview-body details[open] summary {
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+    .prd-flow-nav {
+      position: sticky;
+      top: calc(var(--nav-height) + 12px);
+      z-index: 10;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 1.5rem;
+      padding: 12px 16px;
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+    }
+    .prd-flow-nav span {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      align-self: center;
+      margin-right: 4px;
+    }
+    .prd-flow-nav a {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .prd-flow-nav a:hover {
+      border-color: #667EEA;
+      color: #667EEA;
+      background: rgba(102, 126, 234, 0.06);
+    }
+    .prd-preview-body blockquote:first-of-type {
+      background: linear-gradient(135deg, rgba(102,126,234,0.08), rgba(118,75,162,0.06));
+      border-left-color: #667EEA;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+    }
+    .prd-loading {
+      text-align: center;
+      padding: 120px 20px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body class="site">
+  <nav class="prd-preview-nav">
+    <div class="prd-preview-nav-inner">
+      <span class="prd-preview-title">OCR 装卸货磅单识别 · PRD</span>
+      <div class="nav-actions">
+        <a href="../../index.html" class="nav-page-link">← 返回首页</a>
+        <a href="../../planning.html" class="nav-page-link">产品规划 →</a>
+      </div>
+    </div>
+  </nav>
+  <main class="prd-preview-body" id="content">
+    <div class="prd-loading">正在加载文档…</div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    const contentEl = document.getElementById('content');
+    const PRD_FILE = 'PRD-OCR装卸货磅单识别.md';
+
+    marked.setOptions({ gfm: true, breaks: false });
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      securityLevel: 'loose',
+      flowchart: { curve: 'basis', padding: 16, htmlLabels: true, nodeSpacing: 40, rankSpacing: 50 },
+      sequence: { actorMargin: 60, messageMargin: 40, boxMargin: 12, mirrorActors: false },
+      themeVariables: {
+        primaryColor: '#EEF0FF',
+        primaryBorderColor: '#667EEA',
+        primaryTextColor: '#1A1A1E',
+        secondaryColor: '#F5F5F7',
+        tertiaryColor: '#FAFAFC',
+        lineColor: '#9E9EA8',
+        fontFamily: 'Inter, sans-serif',
+        fontSize: '13px'
+      }
+    });
+
+    function injectFlowNav() {
+      const h2 = [...contentEl.querySelectorAll('h2')].find(el => el.textContent.includes('业务流程'));
+      if (!h2) return;
+      contentEl.classList.add('prd-flow-wide');
+      const idMap = { '1': 'flow-41', '2': 'flow-42', '3': 'flow-43', '4': 'flow-44', '5': 'flow-45' };
+      contentEl.querySelectorAll('h3').forEach(h3 => {
+        const m = h3.textContent.match(/^4\.(\d+)/);
+        if (m && idMap[m[1]]) h3.id = idMap[m[1]];
+      });
+      const nav = document.createElement('nav');
+      nav.className = 'prd-flow-nav';
+      nav.innerHTML = `
+        <span>流程导航</span>
+        <a href="#flow-41">4.1 总览</a>
+        <a href="#flow-42">4.2 时序</a>
+        <a href="#flow-43">4.3 决策树</a>
+        <a href="#flow-44">4.4 分层详图</a>
+        <a href="#flow-45">4.5 流程步骤</a>
+      `;
+      h2.insertAdjacentElement('afterend', nav);
+    }
+
+    async function renderMermaid() {
+      const blocks = contentEl.querySelectorAll('pre code.language-mermaid, code.language-mermaid');
+      for (const block of blocks) {
+        const pre = block.closest('pre');
+        const src = block.textContent;
+        const div = document.createElement('div');
+        div.className = 'mermaid';
+        div.textContent = src;
+        if (pre) pre.replaceWith(div);
+        else block.replaceWith(div);
+      }
+      const nodes = contentEl.querySelectorAll('.mermaid');
+      if (nodes.length) await mermaid.run({ nodes });
+    }
+
+    async function loadDoc() {
+      contentEl.innerHTML = '<div class="prd-loading">正在加载文档…</div>';
+      contentEl.classList.remove('prd-flow-wide');
+      try {
+        const res = await fetch(PRD_FILE);
+        if (!res.ok) throw new Error(res.statusText);
+        const md = await res.text();
+        contentEl.innerHTML = marked.parse(md);
+        injectFlowNav();
+        await renderMermaid();
+        contentEl.querySelectorAll('details').forEach(d => {
+          d.addEventListener('toggle', () => { if (d.open) renderMermaid(); });
+        });
+      } catch (e) {
+        contentEl.innerHTML = '<div class="prd-loading">加载失败，请通过本地 HTTP 服务访问（不能直接 file:// 打开）。</div>';
+      }
+    }
+
+    loadDoc();
+  </script>
+</body>
+</html>
