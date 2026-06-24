@@ -516,7 +516,7 @@ def render_html(blocks: list[dict[str, object]]) -> str:
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>开沃 · {esc(title)}</title>
+  <title>合一 · {esc(title)}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -532,7 +532,7 @@ def render_html(blocks: list[dict[str, object]]) -> str:
 
   <header class="topbar" id="topbar">
     <a href="index.html" class="brand-link">
-      <span class="brand-mark">开</span>
+      <span class="brand-mark">合</span>
       <span class="brand-text">{esc(title)}</span>
     </a>
     <nav class="layer-tabs" aria-label="层级导航">
