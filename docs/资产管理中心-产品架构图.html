@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>资产管理中心产品架构图</title>
+  <style>
+    :root {
+      --page: #f7f6f3;
+      --paper: #ffffff;
+      --paper-soft: #fbfaf8;
+      --soft: #f1f1ef;
+      --ink: #37352f;
+      --muted: #787774;
+      --faint: #9b9a97;
+      --line: rgba(55, 53, 47, 0.16);
+      --line-strong: rgba(55, 53, 47, 0.24);
+      --green: #5f7665;
+      --blue: #5f6f86;
+      --brown: #8a6f52;
+      --red: #8b5f5b;
+      --radius: 6px;
+      --font: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--page);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: var(--font);
+      background: var(--page);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .page {
+      width: min(1280px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 40px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 22px;
+      align-items: end;
+      margin-bottom: 18px;
+      padding-left: 2px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 9px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background:
+        linear-gradient(var(--line), var(--line)) 50% 50% / 10px 1px no-repeat,
+        linear-gradient(90deg, var(--line), var(--line)) 50% 50% / 1px 10px no-repeat,
+        var(--paper);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 3vw, 42px);
+      line-height: 1.14;
+      font-weight: 760;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-copy {
+      max-width: 860px;
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      max-width: 360px;
+    }
+
+    .tag,
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--paper-soft);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 620;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .tag {
+      padding: 6px 9px;
+    }
+
+    .architecture {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .layer {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .layer:last-child {
+      border-bottom: 0;
+    }
+
+    .layer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper-soft);
+    }
+
+    .layer-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 14px;
+      font-weight: 740;
+    }
+
+    .layer-index {
+      display: inline-grid;
+      place-items: center;
+      width: 23px;
+      height: 23px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--soft);
+      font-size: 12px;
+      font-weight: 760;
+    }
+
+    .layer-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: right;
+    }
+
+    .portal-row {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .portal {
+      min-height: 70px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-soft);
+    }
+
+    .portal strong,
+    .mini strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 720;
+    }
+
+    .portal span,
+    .mini span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .lifecycle {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 14px;
+      list-style: none;
+    }
+
+    .life-step {
+      position: relative;
+      min-height: 82px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .life-step::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -10px;
+      width: 10px;
+      height: 1px;
+      background: var(--line-strong);
+    }
+
+    .life-step:last-child::after {
+      display: none;
+    }
+
+    .life-step b {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+      line-height: 1.35;
+      font-weight: 730;
+    }
+
+    .life-step span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.48;
+    }
+
+    .core-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.12fr 1fr;
+      gap: 12px;
+      padding: 14px;
+      align-items: stretch;
+    }
+
+    .domain {
+      display: flex;
+      flex-direction: column;
+      min-height: 285px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .domain.is-center {
+      background: var(--paper-soft);
+      border-color: var(--line-strong);
+    }
+
+    .domain-head {
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .domain-kicker {
+      display: inline-flex;
+      margin-bottom: 9px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: var(--soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 690;
+    }
+
+    .domain h2 {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.3;
+      font-weight: 760;
+    }
+
+    .domain p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.62;
+    }
+
+    .capability-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 14px;
+      list-style: none;
+    }
+
+    .capability-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: 36px;
+      padding: 8px 9px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--paper-soft);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 640;
+    }
+
+    .capability-list li span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 560;
+      white-space: nowrap;
+    }
+
+    .cockpit {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 12px;
+      padding: 0 14px 14px;
+    }
+
+    .summary {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-soft);
+    }
+
+    .summary h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .summary p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .kpi {
+      min-height: 100px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .kpi b {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .kpi strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .kpi span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.48;
+    }
+
+    .foundation {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .mini {
+      min-height: 82px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-soft);
+    }
+
+    .footer-note {
+      margin: 14px 2px 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 1120px) {
+      .hero,
+      .core-layout,
+      .cockpit {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-tags {
+        justify-content: flex-start;
+        max-width: none;
+      }
+
+      .portal-row,
+      .lifecycle {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .life-step::after {
+        display: none;
+      }
+
+      .foundation,
+      .kpi-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(100vw - 20px, 720px);
+        padding-top: 20px;
+      }
+
+      .layer-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .layer-note {
+        text-align: left;
+      }
+
+      .portal-row,
+      .lifecycle,
+      .foundation,
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tag,
+      .pill {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow">产品架构总览 / Asset Management Center</div>
+        <h1>资产管理中心产品架构图</h1>
+        <p class="hero-copy">
+          以单车资产档案为核心，连接合同账务、风险管控、残值评估和退役处置，形成新能源重卡从建档到退出的资产经营闭环。
+        </p>
+      </div>
+      <div class="hero-tags" aria-label="架构关键词">
+        <span class="tag">一车一档</span>
+        <span class="tag">租赁账务</span>
+        <span class="tag">资产风控</span>
+        <span class="tag">残值处置</span>
+        <span class="tag">电池追溯</span>
+      </div>
+    </header>
+
+    <section class="architecture" aria-label="资产管理中心产品架构">
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">1</span> 用户与业务入口</div>
+          <div class="layer-note">按角色进入同一个资产经营视图</div>
+        </div>
+        <div class="portal-row">
+          <div class="portal">
+            <strong>管理层</strong>
+            <span>资产规模与经营质量</span>
+          </div>
+          <div class="portal">
+            <strong>资产运营</strong>
+            <span>车辆档案与健康状态</span>
+          </div>
+          <div class="portal">
+            <strong>财务</strong>
+            <span>租金账单与对账</span>
+          </div>
+          <div class="portal">
+            <strong>风控</strong>
+            <span>逾期催收与资产限制</span>
+          </div>
+          <div class="portal">
+            <strong>车厂 / 资方</strong>
+            <span>合规材料与三方协同</span>
+          </div>
+          <div class="portal">
+            <strong>处置方</strong>
+            <span>二手拍卖与电池回收</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">2</span> 资产生命周期主链路</div>
+          <div class="layer-note">从建档、运营、回款到退出的高层闭环</div>
+        </div>
+        <ol class="lifecycle">
+          <li class="life-step">
+            <b>建档</b>
+            <span>车辆、证照、电池、上牌信息</span>
+          </li>
+          <li class="life-step">
+            <b>租赁</b>
+            <span>合同、计费规则、履约周期</span>
+          </li>
+          <li class="life-step">
+            <b>运营</b>
+            <span>里程、能耗、SOH、维保事故</span>
+          </li>
+          <li class="life-step">
+            <b>回款</b>
+            <span>自动账单、对账、逾期催收</span>
+          </li>
+          <li class="life-step">
+            <b>估值</b>
+            <span>残值测算、趋势预测、置换建议</span>
+          </li>
+          <li class="life-step">
+            <b>退出</b>
+            <span>拍卖报废、电池流向、合规报告</span>
+          </li>
+        </ol>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">3</span> 核心产品能力</div>
+          <div class="layer-note">三大中心支撑资产全生命周期管理</div>
+        </div>
+        <div class="core-layout">
+          <article class="domain" style="--accent: var(--green)">
+            <div class="domain-head">
+              <span class="domain-kicker">资产底座</span>
+              <h2>车辆数字档案中心</h2>
+              <p>建立一车一档，沉淀车辆、合规、电池、维保和事故数据。</p>
+            </div>
+            <ul class="capability-list">
+              <li>基础属性 <span>VIN / 三电 / 上牌</span></li>
+              <li>合规证照 <span>证件归档 / 到期提醒</span></li>
+              <li>电池健康 <span>SOH / 异常画像</span></li>
+              <li>维保事故 <span>工单 / 出险 / 理赔</span></li>
+            </ul>
+          </article>
+
+          <article class="domain is-center" style="--accent: var(--blue)">
+            <div class="domain-head">
+              <span class="domain-kicker">经营核心</span>
+              <h2>租赁账务与资产风控中心</h2>
+              <p>把租赁合同转成自动计费、对账、催收和资产风险处置规则。</p>
+            </div>
+            <ul class="capability-list">
+              <li>合同台账 <span>起租 / 到期 / 免租</span></li>
+              <li>计费规则 <span>月租 / 里程 / 车电分离</span></li>
+              <li>账单对账 <span>自动算费 / 三方对账</span></li>
+              <li>逾期风控 <span>提醒 / 预警 / 远程限制</span></li>
+            </ul>
+          </article>
+
+          <article class="domain" style="--accent: var(--brown)">
+            <div class="domain-head">
+              <span class="domain-kicker">资产退出</span>
+              <h2>残值评估与退役处置中心</h2>
+              <p>评估车辆残值，管理二手处置、报废审批和动力电池退役流向。</p>
+            </div>
+            <ul class="capability-list">
+              <li>残值模型 <span>里程 / SOH / 事故 / 行情</span></li>
+              <li>处置资产池 <span>年限 / SOH 阈值</span></li>
+              <li>竞价审批 <span>拍卖 / 报废 / 多级审批</span></li>
+              <li>电池追溯 <span>梯次利用 / 回收报告</span></li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="cockpit">
+          <div class="summary">
+            <h3>资产管理中心</h3>
+            <p>
+              以 VIN 为主键，把车辆实物、合同现金流、风险状态和残值退出统一到一套资产经营账本中。
+            </p>
+          </div>
+          <div class="kpi-grid" aria-label="经营驾驶舱指标">
+            <div class="kpi">
+              <b>1</b>
+              <strong>资产规模</strong>
+              <span>在租、闲置、待处置</span>
+            </div>
+            <div class="kpi">
+              <b>2</b>
+              <strong>健康状态</strong>
+              <span>SOH、维保、事故</span>
+            </div>
+            <div class="kpi">
+              <b>3</b>
+              <strong>回款风险</strong>
+              <span>应收、逾期、账龄</span>
+            </div>
+            <div class="kpi">
+              <b>4</b>
+              <strong>残值退出</strong>
+              <span>估值、拍卖、退役</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">4</span> 平台支撑与数据底座</div>
+          <div class="layer-note">为三大中心提供数据、流程和合规能力</div>
+        </div>
+        <div class="foundation">
+          <div class="mini">
+            <strong>IoT 车辆数据</strong>
+            <span>里程 / 能耗 / SOC / SOH</span>
+          </div>
+          <div class="mini">
+            <strong>售后系统</strong>
+            <span>工单 / 维保 / 零部件</span>
+          </div>
+          <div class="mini">
+            <strong>财务系统</strong>
+            <span>账单 / 回款 / 发票</span>
+          </div>
+          <div class="mini">
+            <strong>保险理赔</strong>
+            <span>事故 / 定损 / 理赔</span>
+          </div>
+          <div class="mini">
+            <strong>行情数据</strong>
+            <span>二手价格 / 残值参照</span>
+          </div>
+          <div class="mini">
+            <strong>审批流</strong>
+            <span>风控 / 拍卖 / 报废</span>
+          </div>
+          <div class="mini">
+            <strong>消息通知</strong>
+            <span>到期 / 逾期 / 预警</span>
+          </div>
+          <div class="mini">
+            <strong>权限审计</strong>
+            <span>角色 / 留痕 / 合规</span>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <p class="footer-note">
+      精简版定位：用于方案汇报与产品蓝图展示。详细字段、计费公式、审批节点和风控阈值可下钻到 PRD 或二级模块图。
+    </p>
+  </main>
+</body>
+</html>

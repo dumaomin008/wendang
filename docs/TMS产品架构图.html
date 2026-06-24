@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>新能源大宗物流 TMS 产品架构图</title>
+  <style>
+    :root {
+      --page: #f7f6f3;
+      --surface: #ffffff;
+      --soft: #f1f1ef;
+      --ink: #37352f;
+      --muted: #787774;
+      --line: rgba(55, 53, 47, 0.16);
+      --blue: #6b7280;
+      --teal: #4f6f64;
+      --green: #5f7665;
+      --amber: #8a735c;
+      --cyan: #60717a;
+      --steel: #6b6a67;
+      --radius: 5px;
+      --font: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Inter", system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: var(--font);
+      background: var(--page);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .page {
+      width: min(1260px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 40px;
+    }
+
+    .hero {
+      margin-bottom: 20px;
+      padding-left: 2px;
+    }
+
+    .eyebrow {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .eyebrow::before {
+      display: none;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 3vw, 40px);
+      line-height: 1.18;
+      font-weight: 700;
+    }
+
+    .hero-copy {
+      max-width: 920px;
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .architecture {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .layer {
+      border-bottom: 1px solid var(--line);
+      background: #ffffff;
+    }
+
+    .layer:last-child {
+      border-bottom: 0;
+    }
+
+    .layer-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 13px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfaf8;
+    }
+
+    .layer-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .layer-index {
+      display: inline-grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      color: var(--ink);
+      background: var(--soft);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .layer-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: right;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .chip {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfaf8;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      padding: 14px;
+      background: #ffffff;
+    }
+
+    .flow-step {
+      position: relative;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfaf8;
+      text-align: center;
+    }
+
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -10px;
+      width: 10px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .flow-step:last-child::after {
+      display: none;
+    }
+
+    .flow-step strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .flow-step span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .business-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.18fr 1fr;
+      gap: 12px;
+      padding: 14px;
+      align-items: stretch;
+      background: #ffffff;
+    }
+
+    .business-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 174px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #ffffff;
+    }
+
+    .business-card.core {
+      min-height: 100%;
+      background: #fbfaf8;
+    }
+
+    .business-card h2 {
+      margin: 0;
+      padding: 14px 14px 0;
+      font-size: 17px;
+      line-height: 1.3;
+      font-weight: 700;
+    }
+
+    .business-card p {
+      margin: 8px 0 0;
+      padding: 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+      padding: 13px 14px 14px;
+    }
+
+    .tag {
+      padding: 5px 8px;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      background: var(--soft);
+      color: var(--steel);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .core .tag {
+      background: #ecebe7;
+      color: var(--teal);
+    }
+
+    .bottom-business {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      padding: 0 14px 14px;
+      background: #ffffff;
+    }
+
+    .capability-row,
+    .data-row,
+    .external-row {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      background: #ffffff;
+    }
+
+    .capability-row {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .data-row {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .external-row {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .mini-card {
+      min-height: 80px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfaf8;
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 600;
+    }
+
+    .mini-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1080px) {
+      .business-grid,
+      .bottom-business,
+      .capability-row,
+      .data-row,
+      .external-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .flow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .flow-step::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(100vw - 20px, 720px);
+        padding-top: 20px;
+      }
+
+      .layer-head {
+        flex-direction: column;
+      }
+
+      .layer-note {
+        text-align: left;
+      }
+
+      .business-grid,
+      .bottom-business,
+      .capability-row,
+      .data-row,
+      .external-row,
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .chip {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="eyebrow">产品架构总览</div>
+      <h1>新能源大宗物流 TMS 产品架构图</h1>
+      <p class="hero-copy">
+        面向矿区、钢厂与新能源重卡运营场景，以订单主数据为底座，以车能协同调度为核心，贯通履约执行、计费结算和生态协同。
+      </p>
+    </header>
+
+    <section class="architecture" aria-label="TMS 产品架构总览">
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">1</span> 用户与协同入口</div>
+          <div class="layer-note">按角色进入同一个运输履约闭环</div>
+        </div>
+        <div class="chips">
+          <span class="chip">TMS 管理工作台</span>
+          <span class="chip">调度控制塔 / 大屏</span>
+          <span class="chip">司机 / 管理门户</span>
+          <span class="chip">货主门户</span>
+          <span class="chip">承运商门户</span>
+          <span class="chip">财务对账入口</span>
+        </div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">2</span> 核心业务链路</div>
+          <div class="layer-note">从货源到结算的主流程</div>
+        </div>
+        <div class="flow">
+          <div class="flow-step">
+            <strong>订单接入</strong>
+            <span>货主指令 / 批量导入</span>
+          </div>
+          <div class="flow-step">
+            <strong>智能调度</strong>
+            <span>运力匹配 / SOC 约束</span>
+          </div>
+          <div class="flow-step">
+            <strong>在途执行</strong>
+            <span>轨迹 / 装卸 / 异常</span>
+          </div>
+          <div class="flow-step">
+            <strong>计费结算</strong>
+            <span>地磅 / 回单 / 对账</span>
+          </div>
+          <div class="flow-step">
+            <strong>经营分析</strong>
+            <span>KPI / 成本 / 评分</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">3</span> 业务应用层</div>
+          <div class="layer-note">五大业务域，中心突出车能协同调度引擎</div>
+        </div>
+
+        <div class="business-grid">
+          <article class="business-card">
+            <h2>主数据与订单底座</h2>
+            <p>统一组织、线路、围栏、车辆、司机、承运商与订单，为后续调度和结算提供标准对象。</p>
+            <div class="tag-list">
+              <span class="tag">组织权限</span>
+              <span class="tag">线路围栏</span>
+              <span class="tag">订单清洗</span>
+            </div>
+          </article>
+
+          <article class="business-card core">
+            <h2>车能协同智能调度引擎</h2>
+            <p>融合订单时窗、车辆 SOC、路况、补能资源、司机工时与合同费率，输出可执行派车方案。</p>
+            <div class="tag-list">
+              <span class="tag">SOC 匹配</span>
+              <span class="tag">VRP / TSP</span>
+              <span class="tag">虚拟排队</span>
+            </div>
+          </article>
+
+          <article class="business-card execution">
+            <h2>在途管控与无感执行</h2>
+            <p>连接司机、车辆、场站和地磅，实现任务执行、轨迹追踪、异常风控与电子回单在线化。</p>
+            <div class="tag-list">
+              <span class="tag">移动执行</span>
+              <span class="tag">轨迹 ETA</span>
+              <span class="tag">地磅回单</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="bottom-business">
+          <article class="business-card settlement">
+            <h2>计费与结算中心</h2>
+            <p>统一运价、地磅净重、补能扣款、附加费和理赔罚款，形成应收应付与票款税协同。</p>
+            <div class="tag-list">
+              <span class="tag">运价本</span>
+              <span class="tag">台账对撞</span>
+              <span class="tag">票款税</span>
+            </div>
+          </article>
+
+          <article class="business-card portal">
+            <h2>数据洞察与生态门户</h2>
+            <p>为管理层、货主和承运商提供运营看板、在线协同和承运商计分卡，反哺后续派单。</p>
+            <div class="tag-list">
+              <span class="tag">运营大盘</span>
+              <span class="tag">货主协同</span>
+              <span class="tag">承运商评分</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">4</span> 平台支撑能力</div>
+          <div class="layer-note">跨业务域复用的基础服务</div>
+        </div>
+        <div class="capability-row">
+          <div class="mini-card">
+            <strong>权限与流程</strong>
+            <span>RBAC、审批、审计、数据隔离</span>
+          </div>
+          <div class="mini-card">
+            <strong>规则与计费</strong>
+            <span>运价、合同、附加费、调价机制</span>
+          </div>
+          <div class="mini-card">
+            <strong>算法服务</strong>
+            <span>调度优化、路径规划、预测沙盘</span>
+          </div>
+          <div class="mini-card">
+            <strong>消息与工单</strong>
+            <span>任务推送、异常升级、闭环处理</span>
+          </div>
+          <div class="mini-card">
+            <strong>文件与存证</strong>
+            <span>照片、OCR、电子签、e-POD</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">5</span> 数据资产层</div>
+          <div class="layer-note">沉淀为调度、结算和经营分析复用的数据底盘</div>
+        </div>
+        <div class="data-row">
+          <div class="mini-card">
+            <strong>主数据</strong>
+            <span>组织、线路、车辆、司机、承运商</span>
+          </div>
+          <div class="mini-card">
+            <strong>履约数据</strong>
+            <span>订单、任务、轨迹、异常、回单</span>
+          </div>
+          <div class="mini-card">
+            <strong>能源数据</strong>
+            <span>SOC、能耗、补能、站点排队</span>
+          </div>
+          <div class="mini-card">
+            <strong>财务数据</strong>
+            <span>运价、账单、扣款、发票、回款</span>
+          </div>
+          <div class="mini-card">
+            <strong>指标数据</strong>
+            <span>准时率、货损率、吨公里成本、评分</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">6</span> 外部系统与物联接入</div>
+          <div class="layer-note">连接货主、地图、车辆、场站、补能与财务生态</div>
+        </div>
+        <div class="external-row">
+          <div class="mini-card">
+            <strong>ERP / OMS</strong>
+            <span>发货指令与状态回传</span>
+          </div>
+          <div class="mini-card">
+            <strong>地图与路况</strong>
+            <span>地理编码、导航、限行</span>
+          </div>
+          <div class="mini-card">
+            <strong>TSP / BMS</strong>
+            <span>车辆在线、SOC、能耗</span>
+          </div>
+          <div class="mini-card">
+            <strong>充换电站</strong>
+            <span>站点能力、排队、扣款</span>
+          </div>
+          <div class="mini-card">
+            <strong>地磅 / 道闸</strong>
+            <span>过闸、毛重、皮重</span>
+          </div>
+          <div class="mini-card">
+            <strong>银行 / 开票</strong>
+            <span>付款、发票、回款核销</span>
+          </div>
+        </div>
+      </section>
+
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>全平台产品架构蓝图</title>
+  <style>
+    :root {
+      --page: #f7f6f3;
+      --paper: #ffffff;
+      --paper-soft: #fbfaf8;
+      --soft: #f1f1ef;
+      --ink: #37352f;
+      --muted: #787774;
+      --faint: #9b9a97;
+      --line: rgba(55, 53, 47, 0.16);
+      --line-strong: rgba(55, 53, 47, 0.26);
+      --blue: #546a86;
+      --green: #5f7665;
+      --red: #8b615d;
+      --gold: #8b7657;
+      --slate: #626b73;
+      --radius: 6px;
+      --font: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--page);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: var(--font);
+      background: var(--page);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .page {
+      width: min(1360px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 44px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 18px;
+      padding: 0 2px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 9px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background:
+        linear-gradient(var(--line), var(--line)) 50% 50% / 10px 1px no-repeat,
+        linear-gradient(90deg, var(--line), var(--line)) 50% 50% / 1px 10px no-repeat,
+        var(--paper);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.14;
+      font-weight: 760;
+    }
+
+    .hero-copy {
+      max-width: 940px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      max-width: 390px;
+    }
+
+    .tag,
+    .pill,
+    .mini-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--paper-soft);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .tag {
+      padding: 6px 9px;
+    }
+
+    .architecture {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .layer {
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .layer:last-child {
+      border-bottom: 0;
+    }
+
+    .layer-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper-soft);
+    }
+
+    .layer-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+      font-size: 14px;
+      font-weight: 740;
+    }
+
+    .layer-index {
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 23px;
+      height: 23px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--soft);
+      font-size: 12px;
+      font-weight: 760;
+    }
+
+    .layer-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: right;
+    }
+
+    .touch-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .touch-card,
+    .center-card,
+    .support-card,
+    .data-card,
+    .ai-card,
+    .finance-card {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .touch-card {
+      padding: 12px;
+      background: var(--paper-soft);
+    }
+
+    .card-title {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .card-title strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.35;
+      font-weight: 740;
+    }
+
+    .mini-tag {
+      flex: 0 0 auto;
+      padding: 4px 6px;
+      color: var(--faint);
+      font-size: 11px;
+    }
+
+    .desc {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.62;
+    }
+
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 4px 7px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--paper);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .connector {
+      display: grid;
+      grid-template-columns: minmax(90px, 1fr) auto minmax(90px, 1fr);
+      align-items: center;
+      gap: 10px;
+      padding: 0 14px 14px;
+      color: var(--faint);
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .connector::before,
+    .connector::after {
+      content: "";
+      height: 1px;
+      background: var(--line);
+    }
+
+    .connector span {
+      padding: 5px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper-soft);
+      white-space: nowrap;
+    }
+
+    .core-content {
+      padding: 14px;
+      background: var(--paper);
+    }
+
+    .lifecycle {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .life-step {
+      position: relative;
+      min-height: 70px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-soft);
+    }
+
+    .life-step::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -8px;
+      width: 8px;
+      height: 1px;
+      background: var(--line-strong);
+    }
+
+    .life-step:last-child::after {
+      display: none;
+    }
+
+    .life-step b {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 730;
+    }
+
+    .life-step span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .center-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .center-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 312px;
+      overflow: hidden;
+    }
+
+    .center-head {
+      padding: 13px 13px 11px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper-soft);
+    }
+
+    .center-head.market {
+      border-top: 4px solid var(--green);
+    }
+
+    .center-head.asset {
+      border-top: 4px solid var(--blue);
+    }
+
+    .center-head.tms {
+      border-top: 4px solid var(--red);
+    }
+
+    .center-head.energy {
+      border-top: 4px solid var(--gold);
+    }
+
+    .center-kicker {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 720;
+      text-transform: uppercase;
+    }
+
+    .center-head h3 {
+      font-size: 17px;
+      line-height: 1.28;
+      font-weight: 760;
+    }
+
+    .module-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .module-list li {
+      padding: 12px 13px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .module-list li:last-child {
+      border-bottom: 0;
+    }
+
+    .module-list b {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 720;
+    }
+
+    .module-list span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .support-card {
+      padding: 13px;
+      background: var(--paper-soft);
+    }
+
+    .support-card h3,
+    .data-card h3,
+    .ai-card h3,
+    .finance-card h3 {
+      margin-bottom: 8px;
+      font-size: 14px;
+      line-height: 1.35;
+      font-weight: 740;
+    }
+
+    .data-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.28fr;
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .data-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-soft);
+      overflow: hidden;
+    }
+
+    .data-panel-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+      font-size: 13px;
+      font-weight: 740;
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      padding: 10px;
+    }
+
+    .data-card {
+      padding: 11px;
+      background: var(--paper);
+    }
+
+    .database-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      padding: 10px;
+    }
+
+    .database {
+      min-height: 92px;
+      padding: 12px 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      text-align: center;
+    }
+
+    .database b {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 730;
+    }
+
+    .database span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .ai-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .ai-card {
+      min-height: 150px;
+      padding: 13px;
+      background: var(--paper-soft);
+    }
+
+    .ai-card .num {
+      display: inline-grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      margin-bottom: 10px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--paper);
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 760;
+    }
+
+    .finance-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .finance-card {
+      padding: 13px;
+      background: var(--paper-soft);
+    }
+
+    .footnote {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 14px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+      background: var(--paper-soft);
+    }
+
+    @media (max-width: 1180px) {
+      .touch-grid,
+      .center-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .lifecycle {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .life-step::after {
+        display: none;
+      }
+
+      .ai-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .database-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 860px) {
+      .page {
+        width: min(calc(100% - 24px), 720px);
+        padding-top: 24px;
+      }
+
+      .hero,
+      .layer-head,
+      .data-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-tags {
+        justify-content: flex-start;
+        max-width: none;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .layer-note {
+        text-align: left;
+      }
+
+      .touch-grid,
+      .center-grid,
+      .support-grid,
+      .finance-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lifecycle,
+      .ai-grid,
+      .data-grid,
+      .database-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .connector {
+        grid-template-columns: 1fr;
+      }
+
+      .connector::before,
+      .connector::after {
+        display: none;
+      }
+
+      .connector span {
+        justify-self: start;
+        white-space: normal;
+      }
+
+      .footnote {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .lifecycle,
+      .ai-grid,
+      .data-grid,
+      .database-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-title {
+        display: block;
+      }
+
+      .mini-tag {
+        margin-top: 7px;
+        width: fit-content;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .page {
+        width: 1320px;
+        padding: 0;
+      }
+
+      .architecture {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <span class="eyebrow">High-level Product Architecture</span>
+        <h1>全平台产品架构蓝图</h1>
+        <p class="hero-copy">
+          以“触点交互、核心业务、基础支撑、数据中台、AI 赋能、金融生态”六层展开，
+          串联合资项目从市场转化、资产管理、运输运营、补能服务到资金闭环的完整链路。
+        </p>
+      </div>
+      <div class="hero-tags" aria-label="架构关键词">
+        <span class="tag">敏捷触点</span>
+        <span class="tag">四大业务中心</span>
+        <span class="tag">车能协同</span>
+        <span class="tag">数据资产沉淀</span>
+        <span class="tag">AI 降本增效</span>
+        <span class="tag">金融生态共赢</span>
+      </div>
+    </header>
+
+    <section class="architecture" aria-label="新能源大宗物流平台架构图">
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title">
+            <span class="layer-index">01</span>
+            <span>触点交互层线</span>
+          </div>
+          <p class="layer-note">系统在各类工作场景下的数字触角，强调敏捷、防呆与多端协同</p>
+        </div>
+        <div class="touch-grid">
+          <article class="touch-card">
+            <div class="card-title">
+              <strong>大宗司机端</strong>
+              <span class="mini-tag">APP / 车机 / 小程序</span>
+            </div>
+            <p class="desc">面向司机的极简作业入口，降低接单、导航、补能与学习成本。</p>
+            <div class="chip-list">
+              <span class="chip">极简导航</span>
+              <span class="chip">一键接单</span>
+              <span class="chip">扫码/无感充电</span>
+              <span class="chip">安全预警播报</span>
+              <span class="chip">微课学习</span>
+            </div>
+          </article>
+          <article class="touch-card">
+            <div class="card-title">
+              <strong>移动运营管理端</strong>
+              <span class="mini-tag">APP / 小程序</span>
+            </div>
+            <p class="desc">服务管理层、调度与车队长的移动指挥中台，支持现场快速决策。</p>
+            <div class="chip-list">
+              <span class="chip">异常秒批</span>
+              <span class="chip">实时大盘</span>
+              <span class="chip">在途车辆巡航</span>
+              <span class="chip">维保一键预约</span>
+            </div>
+          </article>
+          <article class="touch-card">
+            <div class="card-title">
+              <strong>协同作业端</strong>
+              <span class="mini-tag">场站 / 门禁 / PDA</span>
+            </div>
+            <p class="desc">让场站、门禁与交接节点无纸化、自动化，减少人工录入和错漏。</p>
+            <div class="chip-list">
+              <span class="chip">自动签到打卡</span>
+              <span class="chip">场站数据 API 回传</span>
+              <span class="chip">无纸化交接 ePOD</span>
+            </div>
+          </article>
+          <article class="touch-card">
+            <div class="card-title">
+              <strong>生态与合作伙伴端</strong>
+              <span class="mini-tag">PC Web / API</span>
+            </div>
+            <p class="desc">连接货主、资方、服务站与监管侧，将运营能力外化为协同界面。</p>
+            <div class="chip-list">
+              <span class="chip">货主企业看板</span>
+              <span class="chip">资方风控大屏</span>
+              <span class="chip">服务站工单台</span>
+              <span class="chip">政府监管推送</span>
+            </div>
+          </article>
+        </div>
+        <div class="connector"><span>作业事件、车辆状态、补能请求与协同数据向核心链路汇聚</span></div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title">
+            <span class="layer-index">02</span>
+            <span>平台核心业务链路</span>
+          </div>
+          <p class="layer-note">串联合资项目完整生命周期，Market / Asset / TMS / Energy 四大中心闭环运转</p>
+        </div>
+        <div class="core-content">
+          <div class="lifecycle" aria-label="项目生命周期">
+            <div class="life-step"><b>尽调</b><span>货源、补能、政策、ROI</span></div>
+            <div class="life-step"><b>立项</b><span>客户、商机、合同、项目</span></div>
+            <div class="life-step"><b>交付</b><span>车辆、电池、合同、档案</span></div>
+            <div class="life-step"><b>运营</b><span>货源、运力、调度、轨迹</span></div>
+            <div class="life-step"><b>补能</b><span>场站、充电、价格、账务</span></div>
+            <div class="life-step"><b>结算</b><span>对账、开票、付款、回款</span></div>
+            <div class="life-step"><b>处置</b><span>SOH、残值、二手车、梯次利用</span></div>
+          </div>
+
+          <div class="center-grid">
+            <article class="center-card">
+              <div class="center-head market">
+                <span class="center-kicker">Market</span>
+                <h3>市场转化管理中心</h3>
+              </div>
+              <ul class="module-list">
+                <li>
+                  <b>项目尽调工具</b>
+                  <span>货源评估、补能条件评估、政策补贴测算、ROI 自动计算。</span>
+                </li>
+                <li>
+                  <b>CRM 客户管理</b>
+                  <span>客户信息、跟进记录、商机管理、合同管理。</span>
+                </li>
+                <li>
+                  <b>项目全流程追踪</b>
+                  <span>尽调、立项、车辆交付、运营、回款全节点管控。</span>
+                </li>
+              </ul>
+            </article>
+
+            <article class="center-card">
+              <div class="center-head asset">
+                <span class="center-kicker">Asset</span>
+                <h3>资产价值管理中心</h3>
+              </div>
+              <ul class="module-list">
+                <li>
+                  <b>全生命周期档案</b>
+                  <span>一车一档沉淀车辆、电池 BMS、维修、事故与运营数据。</span>
+                </li>
+                <li>
+                  <b>租赁合同管理</b>
+                  <span>合同参数录入、租金自动计算、催收提醒、逾期限制风控。</span>
+                </li>
+                <li>
+                  <b>车辆残值管理</b>
+                  <span>基于 SOH 动态评估残值，支持二手车审批与电池梯次流转。</span>
+                </li>
+              </ul>
+            </article>
+
+            <article class="center-card">
+              <div class="center-head tms">
+                <span class="center-kicker">TMS</span>
+                <h3>物流运输智运中心</h3>
+              </div>
+              <ul class="module-list">
+                <li>
+                  <b>货源与运力管理</b>
+                  <span>货源发布、审核、分配，运力池分级池管理。</span>
+                </li>
+                <li>
+                  <b>智能调度工作台</b>
+                  <span>融合 SOC 自动派单、路线规划、异常改派处理。</span>
+                </li>
+                <li>
+                  <b>过程可视化管控</b>
+                  <span>实时 GPS 定位、轨迹回放、电子围栏防作弊。</span>
+                </li>
+                <li>
+                  <b>智能结算中心</b>
+                  <span>多源规则运费计算、三方对账、在线开票与付款。</span>
+                </li>
+              </ul>
+            </article>
+
+            <article class="center-card">
+              <div class="center-head energy">
+                <span class="center-kicker">Energy</span>
+                <h3>补能与能源管理中心</h3>
+              </div>
+              <ul class="module-list">
+                <li>
+                  <b>充电站资产管理</b>
+                  <span>场站信息库、充电桩实时状态、峰谷平价格策略管理。</span>
+                </li>
+                <li>
+                  <b>充电服务闭环</b>
+                  <span>扫码/一键充电控制，监控电压电流并执行异常断电保护。</span>
+                </li>
+                <li>
+                  <b>能源账务清分</b>
+                  <span>自动对账、跨域多方分账打款、发票归集管理。</span>
+                </li>
+              </ul>
+            </article>
+          </div>
+        </div>
+        <div class="connector"><span>业务链路产生车辆、能源、财务与风控数据，向支撑层与中台沉淀</span></div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title">
+            <span class="layer-index">03</span>
+            <span>基础支撑与后市场服务层</span>
+          </div>
+          <p class="layer-note">为前线业务提供物理级、硬件级安全保障与持续运转能力</p>
+        </div>
+        <div class="support-grid">
+          <article class="support-card">
+            <h3>车联网基础服务 IoT</h3>
+            <p class="desc">车机 CAN 数据深度采集、远程启停控制、车辆状态自检预警。</p>
+            <div class="chip-list">
+              <span class="chip">CAN 数据</span>
+              <span class="chip">远程控制</span>
+              <span class="chip">状态自检</span>
+            </div>
+          </article>
+          <article class="support-card">
+            <h3>主动安全管控闭环</h3>
+            <p class="desc">DMS 疲劳监测、ADAS 碰撞/偏航报警、语音强插干预、在线安全培训考试。</p>
+            <div class="chip-list">
+              <span class="chip">DMS</span>
+              <span class="chip">ADAS</span>
+              <span class="chip">语音强插</span>
+              <span class="chip">千人千面培训</span>
+            </div>
+          </article>
+          <article class="support-card">
+            <h3>后市场维保生态管家</h3>
+            <p class="desc">预防性维保预警、预约派发、维修工单流转结算、高压配件库存调拨、一键救援。</p>
+            <div class="chip-list">
+              <span class="chip">维保预约</span>
+              <span class="chip">工单结算</span>
+              <span class="chip">配件调拨</span>
+              <span class="chip">抛锚救援</span>
+            </div>
+          </article>
+        </div>
+        <div class="connector"><span>设备信号、服务履约与安全事件形成可训练、可追溯的数据底座</span></div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title">
+            <span class="layer-index">04</span>
+            <span>数据挖掘与中台层</span>
+          </div>
+          <p class="layer-note">沉淀核心数据资产，构建平台数字基座</p>
+        </div>
+        <div class="data-wrap">
+          <article class="data-panel">
+            <div class="data-panel-title">
+              <span>四大数据体系</span>
+              <span class="pill">Data Domains</span>
+            </div>
+            <div class="data-grid">
+              <div class="data-card">
+                <h3>市场数据</h3>
+                <p class="desc">行业趋势、竞品、项目尽调与市场转化数据。</p>
+              </div>
+              <div class="data-card">
+                <h3>运营数据</h3>
+                <p class="desc">运力、货源、补能、轨迹与过程履约数据。</p>
+              </div>
+              <div class="data-card">
+                <h3>业务数据</h3>
+                <p class="desc">销售、合同、资产状态与生命周期节点数据。</p>
+              </div>
+              <div class="data-card">
+                <h3>财务数据</h3>
+                <p class="desc">收支利润、现金流预警、账务清分与回款数据。</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="data-panel">
+            <div class="data-panel-title">
+              <span>五大核心数据库</span>
+              <span class="pill">Core Databases</span>
+            </div>
+            <div class="database-grid">
+              <div class="database"><b>货源库</b><span>线路、货类、装卸、价格与履约要求。</span></div>
+              <div class="database"><b>物流公司库</b><span>客户、车队、合作关系与信用记录。</span></div>
+              <div class="database"><b>司机人才信用库</b><span>驾驶行为、培训记录、违章与履约画像。</span></div>
+              <div class="database"><b>车辆/IoT 运行库</b><span>车辆状态、电池、轨迹、故障与安全事件。</span></div>
+              <div class="database"><b>场站/能源分布库</b><span>站点、桩况、电价、负荷与排队拥挤度。</span></div>
+            </div>
+          </article>
+        </div>
+        <div class="connector"><span>数据资产向上供给智能调度、能耗诊断、风控与金融可信凭证</span></div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title">
+            <span class="layer-index">05</span>
+            <span>AI 赋能层</span>
+          </div>
+          <p class="layer-note">平台大脑，负责降本增效、风险识别与前瞻技术接口</p>
+        </div>
+        <div class="ai-grid">
+          <article class="ai-card">
+            <span class="num">AI</span>
+            <h3>智能运输调度引擎</h3>
+            <p class="desc">基于货源与运力分布做最优匹配，降低空驶率。</p>
+          </article>
+          <article class="ai-card">
+            <span class="num">AI</span>
+            <h3>车能协同调度引擎</h3>
+            <p class="desc">融合剩余续航与场站拥挤度，计算补能路径最优解。</p>
+          </article>
+          <article class="ai-card">
+            <span class="num">AI</span>
+            <h3>成本与能耗算法</h3>
+            <p class="desc">能耗异常诊断、轮胎与关键部件磨损预测。</p>
+          </article>
+          <article class="ai-card">
+            <span class="num">AI</span>
+            <h3>电力预测与交易模型</h3>
+            <p class="desc">预测场站用电负荷，利用峰谷电价差辅助套利策略。</p>
+          </article>
+          <article class="ai-card">
+            <span class="num">AI</span>
+            <h3>人本风控大模型</h3>
+            <p class="desc">形成司机驾驶行为画像，驱动不良行为纠正闭环。</p>
+          </article>
+          <article class="ai-card">
+            <span class="num">AI</span>
+            <h3>前瞻技术预研接口</h3>
+            <p class="desc">为封闭矿区、钢厂内部 L4 级无人驾驶调度指令预留接口。</p>
+          </article>
+        </div>
+        <div class="connector"><span>算法输出回写核心业务链路，形成调度、风控、补能与成本优化闭环</span></div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title">
+            <span class="layer-index">06</span>
+            <span>金融与生态支持层</span>
+          </div>
+          <p class="layer-note">将物流运营转化为金融资产，实现生态共赢</p>
+        </div>
+        <div class="finance-grid">
+          <article class="finance-card">
+            <h3>车辆/设备融资通道</h3>
+            <p class="desc">牵引车/挂车经营性租赁对接、车电分离租赁确权接口、充电站基建融资。</p>
+            <div class="chip-list">
+              <span class="chip">经营性租赁</span>
+              <span class="chip">车电分离确权</span>
+              <span class="chip">基建融资</span>
+            </div>
+          </article>
+          <article class="finance-card">
+            <h3>供应链保理金融</h3>
+            <p class="desc">凭借不可篡改的运费流水，对接运费保理、应收账款与预付款融资接口。</p>
+            <div class="chip-list">
+              <span class="chip">运费流水</span>
+              <span class="chip">应收账款</span>
+              <span class="chip">预付款融资</span>
+            </div>
+          </article>
+          <article class="finance-card">
+            <h3>保险精算与理赔协同</h3>
+            <p class="desc">车辆、货物、雇主责任险一键投保，车联网主动安全数据抵扣保费，视频快赔。</p>
+            <div class="chip-list">
+              <span class="chip">一键投保</span>
+              <span class="chip">安全数据定价</span>
+              <span class="chip">视频定损理赔</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footnote">
+        <span>架构阅读方式：从上到下看业务触点如何进入平台闭环，从下到上看数据、AI 与金融生态如何反哺业务。</span>
+        <span>视觉风格：Notion 式纸感底色、轻边框、数据库标签与克制信息密度。</span>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,325 +1,330 @@
-/* ===== Navigation Tree ===== */
-const NAV_TREE = [
-  {
-    id: '1', label: '第一层：战略层', subtitle: '定义平台的边界与灵魂', href: '#layer-intro',
-    children: [
-      { label: '总述', href: '#layer-intro' },
-      { label: '背景趋势', href: '#background' },
-      { label: '商业论证', href: '#business-case' },
-      { label: '角色痛点', href: '#roles' },
-      { label: '平台定位', href: '#positioning' },
-      { label: '竞争壁垒', href: '#moat' },
-      { label: '平台边界', href: '#boundaries' },
-    ],
-  },
-  {
-    id: '2', label: '第二层：用户层', subtitle: '全景用户画像与全链路场景地图', href: '#layer2-intro',
-    children: [
-      { label: '总述', href: '#layer2-intro' },
-      { label: '端产品矩阵', href: '#layer2-matrix' },
-      { label: '阶段一 · 获客', href: '#layer2-phase1' },
-      { label: '阶段二 · 转化', href: '#layer2-phase2' },
-      { label: '阶段三 · 资产', href: '#layer2-phase3' },
-      { label: '阶段四 · 运营', href: '#layer2-phase4' },
-      { label: '阶段五 · 后市场', href: '#layer2-phase5' },
-    ],
-  },
-  {
-    id: '3', label: '第三层：全平台功能与架构全景蓝图', href: '#layer3-intro',
-    children: [
-      { label: '总述', href: '#layer3-intro' },
-      { label: '架构全景图', href: '#layer3-blueprint' },
-      { label: '3.1 触点交互层', href: '#layer3-31' },
-      { label: '3.2 核心业务链', href: '#layer3-32' },
-      { label: '3.3 基础支撑', href: '#layer3-33' },
-      { label: '3.4 数据中台', href: '#layer3-34' },
-      { label: '3.5 AI 赋能', href: '#layer3-35' },
-      { label: '3.6 金融生态', href: '#layer3-36' },
-    ],
-  },
-  {
-    id: '4', label: '第四层：子系统功能与架构', href: '#layer4-intro',
-    children: [
-      { label: '总述', href: '#layer4-intro' },
-      { label: '市场转化中心', href: '#layer4-market' },
-      { label: '资产价值中心', href: '#layer4-asset' },
-      { label: '物流智运中心', href: '#layer4-tms' },
-      { label: '安全后市场', href: '#layer4-safety' },
-      { label: '补能能源中心', href: '#layer4-energy' },
-    ],
-  },
-  {
-    id: '5', label: '第五层：产品路线规划', href: '#layer5-intro',
-    children: [
-      { label: '总述', href: '#layer5-intro' },
-      { label: '短期 · 运营闭环', href: '#layer5-short' },
-      { label: '中期 · 数据深化', href: '#layer5-mid' },
-      { label: '长期 · 生态金融', href: '#layer5-long' },
-    ],
-  },
-];
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
 
-const STAGGER_MS = 40;
-const MAX_STAGGER = 6;
-
-const nav = document.getElementById('nav');
-const sidebar = document.getElementById('sidebar');
-const docNav = document.getElementById('docNav');
-const sidebarOverlay = document.getElementById('sidebarOverlay');
-const navMenuBtn = document.getElementById('navMenuBtn');
-const sidebarClose = document.getElementById('sidebarClose');
-const readProgress = document.getElementById('readProgress');
-const backTop = document.getElementById('backTop');
-const navLayerTabs = document.querySelectorAll('.nav-layer-tab');
-const navLogo = document.getElementById('navLogo');
-
-let scrollTimer = null;
-let reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ===== In-page navigation ===== */
 function getScrollOffset() {
-  const padding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
-  return Number.isFinite(padding) ? padding : 0;
+  const value = Number.parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
+  return Number.isFinite(value) ? value : 0;
 }
 
-function findLayerForHref(href) {
-  return NAV_TREE.find((g) => g.children.some((c) => c.href === href));
+function navigationKind() {
+  const nav = performance.getEntriesByType('navigation')[0];
+  return nav?.type || 'navigate';
 }
 
-function jumpTo(href) {
-  const target = document.querySelector(href);
-  if (!target) return false;
-  const top = Math.max(0, window.scrollY + target.getBoundingClientRect().top - getScrollOffset());
-  window.scrollTo(0, top);
-  history.replaceState(null, '', href);
-  return true;
+function scrollToTopInstant() {
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 }
 
-function markDocNav(href) {
-  const layer = findLayerForHref(href);
-  docNav.querySelectorAll('.doc-nav-group').forEach((group) => {
-    group.classList.toggle('is-current', group.dataset.layer === layer?.id);
-  });
-  docNav.querySelectorAll('.doc-nav-link').forEach((link) => {
-    link.classList.toggle('is-active', link.getAttribute('href') === href);
-  });
-}
+function settleInitialScroll() {
+  const isReload = navigationKind() === 'reload';
 
-function syncTopTabs(href) {
-  const layer = findLayerForHref(href);
-  navLayerTabs.forEach((tab) => {
-    tab.classList.toggle('active', tab.dataset.layer === layer?.id);
-  });
-}
-
-function navigate(href, { closeDrawer = true } = {}) {
-  if (!href || !href.startsWith('#')) return;
-  if (!jumpTo(href)) return;
-  markDocNav(href);
-  syncTopTabs(href);
-  if (closeDrawer) closeSidebar();
-}
-
-function initDocNav() {
-  docNav.innerHTML = NAV_TREE.map((group) => `
-    <section class="doc-nav-group${group.id === '1' ? ' is-current' : ''}" data-layer="${group.id}">
-      <button type="button" class="doc-nav-layer" data-href="${group.href}">
-        <span class="doc-nav-layer-title">${group.label}</span>
-        ${group.subtitle ? `<span class="doc-nav-layer-desc">${group.subtitle}</span>` : ''}
-      </button>
-      <ul class="doc-nav-items">
-        ${group.children.map((item) => `
-          <li><a href="${item.href}" class="doc-nav-link">${item.label}</a></li>
-        `).join('')}
-      </ul>
-    </section>
-  `).join('');
-}
-
-function initGlobalAnchors() {
-  document.addEventListener('click', (e) => {
-    const anchor = e.target.closest('a[href^="#"]');
-    if (!anchor) return;
-    const href = anchor.getAttribute('href');
-    if (!href || href === '#') return;
-    if (!document.querySelector(href)) return;
-    e.preventDefault();
-    const closeDrawer = Boolean(anchor.closest('.sidebar, .doc-nav, .nav-layers'));
-    navigate(href, { closeDrawer });
-  });
-}
-
-function openSidebar() {
-  sidebar.classList.add('open');
-  sidebarOverlay.classList.add('visible');
-  document.body.classList.add('sidebar-open');
-}
-
-function closeSidebar() {
-  sidebar.classList.remove('open');
-  sidebarOverlay.classList.remove('visible');
-  document.body.classList.remove('sidebar-open');
-}
-
-navMenuBtn?.addEventListener('click', openSidebar);
-sidebarClose?.addEventListener('click', closeSidebar);
-sidebarOverlay?.addEventListener('click', closeSidebar);
-
-navLogo?.addEventListener('click', (e) => {
-  e.preventDefault();
-  navigate('#layer-intro', { closeDrawer: false });
-});
-
-/* ===== Scroll Spy ===== */
-const spyIds = [];
-NAV_TREE.forEach((g) => g.children.forEach((c) => spyIds.push(c.href.slice(1))));
-const spyElements = spyIds.map((id) => document.getElementById(id)).filter(Boolean);
-
-function updateActiveNav() {
-  const marker = window.scrollY + window.innerHeight * 0.26;
-  let currentId = spyElements[0]?.id || '';
-
-  for (const el of spyElements) {
-    const top = el.getBoundingClientRect().top + window.scrollY;
-    if (top <= marker) currentId = el.id;
+  if (isReload && window.location.hash) {
+    history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
   }
 
-  const href = `#${currentId}`;
-  markDocNav(href);
-  syncTopTabs(href);
+  if (!isReload && window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+      const top = Math.max(0, window.scrollY + target.getBoundingClientRect().top - getScrollOffset());
+      window.scrollTo({ top, left: 0, behavior: 'instant' });
+      return;
+    }
+  }
+
+  scrollToTopInstant();
+}
+
+const topbar = document.getElementById('topbar');
+const readProgress = document.getElementById('readProgress');
+const backTop = document.getElementById('backTop');
+const tocToggle = document.getElementById('tocToggle');
+const tocDrawer = document.getElementById('tocDrawer');
+const tocClose = document.getElementById('tocClose');
+const tocOverlay = document.getElementById('tocOverlay');
+const focusToggle = document.getElementById('focusToggle');
+const sectionChip = document.getElementById('sectionChip');
+const imageViewer = document.getElementById('imageViewer');
+const imageViewerImg = document.getElementById('imageViewerImg');
+const imageViewerClose = document.getElementById('imageViewerClose');
+
+const layerSections = [...document.querySelectorAll('[data-layer-section]')];
+const layerTabs = [...document.querySelectorAll('.layer-tab')];
+const tocGroups = [...document.querySelectorAll('.toc-group')];
+const tocChildren = [...document.querySelectorAll('.toc-child')];
+const chapters = [...document.querySelectorAll('.chapter-panel')];
+let currentChapterId = chapters[0]?.id || '';
+let scrollTrackingEnabled = false;
+
+function setProgress() {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  readProgress.style.width = `${max > 0 ? (window.scrollY / max) * 100 : 0}%`;
 }
 
 function onScroll() {
-  nav.classList.toggle('scrolled', window.scrollY > 8);
-
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  readProgress.style.width = `${docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0}%`;
-
-  readProgress.classList.add('is-scrolling');
-  clearTimeout(scrollTimer);
-  scrollTimer = setTimeout(() => readProgress.classList.remove('is-scrolling'), 400);
-
-  backTop.classList.toggle('visible', window.scrollY > 480);
-  updateActiveNav();
+  topbar.classList.toggle('is-scrolled', window.scrollY > 6);
+  backTop.classList.toggle('is-visible', window.scrollY > 520);
+  setProgress();
 }
 
-backTop?.addEventListener('click', () => {
-  window.scrollTo(0, 0);
-});
+function openToc() {
+  tocDrawer.classList.add('is-open');
+  tocOverlay.classList.add('is-open');
+  document.body.classList.add('toc-open');
+}
 
-/* ===== Module Collapse (L4) ===== */
-function wrapModuleBodies() {
-  document.querySelectorAll('.module-block').forEach((block) => {
-    const h3 = block.querySelector(':scope > h3');
-    if (!h3 || block.querySelector(':scope > .module-block-body')) return;
+function closeToc() {
+  tocDrawer.classList.remove('is-open');
+  tocOverlay.classList.remove('is-open');
+  document.body.classList.remove('toc-open');
+}
 
-    const body = document.createElement('div');
-    body.className = 'module-block-body';
-    const nodes = [...block.childNodes].filter(
-      (n) => n !== h3 && (n.nodeType !== 3 || n.textContent.trim())
-    );
-    nodes.forEach((n) => body.appendChild(n));
-    block.appendChild(body);
+function activeLayer(id) {
+  layerTabs.forEach((tab) => tab.classList.toggle('is-active', tab.dataset.layer === id));
+  tocGroups.forEach((group) => group.classList.toggle('is-active', group.dataset.layerLink === id));
+}
+
+function activeTocLink(id) {
+  currentChapterId = id;
+  tocChildren.forEach((link) => link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`));
+  const target = document.getElementById(id);
+  const label = target?.querySelector('.chapter-header h3')?.textContent || target?.querySelector('h2')?.textContent;
+  if (label && sectionChip) sectionChip.querySelector('strong').textContent = label;
+}
+
+function setFocusMode(enabled) {
+  document.body.classList.toggle('focus-mode', enabled);
+  focusToggle?.setAttribute('aria-pressed', String(enabled));
+  if (focusToggle) focusToggle.textContent = enabled ? '退出专注' : '专注';
+}
+
+function findViewportLayerId() {
+  const offset = getScrollOffset();
+  let best = layerSections[0]?.dataset.layerSection || 'layer-1';
+  let bestDistance = Number.POSITIVE_INFINITY;
+  layerSections.forEach((section) => {
+    const distance = Math.abs(section.getBoundingClientRect().top - offset);
+    if (distance < bestDistance) {
+      bestDistance = distance;
+      best = section.dataset.layerSection;
+    }
+  });
+  return best;
+}
+
+function findViewportChapterId() {
+  const offset = getScrollOffset();
+  let best = chapters[0]?.id || '';
+  let bestDistance = Number.POSITIVE_INFINITY;
+  chapters.forEach((chapter) => {
+    const distance = Math.abs(chapter.getBoundingClientRect().top - offset);
+    if (distance < bestDistance) {
+      bestDistance = distance;
+      best = chapter.id;
+    }
+  });
+  return best;
+}
+
+function syncScrollState() {
+  activeLayer(findViewportLayerId());
+  const chapterId = findViewportChapterId();
+  if (chapterId) activeTocLink(chapterId);
+}
+
+const layerObserver = new IntersectionObserver((entries) => {
+  if (!scrollTrackingEnabled) return;
+  const visible = entries
+    .filter((entry) => entry.isIntersecting)
+    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+  if (visible) activeLayer(visible.target.dataset.layerSection);
+}, { rootMargin: '-24% 0px -64% 0px', threshold: [0.01, 0.1, 0.25] });
+
+layerSections.forEach((section) => layerObserver.observe(section));
+
+const chapterObserver = new IntersectionObserver((entries) => {
+  if (!scrollTrackingEnabled) return;
+  const visible = entries
+    .filter((entry) => entry.isIntersecting)
+    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+  if (visible) activeTocLink(visible.target.id);
+}, { rootMargin: '-20% 0px -70% 0px', threshold: [0.01, 0.1] });
+
+chapters.forEach((chapter) => chapterObserver.observe(chapter));
+
+function filterTable(input) {
+  const query = input.value.trim().toLowerCase();
+  const table = input.closest('.doc-table')?.querySelector('table');
+  if (!table) return;
+  table.querySelectorAll('tbody tr').forEach((row) => {
+    row.classList.toggle('is-filtered-out', query && !row.textContent.toLowerCase().includes(query));
   });
 }
 
-function initModuleCollapse() {
-  wrapModuleBodies();
+function initFontScale() {
+  const stored = Number.parseFloat(localStorage.getItem('planningFontScale') || '1');
+  if (Number.isFinite(stored)) {
+    document.documentElement.style.setProperty('--font-scale', stored);
+  }
+}
 
-  document.querySelectorAll('.module-block > h3').forEach((h3) => {
-    h3.classList.add('module-toggle');
-    h3.setAttribute('role', 'button');
-    h3.setAttribute('tabindex', '0');
-    h3.setAttribute('aria-expanded', 'true');
+function openImage(src) {
+  imageViewerImg.src = src;
+  imageViewer.classList.add('is-open');
+  imageViewer.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('viewer-open');
+}
 
-    const toggle = () => toggleModule(h3.closest('.module-block'));
-    h3.addEventListener('click', toggle);
-    h3.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle();
+function closeImage() {
+  imageViewer.classList.remove('is-open');
+  imageViewer.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('viewer-open');
+  imageViewerImg.src = '';
+}
+
+function openFeatureListTables() {
+  document.querySelectorAll('.topic-heading, .subtopic-heading').forEach((heading) => {
+    if (!heading.textContent.includes('功能清单')) return;
+    let node = heading.nextElementSibling;
+    while (node) {
+      if (node.matches('.topic-heading, .subtopic-heading')) {
+        if (!node.textContent.includes('功能清单')) break;
+      } else if (node.matches('.chapter-panel, .chapter-header')) {
+        break;
+      } else if (node.matches('.doc-table')) {
+        node.open = true;
       }
+      node = node.nextElementSibling;
+    }
+  });
+}
+
+function fitLayerTitles() {
+  document.querySelectorAll('.layer-header h2').forEach((title) => {
+    title.style.removeProperty('font-size');
+    let size = Number.parseFloat(getComputedStyle(title).fontSize);
+    if (!Number.isFinite(size)) size = 18;
+
+    title.style.fontSize = `${size}px`;
+    while (size > 11 && title.scrollWidth > title.clientWidth + 1) {
+      size -= 0.5;
+      title.style.fontSize = `${size}px`;
+    }
+  });
+}
+
+let layerTitleFitTimer;
+
+function scheduleLayerTitleFit() {
+  clearTimeout(layerTitleFitTimer);
+  layerTitleFitTimer = window.setTimeout(() => {
+    requestAnimationFrame(fitLayerTitles);
+  }, 60);
+}
+
+function watchLayerTitleFit() {
+  if (typeof ResizeObserver === 'undefined') return;
+  const observer = new ResizeObserver(scheduleLayerTitleFit);
+  document.querySelectorAll('.layer-header').forEach((header) => observer.observe(header));
+}
+
+function enhancePageLayout() {
+  document.querySelectorAll('.layer-section').forEach((layer) => {
+    const layerChapters = [...layer.querySelectorAll('.chapter-panel')];
+    layerChapters.forEach((chapter, index) => {
+      chapter.dataset.chapterIndex = String(index + 1);
+      if (chapter.querySelector('.doc-table')) chapter.classList.add('chapter-panel--spec');
+      if (chapter.querySelector('.doc-figure')) chapter.classList.add('chapter-panel--visual');
+      if (index % 2 === 1) chapter.classList.add('chapter-panel--alt');
     });
   });
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.quick-card').forEach((node) => {
+    node.classList.add('reveal-block');
+    revealObserver.observe(node);
+  });
 }
 
-function toggleModule(block) {
-  if (!block) return;
-  const collapsed = block.classList.toggle('collapsed');
-  block.querySelector('.module-toggle')?.setAttribute('aria-expanded', String(!collapsed));
+function bootstrapScrollState() {
+  settleInitialScroll();
+  scrollTrackingEnabled = true;
+  syncScrollState();
+  onScroll();
 }
 
-document.getElementById('expandAll')?.addEventListener('click', () => {
-  document.querySelectorAll('.module-block.collapsed').forEach((b) => toggleModule(b));
-});
-
-document.getElementById('collapseAll')?.addEventListener('click', () => {
-  document.querySelectorAll('.module-block:not(.collapsed)').forEach((b) => toggleModule(b));
-});
-
-/* ===== Reveal (section-level only) ===== */
-const REVEAL_SELECTORS = [
-  '.section-header',
-  '.intro-card',
-  '.layer-nav-grid',
-  '.layer-divider',
-  '.subsys-position',
-  '.subsys-diagram',
-  '.blueprint-card',
-  '.arch-diagram',
-  '.layer5-phase-timeline',
-  '.roadmap-table-wrap',
-  '.scenario-table-wrap',
-];
-
-function initReveal() {
-  const targets = document.querySelectorAll(REVEAL_SELECTORS.join(','));
-  targets.forEach((el) => el.classList.add('reveal'));
-
-  if (reducedMotion) {
-    targets.forEach((el) => el.classList.add('visible'));
-    return;
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.08, rootMargin: '0px 0px -5% 0px' }
-  );
-
-  targets.forEach((el) => observer.observe(el));
-}
-
-function initFromHash() {
-  const hash = window.location.hash;
-  if (!hash || !document.querySelector(hash)) return;
-  jumpTo(hash);
-  markDocNav(hash);
-  syncTopTabs(hash);
-}
-
-document.querySelectorAll('.roadmap-table-wrap, .scenario-table-wrap').forEach((wrap) => {
-  if (wrap.scrollWidth > wrap.clientWidth) wrap.classList.add('has-scroll');
-});
-
-/* ===== Init ===== */
-initDocNav();
-initGlobalAnchors();
-initModuleCollapse();
-initReveal();
-initFromHash();
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeSidebar();
-});
-
-window.addEventListener('hashchange', initFromHash);
 window.addEventListener('scroll', onScroll, { passive: true });
-onScroll();
+window.addEventListener('resize', () => {
+  setProgress();
+  scheduleLayerTitleFit();
+}, { passive: true });
+window.addEventListener('pageshow', (event) => {
+  if (!event.persisted) return;
+  openFeatureListTables();
+  bootstrapScrollState();
+  scheduleLayerTitleFit();
+});
 
-document.body.classList.add('motion-ready');
+tocToggle?.addEventListener('click', openToc);
+tocClose?.addEventListener('click', closeToc);
+tocOverlay?.addEventListener('click', closeToc);
+backTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+document.addEventListener('click', (event) => {
+  const anchor = event.target.closest('a[href^="#"]');
+  if (anchor && document.querySelector(anchor.getAttribute('href'))) closeToc();
+
+  const imageButton = event.target.closest('[data-full-image]');
+  if (imageButton) openImage(imageButton.dataset.fullImage);
+});
+
+document.querySelectorAll('.table-filter').forEach((input) => {
+  input.addEventListener('input', () => filterTable(input));
+});
+
+focusToggle?.addEventListener('click', () => {
+  const keepId = findViewportChapterId() || currentChapterId;
+  setFocusMode(!document.body.classList.contains('focus-mode'));
+  requestAnimationFrame(() => {
+    const target = keepId ? document.getElementById(keepId) : null;
+    if (!target) return;
+    const top = Math.max(0, window.scrollY + target.getBoundingClientRect().top - getScrollOffset());
+    window.scrollTo(0, top);
+    scheduleLayerTitleFit();
+  });
+});
+imageViewerClose?.addEventListener('click', closeImage);
+imageViewer?.addEventListener('click', (event) => {
+  if (event.target === imageViewer) closeImage();
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    closeToc();
+    closeImage();
+  }
+});
+
+initFontScale();
+setFocusMode(false);
+openFeatureListTables();
+enhancePageLayout();
+watchLayerTitleFit();
+scheduleLayerTitleFit();
+bootstrapScrollState();
+requestAnimationFrame(bootstrapScrollState);
+document.fonts?.ready?.then(scheduleLayerTitleFit);
+window.addEventListener('load', () => {
+  bootstrapScrollState();
+  scheduleLayerTitleFit();
+}, { once: true });

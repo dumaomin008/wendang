@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>场站能源运营中心产品架构图</title>
+  <style>
+    :root {
+      --page: #f7f6f3;
+      --surface: #ffffff;
+      --soft: #f1f1ef;
+      --ink: #37352f;
+      --muted: #787774;
+      --line: rgba(55, 53, 47, 0.16);
+      --radius: 5px;
+      --font: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Inter", system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: var(--font);
+      background: var(--page);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .page {
+      width: min(1260px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 40px;
+    }
+
+    .hero {
+      margin-bottom: 20px;
+      padding-left: 2px;
+    }
+
+    .eyebrow {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 3vw, 40px);
+      line-height: 1.18;
+      font-weight: 700;
+    }
+
+    .hero-copy {
+      max-width: 940px;
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .architecture {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .layer {
+      border-bottom: 1px solid var(--line);
+      background: #ffffff;
+    }
+
+    .layer:last-child {
+      border-bottom: 0;
+    }
+
+    .layer-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 13px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfaf8;
+    }
+
+    .layer-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .layer-index {
+      display: inline-grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      color: var(--ink);
+      background: var(--soft);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .layer-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: right;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .chip {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfaf8;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      padding: 14px;
+      background: #ffffff;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 82px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfaf8;
+      text-align: center;
+    }
+
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -10px;
+      width: 10px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .flow-step:last-child::after {
+      display: none;
+    }
+
+    .flow-step strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .flow-step span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .business-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      padding: 14px;
+      background: #ffffff;
+    }
+
+    .business-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 190px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #ffffff;
+    }
+
+    .business-card.primary {
+      background: #fbfaf8;
+    }
+
+    .business-card h2 {
+      margin: 0;
+      padding: 14px 14px 0;
+      font-size: 17px;
+      line-height: 1.3;
+      font-weight: 700;
+    }
+
+    .business-card p {
+      margin: 8px 0 0;
+      padding: 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+      padding: 13px 14px 14px;
+    }
+
+    .tag {
+      padding: 5px 8px;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      background: var(--soft);
+      color: #6b6a67;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .capability-row,
+    .data-row,
+    .external-row {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      background: #ffffff;
+    }
+
+    .capability-row {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .data-row {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .external-row {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .mini-card {
+      min-height: 84px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfaf8;
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 600;
+    }
+
+    .mini-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1080px) {
+      .business-grid,
+      .capability-row,
+      .data-row,
+      .external-row,
+      .flow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .flow-step::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(100vw - 20px, 720px);
+        padding-top: 20px;
+      }
+
+      .layer-head {
+        flex-direction: column;
+      }
+
+      .layer-note {
+        text-align: left;
+      }
+
+      .business-grid,
+      .capability-row,
+      .data-row,
+      .external-row,
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .chip {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="eyebrow">产品架构总览</div>
+      <h1>场站能源运营中心产品架构图</h1>
+      <p class="hero-copy">
+        面向矿区、高速旁与物流园的充换电站网络，统一场站资产、设备物联、无感补能、峰谷调度与能源账务清分，形成可视化、可调度、可结算的能源运营中台。
+      </p>
+    </header>
+
+    <section class="architecture" aria-label="场站能源运营中心产品架构总览">
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">1</span> 用户与协同入口</div>
+          <div class="layer-note">围绕场站运营、车队补能与财务清分的统一入口</div>
+        </div>
+        <div class="chips">
+          <span class="chip">能源运营工作台</span>
+          <span class="chip">场站可视化大屏</span>
+          <span class="chip">站长 / 运维门户</span>
+          <span class="chip">司机 / 车队补能入口</span>
+          <span class="chip">财务清分入口</span>
+          <span class="chip">TMS 协同接口</span>
+        </div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">2</span> 核心业务链路</div>
+          <div class="layer-note">从场站建档到补能作业，再到电价调度与多方结算</div>
+        </div>
+        <div class="flow">
+          <div class="flow-step">
+            <strong>场站建档</strong>
+            <span>站点 / 容量 / 设备</span>
+          </div>
+          <div class="flow-step">
+            <strong>设备物联</strong>
+            <span>枪头 / 通道 / 电池</span>
+          </div>
+          <div class="flow-step">
+            <strong>无感补能</strong>
+            <span>鉴权 / 启动 / 熔断</span>
+          </div>
+          <div class="flow-step">
+            <strong>峰谷调度</strong>
+            <span>电价 / 负荷 / 微网</span>
+          </div>
+          <div class="flow-step">
+            <strong>账务清分</strong>
+            <span>计费 / 对账 / 分账</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">3</span> 业务应用层</div>
+          <div class="layer-note">四大业务域承载能源网络、补能作业、调度套利与资金闭环</div>
+        </div>
+        <div class="business-grid">
+          <article class="business-card primary">
+            <h2>场站资产与设备物联大盘</h2>
+            <p>把分散的充电站、换电站、枪头、通道、电池组和配变容量整合成一张可运营的能源网络。</p>
+            <div class="tag-list">
+              <span class="tag">场站数字地图</span>
+              <span class="tag">设备状态看板</span>
+              <span class="tag">电池库存预警</span>
+            </div>
+          </article>
+
+          <article class="business-card">
+            <h2>充电 / 换电无感作业引擎</h2>
+            <p>基于 VIN、车机 MAC 或白名单白卡完成自动鉴权，云端联动设备启动补能并在异常时快速熔断。</p>
+            <div class="tag-list">
+              <span class="tag">无感鉴权</span>
+              <span class="tag">即插即充</span>
+              <span class="tag">BMS 熔断</span>
+            </div>
+          </article>
+
+          <article class="business-card">
+            <h2>峰谷电价策略与微电网调度</h2>
+            <p>结合电价时段、TMS 明日派车计划和变压器负荷上限，把随意充电变成系统统筹的低成本补能。</p>
+            <div class="tag-list">
+              <span class="tag">电价字典</span>
+              <span class="tag">削峰填谷</span>
+              <span class="tag">负荷平滑</span>
+            </div>
+          </article>
+
+          <article class="business-card primary">
+            <h2>能源账务清分与多方对账</h2>
+            <p>每笔补能交易绑定车辆、司机、时段、电量与费率，支撑司机划扣、车队月结和第三方自动分账。</p>
+            <div class="tag-list">
+              <span class="tag">组合计费</span>
+              <span class="tag">订单快照</span>
+              <span class="tag">自动清分</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">4</span> 平台支撑能力</div>
+          <div class="layer-note">支撑设备接入、补能安全、调度策略与财务闭环的基础服务</div>
+        </div>
+        <div class="capability-row">
+          <div class="mini-card">
+            <strong>设备接入与协议适配</strong>
+            <span>充电桩、换电站、BMS、道闸与站控系统统一接入</span>
+          </div>
+          <div class="mini-card">
+            <strong>鉴权与风控</strong>
+            <span>VIN / MAC / 白名单识别，防盗刷与异常拦截</span>
+          </div>
+          <div class="mini-card">
+            <strong>调度算法服务</strong>
+            <span>谷电延时、功率分配、负荷平滑与电池优先级</span>
+          </div>
+          <div class="mini-card">
+            <strong>计费规则引擎</strong>
+            <span>基础电费、服务费、折扣价、月结与清分比例</span>
+          </div>
+          <div class="mini-card">
+            <strong>预警与工单</strong>
+            <span>库存不足、设备离线、硬件故障、热失控风险</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">5</span> 数据资产层</div>
+          <div class="layer-note">沉淀为能源运营、成本优化和安全风控复用的数据底盘</div>
+        </div>
+        <div class="data-row">
+          <div class="mini-card">
+            <strong>场站资产数据</strong>
+            <span>经纬度、配变容量、承包方、营业时间</span>
+          </div>
+          <div class="mini-card">
+            <strong>设备状态数据</strong>
+            <span>枪头、通道、占位、离线、故障状态</span>
+          </div>
+          <div class="mini-card">
+            <strong>电池库存数据</strong>
+            <span>满电可用、充电中、可换电池预警</span>
+          </div>
+          <div class="mini-card">
+            <strong>充放电过程数据</strong>
+            <span>温度、电压、电流、BMS 心跳与熔断记录</span>
+          </div>
+          <div class="mini-card">
+            <strong>电价与负荷数据</strong>
+            <span>尖峰平谷费率、未来电价、变压器负荷</span>
+          </div>
+          <div class="mini-card">
+            <strong>交易结算数据</strong>
+            <span>订单、电量、时段、司机、车架号、清分结果</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">6</span> 外部系统与物联接入</div>
+          <div class="layer-note">连接场站设备、车辆、电网、TMS 与资金清分生态</div>
+        </div>
+        <div class="external-row">
+          <div class="mini-card">
+            <strong>充电桩 / 换电站</strong>
+            <span>枪头、通道、仓内电池、站控系统</span>
+          </div>
+          <div class="mini-card">
+            <strong>BMS / 车辆底盘</strong>
+            <span>电芯温度、电压电流、VIN 与车机身份</span>
+          </div>
+          <div class="mini-card">
+            <strong>供电局 / 电价源</strong>
+            <span>尖峰平谷时段、费率、未来电价字典</span>
+          </div>
+          <div class="mini-card">
+            <strong>TMS 调度系统</strong>
+            <span>明日派车计划、拥堵预警、运费划扣</span>
+          </div>
+          <div class="mini-card">
+            <strong>分账网关 / 银行</strong>
+            <span>司机扣款、车队月结、电费与服务费清分</span>
+          </div>
+          <div class="mini-card">
+            <strong>运维通知渠道</strong>
+            <span>短信、企微、工单、站长值班通知</span>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

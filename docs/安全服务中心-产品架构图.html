@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>安全与后市场服务中心产品架构图</title>
+  <style>
+    :root {
+      --page: #f7f6f3;
+      --paper: #ffffff;
+      --paper-soft: #fbfaf8;
+      --soft: #f1f1ef;
+      --ink: #37352f;
+      --muted: #787774;
+      --faint: #9b9a97;
+      --line: rgba(55, 53, 47, 0.16);
+      --line-strong: rgba(55, 53, 47, 0.24);
+      --green: #5f7665;
+      --blue: #5f6f86;
+      --brown: #8a6f52;
+      --red: #8b5f5b;
+      --steel: #6b6a67;
+      --radius: 6px;
+      --font: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--page);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: var(--font);
+      background: var(--page);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .page {
+      width: min(1320px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 42px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 22px;
+      align-items: end;
+      margin-bottom: 18px;
+      padding-left: 2px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 9px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background:
+        linear-gradient(var(--line), var(--line)) 50% 50% / 10px 1px no-repeat,
+        linear-gradient(90deg, var(--line), var(--line)) 50% 50% / 1px 10px no-repeat,
+        var(--paper);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 3vw, 42px);
+      line-height: 1.14;
+      font-weight: 760;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-copy {
+      max-width: 900px;
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      max-width: 430px;
+    }
+
+    .tag,
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--paper-soft);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 620;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .tag {
+      padding: 6px 9px;
+    }
+
+    .architecture {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .layer {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .layer:last-child {
+      border-bottom: 0;
+    }
+
+    .layer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper-soft);
+    }
+
+    .layer-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 14px;
+      font-weight: 740;
+    }
+
+    .layer-index {
+      display: inline-grid;
+      place-items: center;
+      width: 23px;
+      height: 23px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--soft);
+      font-size: 12px;
+      font-weight: 760;
+    }
+
+    .layer-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: right;
+    }
+
+    .portal-row {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .portal,
+    .mini {
+      min-height: 76px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-soft);
+    }
+
+    .portal strong,
+    .mini strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 720;
+    }
+
+    .portal span,
+    .mini span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .lifecycle {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 14px;
+      list-style: none;
+    }
+
+    .life-step {
+      position: relative;
+      min-height: 88px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .life-step::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -10px;
+      width: 10px;
+      height: 1px;
+      background: var(--line-strong);
+    }
+
+    .life-step:last-child::after {
+      display: none;
+    }
+
+    .life-step b {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+      line-height: 1.35;
+      font-weight: 730;
+    }
+
+    .life-step span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.48;
+    }
+
+    .core-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.16fr 1fr;
+      gap: 12px;
+      padding: 14px;
+      align-items: stretch;
+    }
+
+    .domain {
+      display: flex;
+      flex-direction: column;
+      min-height: 318px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .domain.is-center {
+      background: var(--paper-soft);
+      border-color: var(--line-strong);
+    }
+
+    .domain-head {
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .domain-kicker {
+      display: inline-flex;
+      margin-bottom: 9px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: var(--soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 690;
+    }
+
+    .domain h2 {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.3;
+      font-weight: 760;
+    }
+
+    .domain p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.62;
+    }
+
+    .capability-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 14px;
+      list-style: none;
+    }
+
+    .capability-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: 36px;
+      padding: 8px 9px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--paper-soft);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 640;
+    }
+
+    .capability-list li span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 560;
+      white-space: nowrap;
+    }
+
+    .secondary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      padding: 0 14px 14px;
+    }
+
+    .wide-card {
+      min-height: 172px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .wide-card h3 {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.35;
+      font-weight: 740;
+    }
+
+    .wide-card p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 12px;
+    }
+
+    .pill {
+      padding: 5px 8px;
+      color: var(--accent, var(--muted));
+      background: var(--soft);
+    }
+
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .summary-row {
+      display: grid;
+      grid-template-columns: 1fr 1.45fr;
+      gap: 12px;
+      padding: 0 14px 14px;
+    }
+
+    .summary {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-soft);
+    }
+
+    .summary h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .summary p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .kpi {
+      min-height: 104px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .kpi b {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .kpi strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .kpi span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.48;
+    }
+
+    .footer-note {
+      margin: 14px 2px 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 1120px) {
+      .hero,
+      .core-layout,
+      .summary-row {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-tags {
+        justify-content: flex-start;
+        max-width: none;
+      }
+
+      .portal-row,
+      .lifecycle,
+      .platform-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .life-step::after {
+        display: none;
+      }
+
+      .data-grid,
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(100vw - 20px, 720px);
+        padding-top: 20px;
+      }
+
+      .layer-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .layer-note {
+        text-align: left;
+      }
+
+      .portal-row,
+      .lifecycle,
+      .platform-grid,
+      .data-grid,
+      .secondary-grid,
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tag,
+      .pill,
+      .capability-list li span {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow">产品架构总览 / Safety Service Center</div>
+        <h1>安全与后市场服务中心产品架构图</h1>
+        <p class="hero-copy">
+          面向新能源重卡运营安全与售后服务场景，以“主动安全预警大脑”为前置防线，贯通云端诊断、预防性维保、维修救援、备件逆向物流和司机信用成长体系。
+        </p>
+      </div>
+      <div class="hero-tags" aria-label="架构关键词">
+        <span class="tag">主动安全</span>
+        <span class="tag">云端诊断</span>
+        <span class="tag">维修救援</span>
+        <span class="tag">备件追溯</span>
+        <span class="tag">司机信用</span>
+      </div>
+    </header>
+
+    <section class="architecture" aria-label="安全服务中心产品架构">
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">1</span> 用户与业务入口</div>
+          <div class="layer-note">按角色进入同一个安全服务闭环</div>
+        </div>
+        <div class="portal-row">
+          <div class="portal">
+            <strong>安全员</strong>
+            <span>预警核实、视频喊话、事故复盘</span>
+          </div>
+          <div class="portal">
+            <strong>车队长</strong>
+            <span>维保计划、司机培训、信用管控</span>
+          </div>
+          <div class="portal">
+            <strong>司机</strong>
+            <span>SOS、申诉、微课、信用分</span>
+          </div>
+          <div class="portal">
+            <strong>服务站 / 技师</strong>
+            <span>救援接单、透明维修、索赔提交</span>
+          </div>
+          <div class="portal">
+            <strong>车厂专家</strong>
+            <span>远程诊断、BMS 帧、OTA 升级</span>
+          </div>
+          <div class="portal">
+            <strong>仓储 / 财务</strong>
+            <span>备件调拨、旧件核销、费用审批</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">2</span> 安全服务主链路</div>
+          <div class="layer-note">从风险感知到服务闭环，再反哺司机成长</div>
+        </div>
+        <ol class="lifecycle">
+          <li class="life-step">
+            <b>毫秒级感知</b>
+            <span>ADAS / DMS / CAN / BMS 多源接入</span>
+          </li>
+          <li class="life-step">
+            <b>AI 过滤分级</b>
+            <span>误报降噪、速度路况动态定级</span>
+          </li>
+          <li class="life-step">
+            <b>干预与取证</b>
+            <span>TTS、视频喊话、黑匣子锁存</span>
+          </li>
+          <li class="life-step">
+            <b>诊断与维保</b>
+            <span>DTC、BMS 帧、预测性保养</span>
+          </li>
+          <li class="life-step">
+            <b>维修与备件</b>
+            <span>救援派工、透明维修、旧件回收</span>
+          </li>
+          <li class="life-step">
+            <b>培训与信用</b>
+            <span>定向派课、积分评级、调度约束</span>
+          </li>
+        </ol>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">3</span> 核心产品能力</div>
+          <div class="layer-note">五大业务中心围绕“安全预防 + 服务履约”协同</div>
+        </div>
+        <div class="core-layout">
+          <article class="domain is-center" style="--accent: var(--red)">
+            <div class="domain-head">
+              <span class="domain-kicker">安全前置</span>
+              <h2>主动安全与 AI 预警大脑</h2>
+              <p>建立“感知、过滤、干预、取证、申诉”的主动安全防线。</p>
+            </div>
+            <ul class="capability-list">
+              <li>物联接入 <span>808 / 1078 / 32960</span></li>
+              <li>AI 预警过滤 <span>误报降噪 / 动态分级</span></li>
+              <li>极危干预 <span>TTS / 喊话 / 限速降扭</span></li>
+              <li>事故重构 <span>轨迹 / 踏板 / 视频锁存</span></li>
+            </ul>
+          </article>
+
+          <article class="domain" style="--accent: var(--blue)">
+            <div class="domain-head">
+              <span class="domain-kicker">车厂直连</span>
+              <h2>云端诊断与预防性维保</h2>
+              <p>把故障识别和维保服务前置，降低抛锚停运和进站成本。</p>
+            </div>
+            <ul class="capability-list">
+              <li>DTC 解析 <span>故障码 / 知识库</span></li>
+              <li>BMS 穿透 <span>电芯压差 / 温度波形</span></li>
+              <li>OTA 管理 <span>VCU / BMS 批量升级</span></li>
+              <li>动态保养 <span>负荷 / 循环 / 磨损模型</span></li>
+            </ul>
+          </article>
+
+          <article class="domain" style="--accent: var(--green)">
+            <div class="domain-head">
+              <span class="domain-kicker">服务履约</span>
+              <h2>维修工单与极速救援闭环</h2>
+              <p>从 SOS 到派工、维修、结算、索赔，打造透明车间。</p>
+            </div>
+            <ul class="capability-list">
+              <li>救援调度 <span>SOS / GPS / 智能派工</span></li>
+              <li>透明维修 <span>接车 / 领料 / 质检</span></li>
+              <li>费用审批 <span>工时库 / 配件价 / 对账</span></li>
+              <li>三包索赔 <span>保修判断 / 主机厂索赔</span></li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="secondary-grid">
+          <article class="wide-card" style="--accent: var(--brown)">
+            <h3>高压备件供应链与逆向物流</h3>
+            <p>管理核心三电件的一物一码追溯、多级仓储、预测补货、旧件回收和环保去向。</p>
+            <div class="tag-list">
+              <span class="pill">一物一码</span>
+              <span class="pill">多级库存</span>
+              <span class="pill">智能补货</span>
+              <span class="pill">旧件核销</span>
+            </div>
+          </article>
+          <article class="wide-card" style="--accent: var(--steel)">
+            <h3>司机数字化培训与信用体系</h3>
+            <p>把安全违规数据转化为定向学习、在线考试、信用积分和 TMS 调度约束。</p>
+            <div class="tag-list">
+              <span class="pill">触发式派课</span>
+              <span class="pill">人脸核身</span>
+              <span class="pill">信用驾驶分</span>
+              <span class="pill">调度熔断</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="summary-row">
+          <div class="summary">
+            <h3>安全服务中心</h3>
+            <p>
+              以车辆实时数据和司机行为数据为底座，把“安全预警、维保诊断、救援维修、备件保障、培训信用”沉淀为一套闭环服务体系。
+            </p>
+          </div>
+          <div class="kpi-grid" aria-label="管理驾驶舱指标">
+            <div class="kpi">
+              <b>1</b>
+              <strong>预警质量</strong>
+              <span>误报率、极危响应、申诉通过</span>
+            </div>
+            <div class="kpi">
+              <b>2</b>
+              <strong>车辆健康</strong>
+              <span>DTC、三电异常、保养到期</span>
+            </div>
+            <div class="kpi">
+              <b>3</b>
+              <strong>服务效率</strong>
+              <span>救援时效、维修周期、结算效率</span>
+            </div>
+            <div class="kpi">
+              <b>4</b>
+              <strong>司机风险</strong>
+              <span>信用分、培训完成、调度限制</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">4</span> 平台中台能力</div>
+          <div class="layer-note">跨业务域复用的规则、流程、证据和合规能力</div>
+        </div>
+        <div class="platform-grid">
+          <div class="mini">
+            <strong>物联协议网关</strong>
+            <span>808、1078、32960、CAN、BMS</span>
+          </div>
+          <div class="mini">
+            <strong>AI 模型与规则</strong>
+            <span>视觉过滤、风险分级、维保预测</span>
+          </div>
+          <div class="mini">
+            <strong>视频与证据存证</strong>
+            <span>4 路视频、黑匣子、电子鉴定书</span>
+          </div>
+          <div class="mini">
+            <strong>工单流程引擎</strong>
+            <span>预警、救援、维修、索赔、申诉</span>
+          </div>
+          <div class="mini">
+            <strong>费用与索赔规则</strong>
+            <span>标准工时、配件价、三包判断</span>
+          </div>
+          <div class="mini">
+            <strong>权限与合规审计</strong>
+            <span>授权干预、旧件追溯、环保报告</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="layer">
+        <div class="layer-head">
+          <div class="layer-title"><span class="layer-index">5</span> 数据与生态接入</div>
+          <div class="layer-note">连接车、站、人、仓、厂与调度生态</div>
+        </div>
+        <div class="data-grid">
+          <div class="mini">
+            <strong>车载终端与视频</strong>
+            <span>ADAS、DMS、四路摄像头、车机 TTS</span>
+          </div>
+          <div class="mini">
+            <strong>三电与底盘数据</strong>
+            <span>BMS、VCU、DTC、CAN、踏板转角</span>
+          </div>
+          <div class="mini">
+            <strong>服务站与仓储</strong>
+            <span>技师 APP、PDA、前置仓、区域仓</span>
+          </div>
+          <div class="mini">
+            <strong>司机与调度系统</strong>
+            <span>司机小程序、TMS 派单、在线培训</span>
+          </div>
+          <div class="mini">
+            <strong>车厂与财务生态</strong>
+            <span>主机厂索赔、OTA 包、结算付款</span>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <p class="footer-note">
+      高层版定位：用于方案汇报与 PRD 总览。具体报警阈值、AI 模型策略、维修工时、备件库存算法和信用分公式可在二级模块图中继续下钻。
+    </p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>大宗市场转化中心高层产品架构图</title>
+  <style>
+    :root {
+      --page: #f7f6f3;
+      --paper: #ffffff;
+      --paper-soft: #fbfaf8;
+      --soft: #f1f1ef;
+      --ink: #37352f;
+      --muted: #787774;
+      --faint: #9b9a97;
+      --line: rgba(55, 53, 47, 0.16);
+      --line-strong: rgba(55, 53, 47, 0.26);
+      --green: #5f7665;
+      --blue: #5f6f86;
+      --brown: #8a735c;
+      --red: #8b615d;
+      --purple: #6d647d;
+      --radius: 6px;
+      --font: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--page);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: var(--font);
+      background: var(--page);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    .page {
+      width: min(1380px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 42px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 18px;
+      padding: 0 2px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 9px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background:
+        linear-gradient(var(--line), var(--line)) 50% 50% / 10px 1px no-repeat,
+        linear-gradient(90deg, var(--line), var(--line)) 50% 50% / 1px 10px no-repeat,
+        var(--paper);
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.14;
+      font-weight: 760;
+    }
+
+    .hero-copy {
+      max-width: 920px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      max-width: 430px;
+    }
+
+    .tag,
+    .pill,
+    .mini-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--paper-soft);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .tag {
+      padding: 6px 9px;
+    }
+
+    .architecture {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .section {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section:last-child {
+      border-bottom: 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper-soft);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+      font-size: 14px;
+      font-weight: 740;
+    }
+
+    .section-index {
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 23px;
+      height: 23px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--soft);
+      font-size: 12px;
+      font-weight: 760;
+    }
+
+    .section-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: right;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 8px;
+      padding: 14px;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 76px;
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-soft);
+    }
+
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -8px;
+      width: 8px;
+      height: 1px;
+      background: var(--line-strong);
+    }
+
+    .flow-step:last-child::after {
+      display: none;
+    }
+
+    .flow-step b {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 730;
+    }
+
+    .flow-step span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .module {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .module-head {
+      padding: 13px 13px 11px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper-soft);
+    }
+
+    .module-head.customer {
+      border-top: 4px solid var(--green);
+    }
+
+    .module-head.sandbox {
+      border-top: 4px solid var(--blue);
+    }
+
+    .module-head.delivery {
+      border-top: 4px solid var(--red);
+    }
+
+    .module-head.knowledge {
+      border-top: 4px solid var(--brown);
+    }
+
+    .module-kicker {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 720;
+      text-transform: uppercase;
+    }
+
+    .module h2 {
+      font-size: 17px;
+      line-height: 1.3;
+      font-weight: 760;
+    }
+
+    .module-desc {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.58;
+    }
+
+    .capability-list {
+      display: grid;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .capability {
+      padding: 12px 13px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .capability:last-child {
+      border-bottom: 0;
+    }
+
+    .capability-title {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 7px;
+    }
+
+    .capability-title b {
+      display: block;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 730;
+    }
+
+    .mini-tag {
+      flex: 0 0 auto;
+      padding: 4px 6px;
+      color: var(--faint);
+      font-size: 11px;
+    }
+
+    .desc {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.58;
+    }
+
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 4px 7px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--paper-soft);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .core-layout {
+      display: grid;
+      grid-template-columns: 0.95fr 1.25fr 0.95fr;
+      gap: 10px;
+      padding: 14px;
+      align-items: stretch;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper-soft);
+      font-size: 13px;
+      font-weight: 740;
+    }
+
+    .panel-body {
+      padding: 12px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 8px;
+    }
+
+    .mini-card {
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-soft);
+    }
+
+    .mini-card b {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 730;
+    }
+
+    .calculator {
+      display: grid;
+      gap: 10px;
+    }
+
+    .formula {
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-soft);
+    }
+
+    .formula b {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      line-height: 1.35;
+      font-weight: 760;
+    }
+
+    .formula-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .metric {
+      min-height: 74px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      text-align: center;
+    }
+
+    .metric strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.25;
+      font-weight: 760;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .output-card {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .output-card h3 {
+      margin-bottom: 8px;
+      font-size: 15px;
+      line-height: 1.35;
+      font-weight: 760;
+    }
+
+    .output-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .output {
+      min-height: 88px;
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-soft);
+    }
+
+    .output b {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 730;
+    }
+
+    .knowledge-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .knowledge-card {
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-soft);
+    }
+
+    .knowledge-card h3 {
+      margin-bottom: 8px;
+      font-size: 14px;
+      line-height: 1.35;
+      font-weight: 740;
+    }
+
+    .connector {
+      display: grid;
+      grid-template-columns: minmax(80px, 1fr) auto minmax(80px, 1fr);
+      align-items: center;
+      gap: 10px;
+      padding: 0 14px 14px;
+      color: var(--faint);
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .connector::before,
+    .connector::after {
+      content: "";
+      height: 1px;
+      background: var(--line);
+    }
+
+    .connector span {
+      padding: 5px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper-soft);
+      white-space: nowrap;
+    }
+
+    .footnote {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 14px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+      background: var(--paper-soft);
+    }
+
+    @media (max-width: 1180px) {
+      .flow {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .flow-step::after {
+        display: none;
+      }
+
+      .module-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .core-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .page {
+        width: min(calc(100% - 24px), 720px);
+        padding-top: 24px;
+      }
+
+      .hero,
+      .section-head {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-tags {
+        justify-content: flex-start;
+        max-width: none;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .section-note {
+        text-align: left;
+      }
+
+      .flow,
+      .module-grid,
+      .knowledge-grid,
+      .formula-row,
+      .output-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .connector {
+        grid-template-columns: 1fr;
+      }
+
+      .connector::before,
+      .connector::after {
+        display: none;
+      }
+
+      .connector span {
+        justify-self: start;
+        white-space: normal;
+      }
+
+      .footnote {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <span class="eyebrow">Market Conversion Architecture</span>
+        <h1>大宗市场转化中心高层产品架构图</h1>
+        <p class="hero-copy">
+          面向新能源重卡合资落地场景，围绕客户底盘洞察、售前尽调智算、项目交付履约、政策知识赋能四大模块，
+          将线索经营转化为可量化收益报告与重资产交付闭环。
+        </p>
+      </div>
+      <div class="hero-tags" aria-label="核心关键词">
+        <span class="tag">重资产合资落地</span>
+        <span class="tag">运输底盘数据</span>
+        <span class="tag">ROI / TCO 智算</span>
+        <span class="tag">从合同到首单</span>
+        <span class="tag">政策知识引擎</span>
+      </div>
+    </header>
+
+    <section class="architecture" aria-label="大宗市场转化中心产品架构">
+      <section class="section">
+        <div class="section-head">
+          <div class="section-title">
+            <span class="section-index">00</span>
+            <span>业务转化主链路</span>
+          </div>
+          <p class="section-note">从线索获取到跑通首单，形成 BD、售前、交付、运营可协同的端到端链路</p>
+        </div>
+        <div class="flow">
+          <div class="flow-step"><b>线索获取</b><span>客户来源、行业机会、环保评级压力识别。</span></div>
+          <div class="flow-step"><b>初步接洽</b><span>干系人识别、出资意愿、场地资源探盘。</span></div>
+          <div class="flow-step"><b>线路尽调</b><span>线路绘制、高程坡度、货品与季节参数采集。</span></div>
+          <div class="flow-step"><b>沙盘推演</b><span>能耗、补能、TCO、ROI、碳收益自动测算。</span></div>
+          <div class="flow-step"><b>商务签约</b><span>合资协议、保供合同、融租合同签批归档。</span></div>
+          <div class="flow-step"><b>交付首单</b><span>车辆绑定、材料审核、IoT 初始化、跑通首单。</span></div>
+        </div>
+        <div class="connector"><span>流程节点沉淀为客户画像、项目沙盘、合同资产与交付履约数据</span></div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div class="section-title">
+            <span class="section-index">01</span>
+            <span>四大产品能力域</span>
+          </div>
+          <p class="section-note">以客户经营为入口，以智算沙盘为杀手锏，以交付追踪和知识引擎保障规模复制</p>
+        </div>
+        <div class="module-grid">
+          <article class="module">
+            <div class="module-head customer">
+              <span class="module-kicker">Customer & Opportunity</span>
+              <h2>大宗客户与商机管理模块</h2>
+              <p class="module-desc">摒弃通用 CRM 的繁琐，专为重资产合资落地定制，深挖客户运输底盘数据。</p>
+            </div>
+            <ul class="capability-list">
+              <li class="capability">
+                <div class="capability-title">
+                  <b>客户画像与档案库</b>
+                  <span class="mini-tag">1.1</span>
+                </div>
+                <p class="desc">沉淀企业资质、工商信息、环保评级、车队规模、主营货品、主力车型、平均油耗、出资意愿、场地资源与 TCO 敏感度。</p>
+                <div class="chip-list">
+                  <span class="chip">环保保 A 压力</span>
+                  <span class="chip">自有/外协比例</span>
+                  <span class="chip">煤炭/砂石/钢铁</span>
+                  <span class="chip">TCO 标签</span>
+                </div>
+              </li>
+              <li class="capability">
+                <div class="capability-title">
+                  <b>商机漏斗与线索转化</b>
+                  <span class="mini-tag">1.2</span>
+                </div>
+                <p class="desc">管理线索获取、初步接洽、线路尽调、沙盘推演、商务谈判、合同签约全过程。</p>
+                <div class="chip-list">
+                  <span class="chip">拜访日志</span>
+                  <span class="chip">干系人图谱</span>
+                  <span class="chip">竞品入局</span>
+                </div>
+              </li>
+              <li class="capability">
+                <div class="capability-title">
+                  <b>合同与协议管理</b>
+                  <span class="mini-tag">1.3</span>
+                </div>
+                <p class="desc">管理合资运营协议、资源保供合同、车辆租赁合同模板，支持线上签批、版本控制与存证归档。</p>
+                <div class="chip-list">
+                  <span class="chip">模板库</span>
+                  <span class="chip">电子签</span>
+                  <span class="chip">版本控制</span>
+                  <span class="chip">存证防篡改</span>
+                </div>
+              </li>
+            </ul>
+          </article>
+
+          <article class="module">
+            <div class="module-head sandbox">
+              <span class="module-kicker">Pre-sales Simulation</span>
+              <h2>售前尽调与智算沙盘模块</h2>
+              <p class="module-desc">通过真实物理法则与运营大数据结合，生成客户可感知、可比较的收益报告。</p>
+            </div>
+            <ul class="capability-list">
+              <li class="capability">
+                <div class="capability-title">
+                  <b>路网与高程仿真引擎</b>
+                  <span class="mini-tag">2.1</span>
+                </div>
+                <p class="desc">BD/售前绘制起发地、矿区、钢厂等真实路线，提取高程落差与重载上下坡路段比例。</p>
+                <div class="chip-list">
+                  <span class="chip">线路绘制</span>
+                  <span class="chip">高程落差</span>
+                  <span class="chip">动能回收</span>
+                </div>
+              </li>
+              <li class="capability">
+                <div class="capability-title">
+                  <b>能源与能耗评估器</b>
+                  <span class="mini-tag">2.2</span>
+                </div>
+                <p class="desc">匹配相似路线、货品、季节下的真实能耗数据，并评估沿途充换电站与电网扩容余量。</p>
+                <div class="chip-list">
+                  <span class="chip">kWh/km 基准</span>
+                  <span class="chip">站点勘测</span>
+                  <span class="chip">变压器容量</span>
+                </div>
+              </li>
+              <li class="capability">
+                <div class="capability-title">
+                  <b>ROI 与 TCO 自动算账模型</b>
+                  <span class="mini-tag">2.3</span>
+                </div>
+                <p class="desc">自动比较柴油车与电车在 3 年/5 年周期下的首付、保险、保养、路权罚款、油电差价和碳资产收益。</p>
+                <div class="chip-list">
+                  <span class="chip">油电差价</span>
+                  <span class="chip">全生命周期成本</span>
+                  <span class="chip">碳收益</span>
+                </div>
+              </li>
+              <li class="capability">
+                <div class="capability-title">
+                  <b>商业计划书一键生成</b>
+                  <span class="mini-tag">2.4</span>
+                </div>
+                <p class="desc">将沙盘数据打包为项目合资运营收益推演与建站规划书，支持 PDF/Web 链接与多方案对比。</p>
+                <div class="chip-list">
+                  <span class="chip">动态报表</span>
+                  <span class="chip">多参数方案</span>
+                  <span class="chip">PDF / Web</span>
+                </div>
+              </li>
+            </ul>
+          </article>
+
+          <article class="module">
+            <div class="module-head delivery">
+              <span class="module-kicker">Project Delivery</span>
+              <h2>项目立项与全流程交付追踪</h2>
+              <p class="module-desc">合资敲定后，监控从纸面合同到车轮转动的重资产履约进度。</p>
+            </div>
+            <ul class="capability-list">
+              <li class="capability">
+                <div class="capability-title">
+                  <b>项目里程碑工作台</b>
+                  <span class="mini-tag">3.1</span>
+                </div>
+                <p class="desc">可视化管理立项审批、资金拨付、场站建设、车辆排产发运、交付标定、司机入职、跑通首单。</p>
+                <div class="chip-list">
+                  <span class="chip">进度看板</span>
+                  <span class="chip">SLA 红灯告警</span>
+                  <span class="chip">管理层提醒</span>
+                </div>
+              </li>
+              <li class="capability">
+                <div class="capability-title">
+                  <b>车辆资产交付管理</b>
+                  <span class="mini-tag">3.2</span>
+                </div>
+                <p class="desc">从主机厂 ERP 拉取发车清单，批量绑定 VIN，并统一上传审核发票、合格证、营运证、保险单。</p>
+                <div class="chip-list">
+                  <span class="chip">VIN 批量绑定</span>
+                  <span class="chip">ERP 发车清单</span>
+                  <span class="chip">材料收集夹</span>
+                </div>
+              </li>
+              <li class="capability">
+                <div class="capability-title">
+                  <b>车联网软硬件初始化</b>
+                  <span class="mini-tag">3.3</span>
+                </div>
+                <p class="desc">批量生成车辆专属软账号，记录 DMS、ADAS 摄像头物理标定结果与上线测试日志。</p>
+                <div class="chip-list">
+                  <span class="chip">车机账号</span>
+                  <span class="chip">DMS 标定</span>
+                  <span class="chip">ADAS 验收</span>
+                  <span class="chip">上线测试</span>
+                </div>
+              </li>
+            </ul>
+          </article>
+
+          <article class="module">
+            <div class="module-head knowledge">
+              <span class="module-kicker">Policy & Knowledge</span>
+              <h2>政策补贴与知识引擎</h2>
+              <p class="module-desc">支撑尽调沙盘与 BD 赋能的基础数据中心，让市场打法具备可复制性。</p>
+            </div>
+            <ul class="capability-list">
+              <li class="capability">
+                <div class="capability-title">
+                  <b>区域政策数据库</b>
+                  <span class="mini-tag">4.1</span>
+                </div>
+                <p class="desc">按城市维护新能源重卡置换补贴、运营补贴、环保限行、厂区路权等政策参数。</p>
+                <div class="chip-list">
+                  <span class="chip">购车补贴</span>
+                  <span class="chip">运营补贴</span>
+                  <span class="chip">路权限制</span>
+                </div>
+              </li>
+              <li class="capability">
+                <div class="capability-title">
+                  <b>电价策略字典</b>
+                  <span class="mini-tag">4.2</span>
+                </div>
+                <p class="desc">实时维护全国各省市工业用电尖、峰、平、谷时段划分与费率标准。</p>
+                <div class="chip-list">
+                  <span class="chip">尖峰平谷</span>
+                  <span class="chip">省市费率</span>
+                  <span class="chip">排班测算</span>
+                </div>
+              </li>
+              <li class="capability">
+                <div class="capability-title">
+                  <b>经典案例与话术库</b>
+                  <span class="mini-tag">4.3</span>
+                </div>
+                <p class="desc">沉淀成功破冰话术、客户抗拒点应对指南、跨行业标杆运营案例，赋能新 BD 快速上手。</p>
+                <div class="chip-list">
+                  <span class="chip">破冰话术</span>
+                  <span class="chip">抗拒点应对</span>
+                  <span class="chip">标杆案例</span>
+                </div>
+              </li>
+            </ul>
+          </article>
+        </div>
+        <div class="connector"><span>客户数据驱动沙盘测算，沙盘结果推动签约，交付履约反哺案例与模型</span></div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div class="section-title">
+            <span class="section-index">02</span>
+            <span>售前智算沙盘核心视图</span>
+          </div>
+          <p class="section-note">把路线、能耗、电价、政策与合同参数组合成可解释、可复盘的商业推演</p>
+        </div>
+        <div class="core-layout">
+          <article class="panel">
+            <div class="panel-head">
+              <span>输入数据</span>
+              <span class="pill">Inputs</span>
+            </div>
+            <div class="panel-body stack">
+              <div class="mini-card">
+                <b>客户运输底盘</b>
+                <p class="desc">车队结构、货品品类、车型油耗、线路频次、装卸规则、路权压力。</p>
+              </div>
+              <div class="mini-card">
+                <b>地图与能源约束</b>
+                <p class="desc">起终点、矿区/钢厂节点、高程坡度、站点分布、变压器容量。</p>
+              </div>
+              <div class="mini-card">
+                <b>政策与价格参数</b>
+                <p class="desc">购车补贴、运营补贴、限行罚款、柴油价格、尖峰平谷电价。</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-head">
+              <span>智算模型</span>
+              <span class="pill">Simulation Engine</span>
+            </div>
+            <div class="panel-body calculator">
+              <div class="formula">
+                <b>真实物理法则 + 平台运营大数据</b>
+                <p class="desc">用高程坡度、重载路况和动能回收修正理论能耗，再用相似路线真实 kWh/km 作为基准校准。</p>
+                <div class="formula-row">
+                  <div class="metric"><strong>路线能耗</strong><span>坡度 / 货品 / 季节 / 载重</span></div>
+                  <div class="metric"><strong>补能方案</strong><span>站点 / 排队 / 容量 / 电价</span></div>
+                  <div class="metric"><strong>收益账本</strong><span>TCO / ROI / 碳资产</span></div>
+                </div>
+              </div>
+              <div class="output-card">
+                <h3>关键输出</h3>
+                <p class="desc">将客户最关心的省钱、可跑、可建、可签转化为一页可决策结果。</p>
+                <div class="output-grid">
+                  <div class="output"><b>柴油车 vs 电车</b><p class="desc">3 年/5 年全生命周期成本对比。</p></div>
+                  <div class="output"><b>建站与补能规划</b><p class="desc">沿线站点、扩容余量、峰谷用电比例。</p></div>
+                  <div class="output"><b>合资运营收益报告</b><p class="desc">PDF/Web 链接，多套参数方案对比。</p></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-head">
+              <span>业务动作</span>
+              <span class="pill">Actions</span>
+            </div>
+            <div class="panel-body stack">
+              <div class="mini-card">
+                <b>推动客户决策</b>
+                <p class="desc">用油电差价、补贴、碳收益和路权紧迫感形成商务推进抓手。</p>
+              </div>
+              <div class="mini-card">
+                <b>生成合同参数</b>
+                <p class="desc">将收益边界、车辆规模、资源保供、场站投入沉淀为协议草案参数。</p>
+              </div>
+              <div class="mini-card">
+                <b>进入项目履约</b>
+                <p class="desc">一键转立项，生成车辆、场站、资金、司机与首单里程碑。</p>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="connector"><span>沙盘不是报表，而是从“客户相信”到“项目开跑”的转化引擎</span></div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div class="section-title">
+            <span class="section-index">03</span>
+            <span>政策补贴与知识底座</span>
+          </div>
+          <p class="section-note">为 BD 破冰、售前测算和项目落地提供长期可维护的公共数据资产</p>
+        </div>
+        <div class="knowledge-grid">
+          <article class="knowledge-card">
+            <h3>政策库驱动紧迫感</h3>
+            <p class="desc">把补贴、限行、环保评级和厂区路权组织成城市维度数据库，支撑“路权即生存权”的销售叙事。</p>
+            <div class="chip-list">
+              <span class="chip">城市政策参数</span>
+              <span class="chip">环保限行</span>
+              <span class="chip">厂区通告</span>
+            </div>
+          </article>
+          <article class="knowledge-card">
+            <h3>电价字典驱动算账</h3>
+            <p class="desc">维护工业用电分时费率，结合排班和补能策略计算真实用电比例，避免 ROI 测算失真。</p>
+            <div class="chip-list">
+              <span class="chip">尖峰平谷</span>
+              <span class="chip">排班用电比例</span>
+              <span class="chip">动态价格</span>
+            </div>
+          </article>
+          <article class="knowledge-card">
+            <h3>案例话术驱动复制</h3>
+            <p class="desc">把成功项目打法、客户抗拒点、行业案例和关键问答沉淀为新 BD 可直接调用的作战手册。</p>
+            <div class="chip-list">
+              <span class="chip">破冰模板</span>
+              <span class="chip">抗拒点 FAQ</span>
+              <span class="chip">行业标杆</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footnote">
+        <span>架构阅读方式：先看 00 主链路，再看 01 四大模块，最后用 02 和 03 理解智算沙盘与知识底座如何提升转化率。</span>
+        <span>视觉风格：Notion 式纸感背景、轻边框、数据库标签与克制信息密度。</span>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>

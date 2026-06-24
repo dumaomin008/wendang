@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>市场转化管理中心产品架构全景图</title>
+  <style>
+    :root {
+      --bg: #071018;
+      --bg-deep: #03070d;
+      --ink: #eef7ff;
+      --muted: #92a8bc;
+      --faint: #60778b;
+      --panel: rgba(10, 22, 34, 0.78);
+      --panel-strong: rgba(15, 32, 48, 0.9);
+      --line: rgba(125, 214, 255, 0.2);
+      --cyan: #55d7ff;
+      --teal: #31e0b3;
+      --violet: #9f8cff;
+      --amber: #ffc857;
+      --rose: #ff7aa8;
+      --blue: #438dff;
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
+      --radius: 20px;
+      --font: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Inter", system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--bg-deep);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 18% 14%, rgba(67, 141, 255, 0.24), transparent 30%),
+        radial-gradient(circle at 80% 10%, rgba(49, 224, 179, 0.16), transparent 28%),
+        radial-gradient(circle at 64% 86%, rgba(159, 140, 255, 0.16), transparent 34%),
+        linear-gradient(145deg, #06131e 0%, #04070c 54%, #071018 100%);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(109, 189, 255, 0.052) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(109, 189, 255, 0.052) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: radial-gradient(circle at center, black 0%, transparent 78%);
+    }
+
+    .page {
+      position: relative;
+      width: min(1500px, calc(100vw - 40px));
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 24px 0 34px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+      display: block;
+      width: 44px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--teal));
+    }
+
+    .eyebrow::after {
+      background: linear-gradient(90deg, var(--teal), transparent);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 3.9vw, 54px);
+      line-height: 1.02;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .title-gradient {
+      display: block;
+      color: transparent;
+      background: linear-gradient(92deg, #f5fbff 0%, #7de6ff 38%, #8affd2 72%, #fff0b7 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      text-shadow: 0 0 44px rgba(85, 215, 255, 0.1);
+    }
+
+    .hero-copy {
+      max-width: 900px;
+      margin: 12px 0 0;
+      color: #a8bbcd;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+      max-width: 460px;
+    }
+
+    .badge {
+      padding: 8px 12px;
+      border: 1px solid rgba(125, 230, 255, 0.22);
+      border-radius: 999px;
+      color: #bdefff;
+      background: rgba(125, 230, 255, 0.08);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: inset 0 0 18px rgba(85, 215, 255, 0.04);
+    }
+
+    .canvas {
+      position: relative;
+      display: grid;
+      grid-template-columns: 330px minmax(520px, 1fr) 330px;
+      gap: 18px;
+      padding: 16px;
+      border: 1px solid rgba(125, 214, 255, 0.22);
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(10, 20, 32, 0.82), rgba(4, 10, 17, 0.88)),
+        rgba(5, 12, 20, 0.88);
+      box-shadow: var(--shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+      overflow: hidden;
+    }
+
+    .canvas::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(125, 214, 255, 0.08);
+      border-radius: 24px;
+      pointer-events: none;
+    }
+
+    .canvas::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 760px;
+      height: 760px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(85, 215, 255, 0.15), transparent 34%),
+        conic-gradient(from 120deg, rgba(49, 224, 179, 0), rgba(49, 224, 179, 0.16), rgba(159, 140, 255, 0.14), rgba(255, 200, 87, 0.12), rgba(49, 224, 179, 0));
+      filter: blur(10px);
+      opacity: 0.72;
+      pointer-events: none;
+    }
+
+    .side-column,
+    .center-stage,
+    .foundation {
+      position: relative;
+      z-index: 1;
+    }
+
+    .side-column {
+      display: grid;
+      gap: 14px;
+    }
+
+    .side-section {
+      padding: 16px;
+      border: 1px solid rgba(125, 214, 255, 0.14);
+      border-radius: 22px;
+      background: rgba(7, 18, 29, 0.72);
+      backdrop-filter: blur(18px);
+    }
+
+    .section-kicker {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: var(--faint);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+    }
+
+    .section-kicker span:last-child {
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+
+    .capability-card {
+      position: relative;
+      min-height: 132px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.022)),
+        rgba(8, 20, 32, 0.78);
+      overflow: hidden;
+    }
+
+    .capability-card + .capability-card {
+      margin-top: 12px;
+    }
+
+    .capability-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
+      pointer-events: none;
+    }
+
+    .capability-card::after {
+      content: "";
+      position: absolute;
+      right: -32px;
+      top: -30px;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-glow), transparent 68%);
+      opacity: 0.95;
+    }
+
+    .card-code {
+      display: inline-flex;
+      min-width: 44px;
+      height: 28px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      border: 1px solid var(--accent-line);
+      border-radius: 999px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+    }
+
+    .capability-card h2,
+    .domain-card h2,
+    .foundation-card h2 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      color: #f4fbff;
+      font-size: 18px;
+      line-height: 1.28;
+      letter-spacing: -0.02em;
+    }
+
+    .capability-card p {
+      position: relative;
+      z-index: 1;
+      margin: 9px 0 0;
+      color: #a4b7c8;
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .center-stage {
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .mission-card {
+      position: relative;
+      min-height: 96px;
+      padding: 18px 20px;
+      border: 1px solid rgba(85, 215, 255, 0.2);
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, rgba(85, 215, 255, 0.13), rgba(159, 140, 255, 0.06) 48%, rgba(49, 224, 179, 0.1)),
+        rgba(6, 16, 27, 0.82);
+      overflow: hidden;
+    }
+
+    .mission-card::after {
+      content: "";
+      position: absolute;
+      right: 20px;
+      top: 18px;
+      width: 180px;
+      height: 70px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(85, 215, 255, 0.2), rgba(49, 224, 179, 0.06));
+      filter: blur(18px);
+    }
+
+    .mission-label {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 8px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+    }
+
+    .mission-card h2 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+    }
+
+    .mission-card p {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 10px 0 0;
+      color: #acc0d0;
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .flywheel {
+      position: relative;
+      min-height: 424px;
+      border: 1px solid rgba(125, 214, 255, 0.16);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 50% 48%, rgba(85, 215, 255, 0.12), transparent 32%),
+        linear-gradient(180deg, rgba(8, 18, 30, 0.62), rgba(5, 12, 22, 0.8));
+      overflow: hidden;
+    }
+
+    .flywheel::before,
+    .flywheel::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .flywheel::before {
+      width: 350px;
+      height: 350px;
+      border: 1px dashed rgba(125, 214, 255, 0.24);
+      box-shadow: 0 0 90px rgba(85, 215, 255, 0.08);
+    }
+
+    .flywheel::after {
+      width: 520px;
+      height: 520px;
+      border: 1px solid rgba(255, 255, 255, 0.055);
+    }
+
+    .core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 210px;
+      min-height: 210px;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 26px;
+      border: 1px solid rgba(125, 230, 255, 0.36);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.16), transparent 34%),
+        linear-gradient(145deg, rgba(28, 98, 150, 0.86), rgba(8, 28, 46, 0.94) 52%, rgba(11, 44, 49, 0.92));
+      box-shadow:
+        0 0 60px rgba(85, 215, 255, 0.26),
+        inset 0 0 38px rgba(49, 224, 179, 0.1);
+      z-index: 3;
+    }
+
+    .core strong {
+      display: block;
+      color: #ffffff;
+      font-size: 24px;
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+    }
+
+    .core span {
+      display: block;
+      margin-top: 10px;
+      color: #b8e9f5;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .flow-node {
+      position: absolute;
+      width: 174px;
+      min-height: 92px;
+      padding: 14px 14px 13px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      background: rgba(8, 19, 31, 0.88);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+      z-index: 2;
+    }
+
+    .flow-node::before {
+      content: "";
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--node);
+      box-shadow: 0 0 18px var(--node);
+    }
+
+    .flow-node h3 {
+      margin: 0 0 8px 18px;
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .flow-node p {
+      margin: 0;
+      color: #9fb2c4;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .node-1 { --node: var(--cyan); left: 50%; top: 24px; transform: translateX(-50%); }
+    .node-2 { --node: var(--teal); right: 34px; top: 122px; }
+    .node-3 { --node: var(--amber); right: 78px; bottom: 54px; }
+    .node-4 { --node: var(--violet); left: 78px; bottom: 54px; }
+    .node-5 { --node: var(--rose); left: 34px; top: 122px; }
+
+    .connector {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(125, 230, 255, 0.48), transparent);
+      transform-origin: left center;
+      z-index: 1;
+    }
+
+    .line-a { width: 190px; left: calc(50% + 66px); top: 104px; transform: rotate(28deg); }
+    .line-b { width: 148px; right: 122px; top: 230px; transform: rotate(90deg); }
+    .line-c { width: 170px; right: 250px; bottom: 118px; transform: rotate(158deg); }
+    .line-d { width: 170px; left: 250px; bottom: 118px; transform: rotate(22deg); }
+    .line-e { width: 148px; left: 122px; top: 230px; transform: rotate(90deg); }
+
+    .domain-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .domain-card {
+      position: relative;
+      min-height: 202px;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 22px;
+      background:
+        linear-gradient(155deg, rgba(255, 255, 255, 0.075), transparent 48%),
+        rgba(8, 20, 32, 0.74);
+      overflow: hidden;
+    }
+
+    .domain-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .domain-card::after {
+      content: attr(data-index);
+      position: absolute;
+      right: 14px;
+      top: 8px;
+      color: rgba(255, 255, 255, 0.055);
+      font-size: 70px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.08em;
+    }
+
+    .domain-card p {
+      position: relative;
+      z-index: 1;
+      margin: 8px 0 13px;
+      color: #98adbf;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .mini-list {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .mini-list li {
+      display: grid;
+      grid-template-columns: 7px minmax(0, 1fr);
+      gap: 8px;
+      color: #c4d1dc;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .mini-list li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      margin-top: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 14px var(--accent);
+    }
+
+    .foundation {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1.05fr 1.2fr 1fr;
+      gap: 14px;
+      margin-top: 2px;
+    }
+
+    .foundation-card {
+      min-height: 168px;
+      padding: 18px;
+      border: 1px solid rgba(125, 214, 255, 0.14);
+      border-radius: 22px;
+      background:
+        linear-gradient(145deg, rgba(85, 215, 255, 0.07), transparent 52%),
+        rgba(5, 13, 23, 0.82);
+    }
+
+    .foundation-card p {
+      margin: 8px 0 13px;
+      color: #8da3b7;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 5px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 999px;
+      color: #c6d7e6;
+      background: rgba(255, 255, 255, 0.05);
+      font-size: 11px;
+      line-height: 1.25;
+      white-space: nowrap;
+    }
+
+    .pipeline {
+      margin-top: 18px;
+      padding: 14px;
+      border: 1px solid rgba(255, 200, 87, 0.22);
+      border-radius: 22px;
+      background:
+        linear-gradient(90deg, rgba(255, 200, 87, 0.1), rgba(49, 224, 179, 0.06), rgba(85, 215, 255, 0.08)),
+        rgba(5, 13, 23, 0.72);
+    }
+
+    .pipeline-title {
+      margin: 0 0 12px;
+      color: #ffe2a0;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+    }
+
+    .pipeline-steps {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .step {
+      position: relative;
+      min-height: 58px;
+      padding: 10px 10px 9px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.045);
+      color: #d6e7f2;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .step span {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--amber);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    .step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: -9px;
+      top: 50%;
+      width: 10px;
+      height: 1px;
+      background: rgba(255, 200, 87, 0.5);
+    }
+
+    .accent-cyan { --accent: var(--cyan); --accent-soft: rgba(85, 215, 255, 0.1); --accent-line: rgba(85, 215, 255, 0.32); --accent-glow: rgba(85, 215, 255, 0.28); }
+    .accent-teal { --accent: var(--teal); --accent-soft: rgba(49, 224, 179, 0.1); --accent-line: rgba(49, 224, 179, 0.3); --accent-glow: rgba(49, 224, 179, 0.26); }
+    .accent-violet { --accent: var(--violet); --accent-soft: rgba(159, 140, 255, 0.1); --accent-line: rgba(159, 140, 255, 0.32); --accent-glow: rgba(159, 140, 255, 0.28); }
+    .accent-amber { --accent: var(--amber); --accent-soft: rgba(255, 200, 87, 0.1); --accent-line: rgba(255, 200, 87, 0.34); --accent-glow: rgba(255, 200, 87, 0.24); }
+    .accent-rose { --accent: var(--rose); --accent-soft: rgba(255, 122, 168, 0.1); --accent-line: rgba(255, 122, 168, 0.3); --accent-glow: rgba(255, 122, 168, 0.22); }
+
+    @media (max-width: 1260px) {
+      .page {
+        width: min(1080px, calc(100vw - 28px));
+      }
+
+      .hero,
+      .canvas,
+      .foundation {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-badges {
+        justify-content: flex-start;
+      }
+
+      .center-stage {
+        order: -1;
+      }
+
+      .domain-grid,
+      .pipeline-steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .flywheel {
+        min-height: 520px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: calc(100vw - 18px);
+        padding-top: 20px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .canvas {
+        padding: 12px;
+        border-radius: 22px;
+      }
+
+      .domain-grid,
+      .pipeline-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .flywheel {
+        min-height: auto;
+        display: grid;
+        gap: 10px;
+        padding: 14px;
+      }
+
+      .flywheel::before,
+      .flywheel::after,
+      .connector {
+        display: none;
+      }
+
+      .core,
+      .flow-node {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        width: auto;
+        min-height: auto;
+        transform: none;
+        border-radius: 18px;
+      }
+
+      .core {
+        padding: 22px;
+      }
+
+      .flow-node {
+        width: 100%;
+      }
+
+      .step:not(:last-child)::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow">Market Conversion OS</div>
+        <h1>
+          市场转化管理中心
+          <span class="title-gradient">产品架构全景图</span>
+        </h1>
+        <p class="hero-copy">
+          面向主机厂前线销售、售前专家与交付团队，将拓客、尽调、沙盘、立项、交付和运营冷启动串成一个可度量、可复用、可持续学习的转化操作系统。
+        </p>
+      </div>
+      <div class="hero-badges" aria-label="系统定位">
+        <span class="badge">重资产合资落地</span>
+        <span class="badge">新能源大宗运输</span>
+        <span class="badge">数据仿真驱动</span>
+        <span class="badge">销售到交付闭环</span>
+      </div>
+    </header>
+
+    <section class="canvas" aria-label="市场转化管理中心产品架构">
+      <aside class="side-column">
+        <section class="side-section accent-cyan">
+          <div class="section-kicker"><span>FRONTLINE ENTRY</span><span>触点入口</span></div>
+          <article class="capability-card">
+            <span class="card-code">APP</span>
+            <h2>前线销售移动端</h2>
+            <p>客户建档、拜访签到、线路采集、照片/录音留痕、政策查询、跟进记录在现场一次完成。</p>
+          </article>
+          <article class="capability-card accent-teal">
+            <span class="card-code">PC</span>
+            <h2>售前专家工作台</h2>
+            <p>承接客户底盘与路线数据，完成路谱分析、能耗测算、ROI/TCO 推演与方案编制。</p>
+          </article>
+        </section>
+
+        <section class="side-section accent-violet">
+          <div class="section-kicker"><span>KNOWLEDGE SUPPLY</span><span>知识补给</span></div>
+          <article class="capability-card">
+            <span class="card-code">POLICY</span>
+            <h2>政策补贴与电价策略</h2>
+            <p>按区域维护补贴、路权、环保限行和尖峰平谷电价，让销售话术和收益测算始终有依据。</p>
+          </article>
+        </section>
+      </aside>
+
+      <section class="center-stage">
+        <article class="mission-card">
+          <div class="mission-label">SYSTEM MISSION</div>
+          <h2>用数据仿真打通拓客阻碍，用沙盘推演实现精准立项，用全流程工作流保障资产平稳交付。</h2>
+          <p>系统的核心不是“录 CRM”，而是把客户运输底盘、真实路谱、能源补给、政策电价和车辆交付履约统一到一个转化飞轮里。</p>
+        </article>
+
+        <div class="flywheel" aria-label="核心业务转化飞轮">
+          <div class="connector line-a"></div>
+          <div class="connector line-b"></div>
+          <div class="connector line-c"></div>
+          <div class="connector line-d"></div>
+          <div class="connector line-e"></div>
+
+          <article class="flow-node node-1">
+            <h3>客户拓展</h3>
+            <p>客户画像、业务底盘、合资意向、干系人图谱。</p>
+          </article>
+          <article class="flow-node node-2">
+            <h3>线路尽调</h3>
+            <p>起终点、途经点、坡度高程、补给条件。</p>
+          </article>
+          <article class="flow-node node-3">
+            <h3>智算沙盘</h3>
+            <p>能耗匹配、ROI/TCO、碳收益、方案对比。</p>
+          </article>
+          <article class="flow-node node-4">
+            <h3>立项交付</h3>
+            <p>里程碑、SLA、VIN、材料、TSP 初始化。</p>
+          </article>
+          <article class="flow-node node-5">
+            <h3>运营回流</h3>
+            <p>首单跑通、冷启动数据、案例沉淀、模型校准。</p>
+          </article>
+
+          <div class="core">
+            <strong>市场转化<br />控制塔</strong>
+            <span>把销售判断变成数据方案，把纸面合同推进到车轮转动。</span>
+          </div>
+        </div>
+
+        <section class="domain-grid" aria-label="四大业务域">
+          <article class="domain-card accent-cyan" data-index="01">
+            <h2>大宗客户与商机管理</h2>
+            <p>沉淀客户底盘数据，管理从线索到签约的销售转化。</p>
+            <ul class="mini-list">
+              <li>客户 360 画像与档案库</li>
+              <li>商机漏斗与阶段推进</li>
+              <li>合同模板、电子签与归档</li>
+            </ul>
+          </article>
+
+          <article class="domain-card accent-teal" data-index="02">
+            <h2>售前尽调与智算沙盘</h2>
+            <p>把真实线路、能耗、电价、补贴转化成客户可决策的收益方案。</p>
+            <ul class="mini-list">
+              <li>路网与高程仿真引擎</li>
+              <li>能源补给与能耗评估</li>
+              <li>ROI/TCO 与商业计划书</li>
+            </ul>
+          </article>
+
+          <article class="domain-card accent-amber" data-index="03">
+            <h2>立项与交付追踪</h2>
+            <p>监控从纸面合同到车辆上线、司机入职、首单跑通的履约过程。</p>
+            <ul class="mini-list">
+              <li>项目里程碑与卡点预警</li>
+              <li>VIN 绑定与材料收集</li>
+              <li>车联网账号与标定验收</li>
+            </ul>
+          </article>
+
+          <article class="domain-card accent-violet" data-index="04">
+            <h2>政策与知识引擎</h2>
+            <p>为销售破冰、收益测算和交付合规提供政策、案例和话术支撑。</p>
+            <ul class="mini-list">
+              <li>区域政策与路权限制库</li>
+              <li>全国电价策略字典</li>
+              <li>案例话术与抗拒点应答</li>
+            </ul>
+          </article>
+        </section>
+      </section>
+
+      <aside class="side-column">
+        <section class="side-section accent-amber">
+          <div class="section-kicker"><span>DELIVERY OPS</span><span>交付履约</span></div>
+          <article class="capability-card">
+            <span class="card-code">VIN</span>
+            <h2>车辆资产交付管理</h2>
+            <p>从主机厂 ERP 拉取发车清单，批量绑定 VIN，统一审核发票、合格证、营运证与保险单。</p>
+          </article>
+          <article class="capability-card accent-rose">
+            <span class="card-code">IOT</span>
+            <h2>车联网初始化验收</h2>
+            <p>批量开通 TSP 账号，记录 DMS/ADAS 标定、上线测试日志和现场交付凭证。</p>
+          </article>
+        </section>
+
+        <section class="side-section accent-teal">
+          <div class="section-kicker"><span>OUTPUTS</span><span>成果输出</span></div>
+          <article class="capability-card">
+            <span class="card-code">BP</span>
+            <h2>客户侧商业计划书</h2>
+            <p>一键生成收益推演、建站规划、坡度图、补给地图和 TCO 对比，支持 PDF 与 Web 分享。</p>
+          </article>
+        </section>
+      </aside>
+
+      <section class="foundation" aria-label="数据智能与外部集成底座">
+        <article class="foundation-card">
+          <h2>数据资产底座</h2>
+          <p>所有业务动作都沉淀为可复用资产，后续项目的尽调和测算会越来越准。</p>
+          <div class="chip-row">
+            <span class="chip">客户主数据</span>
+            <span class="chip">商机过程库</span>
+            <span class="chip">线路路谱库</span>
+            <span class="chip">历史能耗库</span>
+            <span class="chip">政策电价库</span>
+            <span class="chip">车辆 VIN 库</span>
+          </div>
+        </article>
+
+        <article class="foundation-card">
+          <h2>智能计算与工作流引擎</h2>
+          <p>把路线、工况、排班、电价、补贴、交付 SLA 串进统一计算和推进规则。</p>
+          <div class="chip-row">
+            <span class="chip">路谱分析</span>
+            <span class="chip">相似线路能耗匹配</span>
+            <span class="chip">ROI/TCO 算账模型</span>
+            <span class="chip">碳收益预估</span>
+            <span class="chip">SLA 预警</span>
+            <span class="chip">报告生成</span>
+          </div>
+        </article>
+
+        <article class="foundation-card">
+          <h2>外部系统集成</h2>
+          <p>对接主机厂与行业数据源，让架构图里的能力真正落进业务现场。</p>
+          <div class="chip-row">
+            <span class="chip">高精地图 API</span>
+            <span class="chip">充换电站数据</span>
+            <span class="chip">主机厂 ERP</span>
+            <span class="chip">TSP 车联网</span>
+            <span class="chip">电子签/存证</span>
+            <span class="chip">对象存储/推送</span>
+          </div>
+        </article>
+      </section>
+    </section>
+
+    <section class="pipeline" aria-label="端到端业务闭环">
+      <h2 class="pipeline-title">END-TO-END CONVERSION LOOP / 端到端转化闭环</h2>
+      <div class="pipeline-steps">
+        <div class="step"><span>STEP 01</span>拓客建档</div>
+        <div class="step"><span>STEP 02</span>商机推进</div>
+        <div class="step"><span>STEP 03</span>线路尽调</div>
+        <div class="step"><span>STEP 04</span>智算沙盘</div>
+        <div class="step"><span>STEP 05</span>商务签约</div>
+        <div class="step"><span>STEP 06</span>项目立项</div>
+        <div class="step"><span>STEP 07</span>资产交付</div>
+        <div class="step"><span>STEP 08</span>数据回流</div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
