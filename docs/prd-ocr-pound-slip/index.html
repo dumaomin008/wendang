@@ -3,246 +3,1040 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OCR 装卸货磅单识别 · PRD 预览</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <title>PRD 文档中心</title>
   <link rel="stylesheet" href="../../styles.css" />
   <style>
+    :root {
+      --prd-nav-height: 76px;
+      --prd-bg: #F8FAFC;
+      --prd-surface: #FFFFFF;
+      --prd-surface-soft: #F8FAFC;
+      --prd-text: #0F172A;
+      --prd-muted: #64748B;
+      --prd-border: #E2E8F0;
+      --prd-indigo: #4F46E5;
+      --prd-violet: #7C3AED;
+      --prd-emerald: #10B981;
+      --prd-shadow: 0 4px 20px -2px rgba(79, 70, 229, 0.10);
+      --prd-shadow-hover: 0 10px 25px -5px rgba(79, 70, 229, 0.15), 0 8px 10px -6px rgba(79, 70, 229, 0.10);
+      --prd-gradient: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+      --prd-font: 'Plus Jakarta Sans', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    body.site.prd-site {
+      min-height: 100vh;
+      font-family: var(--prd-font);
+      color: var(--prd-text);
+      background:
+        linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(255, 255, 255, 0) 34%),
+        linear-gradient(215deg, rgba(124, 58, 237, 0.08) 0%, rgba(255, 255, 255, 0) 30%),
+        var(--prd-bg);
+    }
+
     .prd-preview-nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 100;
-      height: var(--nav-height);
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
+      min-height: var(--prd-nav-height);
+      background: rgba(255, 255, 255, 0.82);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
     }
+
     .prd-preview-nav-inner {
       width: 100%;
-      max-width: none;
-      margin: 0;
-      padding: 0 20px;
-      height: 100%;
-      display: flex;
+      max-width: 1280px;
+      min-height: var(--prd-nav-height);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto minmax(180px, 1fr);
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
+      gap: 20px;
     }
-    @media (min-width: 1100px) {
-      .prd-preview-nav-inner {
-        padding-right: 28px;
-      }
+
+    .prd-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--prd-text);
+      text-decoration: none;
+      min-width: 0;
     }
+
+    .prd-brand-mark {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      color: #FFFFFF;
+      background: var(--prd-gradient);
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.30);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .prd-brand-copy {
+      min-width: 0;
+      display: grid;
+      gap: 2px;
+    }
+
     .prd-preview-title {
       font-size: 15px;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-    .prd-preview-body {
-      max-width: var(--prose-width);
-      margin: 0 auto;
-      padding: calc(var(--nav-height) + 40px) 28px 80px;
-    }
-    .prd-preview-body.prd-flow-wide {
-      max-width: min(1200px, 96vw);
-    }
-    .prd-preview-body h1 {
-      font-size: 2rem;
       font-weight: 800;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
-    }
-    .prd-preview-body h2 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin: 2.5rem 0 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .prd-preview-body h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin: 1.75rem 0 0.75rem;
-    }
-    .prd-preview-body h4 { font-size: 1rem; font-weight: 600; margin: 1.25rem 0 0.5rem; }
-    .prd-preview-body p, .prd-preview-body li { color: var(--text-primary); margin-bottom: 0.65rem; }
-    .prd-preview-body ul, .prd-preview-body ol { padding-left: 1.4rem; margin-bottom: 1rem; }
-    .prd-preview-body blockquote {
-      margin: 1rem 0;
-      padding: 12px 20px;
-      border-left: 4px solid #667EEA;
-      background: var(--bg-alt);
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      color: var(--text-secondary);
-    }
-    .prd-preview-body table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1rem 0 1.5rem;
-      font-size: 14px;
-      background: var(--surface);
-      border-radius: var(--radius-sm);
+      line-height: 1.2;
+      white-space: nowrap;
       overflow: hidden;
-      box-shadow: var(--shadow-card);
+      text-overflow: ellipsis;
     }
-    .prd-preview-body th, .prd-preview-body td {
-      border: 1px solid var(--border);
-      padding: 10px 14px;
-      text-align: left;
-      vertical-align: top;
+
+    .prd-preview-subtitle {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--prd-muted);
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .prd-preview-body th {
-      background: var(--bg-alt);
-      font-weight: 600;
+
+    .prd-doc-picker {
+      position: relative;
+      justify-self: center;
+      min-width: 320px;
+    }
+
+    .prd-doc-trigger {
+      min-height: 44px;
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 999px;
+      padding: 4px 6px 4px 16px;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--prd-text);
+      box-shadow: var(--prd-shadow);
+      cursor: pointer;
+      font: 700 13px/1.2 var(--prd-font);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .prd-doc-trigger:hover {
+      transform: translateY(-1px);
+      border-color: rgba(79, 70, 229, 0.28);
+      box-shadow: var(--prd-shadow-hover);
+    }
+
+    .prd-doc-trigger-label {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
       white-space: nowrap;
     }
-    .prd-preview-body pre {
-      background: #1A1A1E;
-      color: #E8E8ED;
-      padding: 16px 20px;
-      border-radius: var(--radius-sm);
-      overflow-x: auto;
+
+    .prd-doc-trigger-icon {
+      width: 32px;
+      height: 32px;
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--prd-gradient);
+      color: #FFFFFF;
       font-size: 13px;
-      line-height: 1.55;
-      margin: 1rem 0;
+      line-height: 1;
     }
+
+    .prd-doc-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      right: 0;
+      z-index: 130;
+      display: none;
+      padding: 8px;
+      max-height: min(420px, 70vh);
+      overflow-y: auto;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: var(--prd-shadow-hover);
+      backdrop-filter: blur(18px);
+    }
+
+    .prd-doc-menu.is-open {
+      display: grid;
+      gap: 6px;
+    }
+
+    .prd-doc-option {
+      min-height: 54px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: transparent;
+      color: var(--prd-text);
+      text-align: left;
+      cursor: pointer;
+      font-family: var(--prd-font);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .prd-doc-option:hover,
+    .prd-doc-option[aria-selected="true"] {
+      background: #EEF2FF;
+    }
+
+    .prd-doc-option:hover {
+      transform: translateX(2px);
+    }
+
+    .prd-doc-option-title {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .prd-doc-option-desc {
+      display: block;
+      margin-top: 3px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--prd-muted);
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    .prd-doc-option-status {
+      color: var(--prd-indigo);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .prd-doc-trigger:focus-visible,
+    .prd-doc-option:focus-visible,
+    .prd-outline a:focus-visible,
+    .prd-preview-nav a:focus-visible {
+      outline: 2px solid var(--prd-indigo);
+      outline-offset: 2px;
+    }
+
+    .prd-preview-nav .nav-actions {
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .prd-preview-nav .nav-page-link {
+      min-height: 44px;
+      min-width: auto;
+      padding: 0 14px;
+      border: 1px solid var(--prd-border);
+      border-radius: 999px;
+      background: #FFFFFF;
+      color: #334155;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    }
+
+    .prd-preview-nav .nav-page-link:hover {
+      color: var(--prd-indigo);
+      border-color: rgba(79, 70, 229, 0.28);
+      transform: translateY(-1px);
+    }
+
+    .prd-preview-shell {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: calc(var(--prd-nav-height) + 36px) 24px 88px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .prd-preview-body {
+      min-width: 0;
+      padding: 42px;
+      border: 1px solid rgba(226, 232, 240, 0.86);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--prd-shadow);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .prd-preview-body.prd-flow-wide {
+      max-width: none;
+    }
+
+    .prd-preview-body h1 {
+      margin: 0 0 1.5rem;
+      font-size: 2rem;
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: 0;
+      color: var(--prd-text);
+    }
+
+    .prd-preview-body h2 {
+      margin: 2.75rem 0 1rem;
+      padding-top: 0.25rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid var(--prd-border);
+      font-size: 1.35rem;
+      line-height: 1.25;
+      font-weight: 800;
+      letter-spacing: 0;
+      color: var(--prd-text);
+    }
+
+    .prd-preview-body h2:first-child,
+    .prd-preview-body h1 + h2 {
+      margin-top: 1rem;
+    }
+
+    .prd-preview-body h3 {
+      margin: 2rem 0 0.75rem;
+      font-size: 1.08rem;
+      line-height: 1.35;
+      font-weight: 700;
+      color: #1E293B;
+    }
+
+    .prd-preview-body h4 {
+      margin: 1.35rem 0 0.55rem;
+      font-size: 1rem;
+      line-height: 1.4;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .prd-preview-body p,
+    .prd-preview-body li {
+      margin-bottom: 0.75rem;
+      color: #334155;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .prd-preview-body ul,
+    .prd-preview-body ol {
+      margin: 0 0 1rem;
+      padding-left: 1.35rem;
+    }
+
+    .prd-preview-body li::marker {
+      color: var(--prd-indigo);
+      font-weight: 700;
+    }
+
+    .prd-preview-body blockquote {
+      margin: 1.15rem 0;
+      padding: 14px 18px;
+      border: 1px solid rgba(79, 70, 229, 0.14);
+      border-left: 4px solid var(--prd-indigo);
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(124, 58, 237, 0.06));
+      color: #475569;
+    }
+
+    .prd-table-wrap {
+      display: block;
+      width: 100%;
+      margin: 1rem 0 1.6rem;
+      overflow-x: auto;
+      border: 1px solid var(--prd-border);
+      border-radius: 12px;
+      background: #FFFFFF;
+      box-shadow: var(--prd-shadow);
+    }
+
+    .prd-preview-body table {
+      width: 100%;
+      min-width: 560px;
+      margin: 0;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: #FFFFFF;
+    }
+
+    .prd-preview-body th,
+    .prd-preview-body td {
+      min-width: 120px;
+      border-right: 1px solid var(--prd-border);
+      border-bottom: 1px solid var(--prd-border);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: middle;
+      font-size: 14px;
+      line-height: 1.65;
+      color: #334155;
+    }
+
+    .prd-preview-body th:last-child,
+    .prd-preview-body td:last-child {
+      border-right: 0;
+    }
+
+    .prd-preview-body tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .prd-preview-body th {
+      background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%);
+      color: #0F172A;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
     .prd-preview-body code {
-      font-family: 'SF Mono', Menlo, monospace;
+      font-family: 'SF Mono', Menlo, Consolas, monospace;
       font-size: 0.9em;
     }
-    .prd-preview-body p code, .prd-preview-body li code {
-      background: var(--bg-alt);
+
+    .prd-preview-body p code,
+    .prd-preview-body li code {
       padding: 2px 6px;
-      border-radius: 4px;
+      border-radius: 6px;
+      background: #EEF2FF;
+      color: #3730A3;
     }
-    .prd-preview-body hr {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 2rem 0;
-    }
-    .prd-preview-body .mermaid {
-      margin: 1.25rem 0 1.75rem;
-      padding: 24px 16px;
-      background: linear-gradient(180deg, #FAFAFC 0%, var(--surface) 100%);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-card);
+
+    .prd-preview-body pre {
+      margin: 1rem 0 1.25rem;
+      padding: 18px 20px;
       overflow-x: auto;
-      min-height: 80px;
+      border-radius: 12px;
+      background: #0F172A;
+      color: #E2E8F0;
+      font-size: 13px;
+      line-height: 1.6;
     }
+
+    .prd-preview-body hr {
+      margin: 2.2rem 0;
+      border: 0;
+      border-top: 1px solid var(--prd-border);
+    }
+
+    .prd-preview-body > p > img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 1rem auto 1.75rem;
+      border: 1px solid var(--prd-border);
+      border-radius: 14px;
+      background: #FFFFFF;
+      box-shadow: var(--prd-shadow-hover);
+    }
+
+    .prd-preview-body td img {
+      display: inline-block;
+      max-width: 120px;
+      max-height: 36px;
+      vertical-align: middle;
+      margin-left: 6px;
+      border-radius: 6px;
+      border: 1px solid var(--prd-border);
+    }
+
+    .prd-preview-body .mermaid {
+      margin: 1.25rem 0 1.8rem;
+      padding: 24px 16px;
+      min-height: 80px;
+      overflow-x: auto;
+      border: 1px solid rgba(79, 70, 229, 0.14);
+      border-radius: 14px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+      box-shadow: var(--prd-shadow);
+    }
+
+    .prd-preview-body .mermaid-fallback {
+      white-space: pre;
+      font-family: 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 13px;
+      color: #334155;
+    }
+
     .prd-preview-body details {
       margin: 1.5rem 0;
-      padding: 16px 20px;
-      background: var(--bg-alt);
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
+      padding: 16px 18px;
+      border: 1px solid var(--prd-border);
+      border-radius: 12px;
+      background: #F8FAFC;
     }
+
     .prd-preview-body details summary {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
       cursor: pointer;
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--text-secondary);
+      font-weight: 700;
+      color: #334155;
       user-select: none;
     }
+
     .prd-preview-body details[open] summary {
-      margin-bottom: 1rem;
-      color: var(--text-primary);
+      margin-bottom: 0.85rem;
+      color: var(--prd-indigo);
     }
+
     .prd-flow-nav {
       position: sticky;
-      top: calc(var(--nav-height) + 12px);
+      top: calc(var(--prd-nav-height) + 16px);
       z-index: 10;
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin: 0 0 1.5rem;
-      padding: 12px 16px;
-      background: var(--glass);
+      padding: 12px;
+      border: 1px solid rgba(79, 70, 229, 0.14);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: var(--prd-shadow);
       backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-card);
     }
+
     .prd-flow-nav span {
+      align-self: center;
+      margin-right: 2px;
+      color: var(--prd-muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .prd-flow-nav a {
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 12px;
+      border: 1px solid var(--prd-border);
+      border-radius: 999px;
+      background: #FFFFFF;
+      color: #475569;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .prd-flow-nav a:hover {
+      transform: translateY(-1px);
+      border-color: rgba(79, 70, 229, 0.32);
+      color: var(--prd-indigo);
+    }
+
+    .prd-outline {
+      position: sticky;
+      top: calc(var(--prd-nav-height) + 32px);
+    }
+
+    .prd-outline-card {
+      padding: 18px;
+      border: 1px solid rgba(226, 232, 240, 0.86);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: var(--prd-shadow);
+    }
+
+    .prd-outline-eyebrow {
+      margin-bottom: 12px;
+      color: var(--prd-muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .prd-outline-list {
+      display: grid;
+      gap: 4px;
+    }
+
+    .prd-outline a {
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 10px;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.35;
+      text-decoration: none;
+      transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    .prd-outline a:hover {
+      color: var(--prd-indigo);
+      background: #EEF2FF;
+      transform: translateX(2px);
+    }
+
+    .prd-outline a[data-level="3"] {
+      padding-left: 22px;
       font-size: 12px;
       font-weight: 600;
-      color: var(--text-muted);
-      align-self: center;
-      margin-right: 4px;
+      color: #64748B;
     }
-    .prd-flow-nav a {
-      font-size: 12px;
-      font-weight: 500;
-      padding: 5px 12px;
-      border-radius: 999px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .prd-flow-nav a:hover {
-      border-color: #667EEA;
-      color: #667EEA;
-      background: rgba(102, 126, 234, 0.06);
-    }
-    .prd-preview-body blockquote:first-of-type {
-      background: linear-gradient(135deg, rgba(102,126,234,0.08), rgba(118,75,162,0.06));
-      border-left-color: #667EEA;
-      border-radius: var(--radius-sm);
-      font-size: 14px;
-    }
+
     .prd-loading {
-      text-align: center;
-      padding: 120px 20px;
-      color: var(--text-muted);
+      min-height: 360px;
+      display: grid;
+      place-items: center;
+      color: var(--prd-muted);
+      font-weight: 700;
+    }
+
+    @media (min-width: 900px) {
+      .prd-preview-body h1 {
+        font-size: 2.75rem;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .prd-preview-nav-inner {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+
+      .prd-brand {
+        justify-content: center;
+      }
+
+      .prd-preview-nav .nav-actions {
+        justify-content: center;
+      }
+
+      .prd-doc-picker {
+        justify-self: center;
+      }
+
+      :root {
+        --prd-nav-height: 176px;
+      }
+
+      .prd-preview-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .prd-outline {
+        position: static;
+        order: -1;
+      }
+
+      .prd-outline-card {
+        border-radius: 14px;
+      }
+
+      .prd-outline-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --prd-nav-height: 196px;
+      }
+
+      .prd-preview-nav-inner {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .prd-brand-mark {
+        display: none;
+      }
+
+      .prd-doc-picker {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .prd-doc-trigger {
+        padding-left: 14px;
+      }
+
+      .prd-preview-shell {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .prd-preview-body {
+        padding: 26px 18px;
+        border-radius: 14px;
+      }
+
+      .prd-outline {
+        order: 0;
+      }
+
+      .prd-outline-list {
+        grid-template-columns: 1fr;
+      }
+
+      .prd-preview-body h1 {
+        font-size: 1.85rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
-<body class="site">
-  <nav class="prd-preview-nav">
+<body class="site prd-site">
+  <nav class="prd-preview-nav" aria-label="PRD 页面导航">
     <div class="prd-preview-nav-inner">
-      <span class="prd-preview-title">OCR 装卸货磅单识别 · PRD</span>
+      <a class="prd-brand" href="../../index.html" aria-label="返回首页">
+        <span class="prd-brand-mark">PRD</span>
+        <span class="prd-brand-copy">
+          <span class="prd-preview-title" id="activeDocTitle">PRD 文档中心</span>
+          <span class="prd-preview-subtitle" id="activeDocSubtitle">选择文档查看</span>
+        </span>
+      </a>
+      <div class="prd-doc-picker" id="docPicker">
+        <button class="prd-doc-trigger" id="docTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="docMenu">
+          <span class="prd-doc-trigger-label" id="docTriggerLabel">选择 PRD 文档</span>
+          <span class="prd-doc-trigger-icon" aria-hidden="true">⌄</span>
+        </button>
+        <div class="prd-doc-menu" id="docMenu" role="listbox" aria-label="PRD 文档列表"></div>
+      </div>
       <div class="nav-actions">
-        <a href="../../index.html" class="nav-page-link">← 返回首页</a>
-        <a href="../../planning.html" class="nav-page-link">产品规划 →</a>
+        <a href="../../index.html" class="nav-page-link">返回首页</a>
+        <a href="../../planning.html" class="nav-page-link">产品规划</a>
       </div>
     </div>
   </nav>
-  <main class="prd-preview-body" id="content">
-    <div class="prd-loading">正在加载文档…</div>
+
+  <main class="prd-preview-shell">
+    <article class="prd-preview-body" id="content" aria-live="polite">
+      <div class="prd-loading">正在加载文档...</div>
+    </article>
+    <aside class="prd-outline" aria-label="章节导航">
+      <div class="prd-outline-card">
+        <div class="prd-outline-eyebrow">章节导航</div>
+        <nav class="prd-outline-list" id="outlineList"></nav>
+      </div>
+    </aside>
   </main>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
   <script>
     const contentEl = document.getElementById('content');
-    const PRD_FILE = 'PRD-OCR装卸货磅单识别.md';
+    const outlineListEl = document.getElementById('outlineList');
+    const docPickerEl = document.getElementById('docPicker');
+    const docTriggerEl = document.getElementById('docTrigger');
+    const docTriggerLabelEl = document.getElementById('docTriggerLabel');
+    const docMenuEl = document.getElementById('docMenu');
+    const activeTitleEl = document.getElementById('activeDocTitle');
+    const activeSubtitleEl = document.getElementById('activeDocSubtitle');
 
-    marked.setOptions({ gfm: true, breaks: false });
+    const MERMAID_SRC = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
+    const scriptPromises = {};
+    let mermaidReady = false;
 
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: 'base',
-      securityLevel: 'loose',
-      flowchart: { curve: 'basis', padding: 16, htmlLabels: true, nodeSpacing: 40, rankSpacing: 50 },
-      sequence: { actorMargin: 60, messageMargin: 40, boxMargin: 12, mirrorActors: false },
-      themeVariables: {
-        primaryColor: '#EEF0FF',
-        primaryBorderColor: '#667EEA',
-        primaryTextColor: '#1A1A1E',
-        secondaryColor: '#F5F5F7',
-        tertiaryColor: '#FAFAFC',
-        lineColor: '#9E9EA8',
-        fontFamily: 'Inter, sans-serif',
-        fontSize: '13px'
+    const PRD_DOCS = [
+      {
+        id: 'ocr',
+        label: 'OCR PRD',
+        title: 'OCR 装卸货磅单识别',
+        subtitle: '电子回单与结算闭环关键路径',
+        file: 'PRD-OCR装卸货磅单识别.md',
+        assetBase: ''
+      },
+      {
+        id: 'task-node-time',
+        label: '节点时间 PRD',
+        title: '任务单节点时间修正',
+        subtitle: '四个关键节点时间人工修正与追溯',
+        file: '../prd-task-node-time/任务单节点时间修正PRD.md',
+        assetBase: '../prd-task-node-time/'
       }
-    });
+    ];
 
-    function injectFlowNav() {
+    function getActiveDoc() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('doc') || 'ocr';
+      return PRD_DOCS.find(doc => doc.id === id) || PRD_DOCS[0];
+    }
+
+    function ensureScript(src, globalName) {
+      if (window[globalName]) return Promise.resolve(window[globalName]);
+      if (!scriptPromises[src]) {
+        scriptPromises[src] = new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = src;
+          script.async = true;
+          script.onload = () => resolve(window[globalName]);
+          script.onerror = () => reject(new Error(`${src} 加载失败`));
+          document.head.appendChild(script);
+        });
+      }
+      return scriptPromises[src];
+    }
+
+    async function ensureMermaid() {
+      const lib = await ensureScript(MERMAID_SRC, 'mermaid');
+      if (!mermaidReady) {
+        lib.initialize({
+          startOnLoad: false,
+          theme: 'base',
+          securityLevel: 'loose',
+          flowchart: { curve: 'basis', padding: 18, htmlLabels: true, nodeSpacing: 42, rankSpacing: 54 },
+          sequence: { actorMargin: 60, messageMargin: 40, boxMargin: 12, mirrorActors: false },
+          themeVariables: {
+            primaryColor: '#EEF2FF',
+            primaryBorderColor: '#4F46E5',
+            primaryTextColor: '#0F172A',
+            secondaryColor: '#F5F3FF',
+            tertiaryColor: '#F8FAFC',
+            lineColor: '#94A3B8',
+            fontFamily: 'Plus Jakarta Sans, Noto Sans SC, sans-serif',
+            fontSize: '13px'
+          }
+        });
+        mermaidReady = true;
+      }
+      return lib;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function parseInline(value) {
+      return escapeHtml(value)
+        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">')
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>');
+    }
+
+    function splitTableRow(line) {
+      const trimmed = line.trim().replace(/^\|/, '').replace(/\|$/, '');
+      return trimmed.split('|').map(cell => cell.trim());
+    }
+
+    function isTableDivider(line) {
+      return /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line);
+    }
+
+    function renderTable(lines) {
+      const rows = lines.map(splitTableRow);
+      const header = rows[0] || [];
+      const body = rows.slice(2);
+      const headHtml = `<thead><tr>${header.map(cell => `<th>${parseInline(cell)}</th>`).join('')}</tr></thead>`;
+      const bodyHtml = `<tbody>${body.map(row => `<tr>${row.map(cell => `<td>${parseInline(cell)}</td>`).join('')}</tr>`).join('')}</tbody>`;
+      return `<table>${headHtml}${bodyHtml}</table>`;
+    }
+
+    function renderList(items) {
+      if (!items.length) return '';
+      const tag = items[0].type === 'ol' ? 'ol' : 'ul';
+      const body = items.map(item => {
+        const value = tag === 'ol' && item.value ? ` value="${item.value}"` : '';
+        return `<li${value}>${parseInline(item.text)}</li>`;
+      }).join('');
+      return `<${tag}>${body}</${tag}>`;
+    }
+
+    function renderParagraph(lines) {
+      return `<p>${parseInline(lines.join(' '))}</p>`;
+    }
+
+    function parseMarkdown(md) {
+      const lines = md.replace(/\r\n/g, '\n').split('\n');
+      const html = [];
+      let paragraph = [];
+      let listItems = [];
+      let codeLines = [];
+      let codeLang = '';
+
+      function flushParagraph() {
+        if (paragraph.length) {
+          html.push(renderParagraph(paragraph));
+          paragraph = [];
+        }
+      }
+
+      function flushList() {
+        if (listItems.length) {
+          html.push(renderList(listItems));
+          listItems = [];
+        }
+      }
+
+      for (let i = 0; i < lines.length; i += 1) {
+        const line = lines[i];
+
+        if (codeLang) {
+          if (/^```/.test(line)) {
+            html.push(`<pre><code class="language-${escapeHtml(codeLang)}">${escapeHtml(codeLines.join('\n'))}</code></pre>`);
+            codeLines = [];
+            codeLang = '';
+          } else {
+            codeLines.push(line);
+          }
+          continue;
+        }
+
+        const fence = line.match(/^```(\S*)\s*$/);
+        if (fence) {
+          flushParagraph();
+          flushList();
+          codeLang = fence[1] || 'text';
+          codeLines = [];
+          continue;
+        }
+
+        if (!line.trim()) {
+          flushParagraph();
+          flushList();
+          continue;
+        }
+
+        if (line.trim() === '---') {
+          flushParagraph();
+          flushList();
+          html.push('<hr>');
+          continue;
+        }
+
+        if (line.includes('|') && lines[i + 1] && isTableDivider(lines[i + 1])) {
+          flushParagraph();
+          flushList();
+          const tableLines = [line, lines[i + 1]];
+          i += 2;
+          while (i < lines.length && lines[i].includes('|') && lines[i].trim()) {
+            tableLines.push(lines[i]);
+            i += 1;
+          }
+          i -= 1;
+          html.push(renderTable(tableLines));
+          continue;
+        }
+
+        const heading = line.match(/^(#{1,6})\s+(.+)$/);
+        if (heading) {
+          flushParagraph();
+          flushList();
+          const level = heading[1].length;
+          html.push(`<h${level}>${parseInline(heading[2])}</h${level}>`);
+          continue;
+        }
+
+        const quote = line.match(/^>\s?(.*)$/);
+        if (quote) {
+          flushParagraph();
+          flushList();
+          html.push(`<blockquote>${parseInline(quote[1])}</blockquote>`);
+          continue;
+        }
+
+        const ordered = line.match(/^\s*(\d+)\.\s+(.+)$/);
+        if (ordered) {
+          flushParagraph();
+          if (listItems.length && listItems[0].type !== 'ol') flushList();
+          listItems.push({ type: 'ol', value: ordered[1], text: ordered[2] });
+          continue;
+        }
+
+        const unordered = line.match(/^\s*[-*]\s+(.+)$/);
+        if (unordered) {
+          flushParagraph();
+          if (listItems.length && listItems[0].type !== 'ul') flushList();
+          listItems.push({ type: 'ul', text: unordered[1] });
+          continue;
+        }
+
+        flushList();
+        paragraph.push(line.trim());
+      }
+
+      flushParagraph();
+      flushList();
+      if (codeLang) {
+        html.push(`<pre><code class="language-${escapeHtml(codeLang)}">${escapeHtml(codeLines.join('\n'))}</code></pre>`);
+      }
+      return html.join('\n');
+    }
+
+    function setMenuOpen(open) {
+      docMenuEl.classList.toggle('is-open', open);
+      docTriggerEl.setAttribute('aria-expanded', String(open));
+    }
+
+    function renderDocMenu(activeDoc) {
+      docTriggerLabelEl.textContent = activeDoc.title;
+      docMenuEl.innerHTML = '';
+      PRD_DOCS.forEach(doc => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'prd-doc-option';
+        button.role = 'option';
+        button.id = `option-${doc.id}`;
+        button.setAttribute('aria-selected', String(doc.id === activeDoc.id));
+        button.innerHTML = `
+          <span>
+            <span class="prd-doc-option-title">${doc.title}</span>
+            <span class="prd-doc-option-desc">${doc.subtitle}</span>
+          </span>
+          <span class="prd-doc-option-status">${doc.id === activeDoc.id ? '当前' : '打开'}</span>
+        `;
+        button.addEventListener('click', () => selectDoc(doc.id));
+        docMenuEl.appendChild(button);
+      });
+    }
+
+    function selectDoc(id) {
+      const activeDoc = PRD_DOCS.find(doc => doc.id === id) || PRD_DOCS[0];
+      const url = new URL(window.location.href);
+      url.searchParams.set('doc', activeDoc.id);
+      url.hash = '';
+      window.history.pushState({ doc: activeDoc.id }, '', url);
+      setMenuOpen(false);
+      loadDoc(activeDoc, true);
+    }
+
+    function updateDocChrome(activeDoc) {
+      activeTitleEl.textContent = `${activeDoc.title} · PRD`;
+      activeSubtitleEl.textContent = activeDoc.subtitle;
+      document.title = `${activeDoc.title} · PRD 预览`;
+      renderDocMenu(activeDoc);
+    }
+
+    function injectFlowNav(activeDoc) {
+      if (activeDoc.id !== 'ocr') return;
       const h2 = [...contentEl.querySelectorAll('h2')].find(el => el.textContent.includes('业务流程'));
       if (!h2) return;
       contentEl.classList.add('prd-flow-wide');
@@ -264,6 +1058,58 @@
       h2.insertAdjacentElement('afterend', nav);
     }
 
+    function assignHeadingIds(activeDoc) {
+      let index = 0;
+      contentEl.querySelectorAll('h1, h2, h3, h4').forEach(heading => {
+        if (!heading.id) {
+          index += 1;
+          heading.id = `${activeDoc.id}-section-${index}`;
+        }
+      });
+    }
+
+    function buildOutline() {
+      const headings = [...contentEl.querySelectorAll('h2, h3')];
+      outlineListEl.innerHTML = '';
+      if (!headings.length) {
+        outlineListEl.innerHTML = '<span class="prd-preview-subtitle">暂无章节</span>';
+        return;
+      }
+      headings.slice(0, 18).forEach(heading => {
+        const link = document.createElement('a');
+        link.href = `#${heading.id}`;
+        link.textContent = heading.textContent;
+        link.dataset.level = heading.tagName === 'H3' ? '3' : '2';
+        outlineListEl.appendChild(link);
+      });
+    }
+
+    function wrapTables() {
+      contentEl.querySelectorAll('table').forEach(table => {
+        if (table.parentElement?.classList.contains('prd-table-wrap')) return;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'prd-table-wrap';
+        table.insertAdjacentElement('beforebegin', wrapper);
+        wrapper.appendChild(table);
+      });
+    }
+
+    function normalizeAssetPath(src, activeDoc) {
+      if (!src || /^(https?:|data:|\/|#)/i.test(src)) return src;
+      if (!activeDoc.assetBase || src.startsWith('../')) return src;
+      return `${activeDoc.assetBase}${src}`;
+    }
+
+    function postProcessImages(activeDoc) {
+      contentEl.querySelectorAll('img').forEach((img, index) => {
+        const rawSrc = img.getAttribute('src');
+        img.src = normalizeAssetPath(rawSrc, activeDoc);
+        img.loading = index === 0 ? 'eager' : 'lazy';
+        img.decoding = 'async';
+        if (!img.alt) img.alt = 'PRD 文档图片';
+      });
+    }
+
     async function renderMermaid() {
       const blocks = contentEl.querySelectorAll('pre code.language-mermaid, code.language-mermaid');
       for (const block of blocks) {
@@ -276,27 +1122,56 @@
         else block.replaceWith(div);
       }
       const nodes = contentEl.querySelectorAll('.mermaid');
-      if (nodes.length) await mermaid.run({ nodes });
+      if (nodes.length) {
+        try {
+          const lib = await ensureMermaid();
+          await lib.run({ nodes });
+        } catch (error) {
+          nodes.forEach(node => {
+            node.classList.add('mermaid-fallback');
+          });
+        }
+      }
     }
 
-    async function loadDoc() {
-      contentEl.innerHTML = '<div class="prd-loading">正在加载文档…</div>';
+    async function loadDoc(activeDoc = getActiveDoc(), resetScroll = false) {
+      updateDocChrome(activeDoc);
+      contentEl.innerHTML = '<div class="prd-loading">正在加载文档...</div>';
+      outlineListEl.innerHTML = '';
       contentEl.classList.remove('prd-flow-wide');
       try {
-        const res = await fetch(PRD_FILE);
+        const res = await fetch(activeDoc.file);
         if (!res.ok) throw new Error(res.statusText);
         const md = await res.text();
-        contentEl.innerHTML = marked.parse(md);
-        injectFlowNav();
+        contentEl.innerHTML = parseMarkdown(md);
+        wrapTables();
+        postProcessImages(activeDoc);
+        injectFlowNav(activeDoc);
+        assignHeadingIds(activeDoc);
+        buildOutline();
         await renderMermaid();
         contentEl.querySelectorAll('details').forEach(d => {
           d.addEventListener('toggle', () => { if (d.open) renderMermaid(); });
         });
+        if (resetScroll) window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (e) {
-        contentEl.innerHTML = '<div class="prd-loading">加载失败，请通过本地 HTTP 服务访问（不能直接 file:// 打开）。</div>';
+        contentEl.innerHTML = `<div class="prd-loading">${activeDoc.title} 加载失败，请通过本地 HTTP 服务访问。</div>`;
       }
     }
 
+    docTriggerEl.addEventListener('click', () => {
+      setMenuOpen(!docMenuEl.classList.contains('is-open'));
+    });
+
+    document.addEventListener('click', event => {
+      if (!docPickerEl.contains(event.target)) setMenuOpen(false);
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    });
+
+    window.addEventListener('popstate', () => loadDoc(getActiveDoc()));
     loadDoc();
   </script>
 </body>
