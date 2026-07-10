@@ -33,6 +33,10 @@
         var(--prd-bg);
     }
 
+    html {
+      scroll-padding-top: calc(var(--prd-nav-height) + 28px);
+    }
+
     .prd-preview-nav {
       position: fixed;
       top: 0;
@@ -238,6 +242,7 @@
     .prd-doc-trigger:focus-visible,
     .prd-doc-option:focus-visible,
     .prd-outline a:focus-visible,
+    .prd-outline button:focus-visible,
     .prd-preview-nav a:focus-visible {
       outline: 2px solid var(--prd-indigo);
       outline-offset: 2px;
@@ -296,6 +301,13 @@
       font-weight: 800;
       letter-spacing: 0;
       color: var(--prd-text);
+    }
+
+    .prd-preview-body h1,
+    .prd-preview-body h2,
+    .prd-preview-body h3,
+    .prd-preview-body h4 {
+      scroll-margin-top: calc(var(--prd-nav-height) + 28px);
     }
 
     .prd-preview-body h2 {
@@ -552,11 +564,15 @@
     }
 
     .prd-outline-card {
+      max-height: calc(100vh - var(--prd-nav-height) - 64px);
       padding: 18px;
+      display: flex;
+      flex-direction: column;
       border: 1px solid rgba(226, 232, 240, 0.86);
       border-radius: 18px;
       background: rgba(255, 255, 255, 0.86);
       box-shadow: var(--prd-shadow);
+      overflow: hidden;
     }
 
     .prd-outline-eyebrow {
@@ -569,29 +585,60 @@
     .prd-outline-list {
       display: grid;
       gap: 4px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding-right: 4px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(79, 70, 229, 0.38) transparent;
     }
 
-    .prd-outline a {
+    .prd-outline-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .prd-outline-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .prd-outline-list::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      background: rgba(79, 70, 229, 0.28);
+    }
+
+    .prd-outline-list::-webkit-scrollbar-thumb:hover {
+      background: rgba(79, 70, 229, 0.44);
+    }
+
+    .prd-outline a,
+    .prd-outline button {
       min-height: 36px;
+      width: 100%;
       display: flex;
       align-items: center;
+      border: 0;
       padding: 7px 10px;
       border-radius: 10px;
+      background: transparent;
       color: #475569;
       font-size: 13px;
       font-weight: 600;
+      font-family: var(--prd-font);
       line-height: 1.35;
+      text-align: left;
       text-decoration: none;
+      cursor: pointer;
       transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
     }
 
-    .prd-outline a:hover {
+    .prd-outline a:hover,
+    .prd-outline button:hover {
       color: var(--prd-indigo);
       background: #EEF2FF;
       transform: translateX(2px);
     }
 
-    .prd-outline a[data-level="3"] {
+    .prd-outline a[data-level="3"],
+    .prd-outline button[data-level="3"] {
       padding-left: 22px;
       font-size: 12px;
       font-weight: 600;
@@ -646,10 +693,12 @@
       }
 
       .prd-outline-card {
+        max-height: none;
         border-radius: 14px;
       }
 
       .prd-outline-list {
+        overflow: visible;
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
@@ -764,6 +813,7 @@
     const PRD_DOCS = [
       {
         id: 'ocr',
+        hidden: true,
         label: 'OCR PRD',
         title: 'OCR 装卸货磅单识别',
         subtitle: '电子回单与结算闭环关键路径',
@@ -777,13 +827,22 @@
         subtitle: '节点时间、驾驶员与磅单信息统一修正',
         file: '../prd-task-node-time/任务单节点时间修正PRD.md',
         assetBase: '../prd-task-node-time/'
+      },
+      {
+        id: 'station-route-planning',
+        label: '场站路线 PRD',
+        title: '场站路线规划',
+        subtitle: '司机端地图找充电场站｜第一期',
+        file: '../prd-station-route-planning/场站路线规划PRD_第一期最终版.md',
+        assetBase: '../prd-station-route-planning/'
       }
     ];
+    const VISIBLE_PRD_DOCS = PRD_DOCS.filter(doc => !doc.hidden);
 
     function getActiveDoc() {
       const params = new URLSearchParams(window.location.search);
-      const id = params.get('doc') || 'ocr';
-      return PRD_DOCS.find(doc => doc.id === id) || PRD_DOCS[0];
+      const id = params.get('doc');
+      return VISIBLE_PRD_DOCS.find(doc => doc.id === id) || VISIBLE_PRD_DOCS[0] || PRD_DOCS[0];
     }
 
     function ensureScript(src, globalName) {
@@ -999,7 +1058,7 @@
     function renderDocMenu(activeDoc) {
       docTriggerLabelEl.textContent = activeDoc.title;
       docMenuEl.innerHTML = '';
-      PRD_DOCS.forEach(doc => {
+      VISIBLE_PRD_DOCS.forEach(doc => {
         const button = document.createElement('button');
         button.type = 'button';
         button.className = 'prd-doc-option';
@@ -1019,7 +1078,7 @@
     }
 
     function selectDoc(id) {
-      const activeDoc = PRD_DOCS.find(doc => doc.id === id) || PRD_DOCS[0];
+      const activeDoc = VISIBLE_PRD_DOCS.find(doc => doc.id === id) || VISIBLE_PRD_DOCS[0] || PRD_DOCS[0];
       const url = new URL(window.location.href);
       url.searchParams.set('doc', activeDoc.id);
       url.hash = '';
@@ -1068,6 +1127,21 @@
       });
     }
 
+    function getScrollOffset() {
+      const navHeight = document.querySelector('.prd-preview-nav')?.getBoundingClientRect().height || 0;
+      return navHeight + 28;
+    }
+
+    function scrollToHash(hash, behavior = 'smooth') {
+      if (!hash || hash === '#') return false;
+      const id = decodeURIComponent(hash.replace(/^#/, ''));
+      const target = document.getElementById(id);
+      if (!target) return false;
+      const top = target.getBoundingClientRect().top + window.scrollY - getScrollOffset();
+      window.scrollTo({ top: Math.max(0, top), behavior });
+      return true;
+    }
+
     function buildOutline() {
       const headings = [...contentEl.querySelectorAll('h2, h3')];
       outlineListEl.innerHTML = '';
@@ -1075,11 +1149,19 @@
         outlineListEl.innerHTML = '<span class="prd-preview-subtitle">暂无章节</span>';
         return;
       }
-      headings.slice(0, 18).forEach(heading => {
-        const link = document.createElement('a');
-        link.href = `#${heading.id}`;
+      headings.forEach(heading => {
+        const link = document.createElement('button');
+        link.type = 'button';
         link.textContent = heading.textContent;
+        link.dataset.target = heading.id;
         link.dataset.level = heading.tagName === 'H3' ? '3' : '2';
+        link.addEventListener('click', event => {
+          event.preventDefault();
+          const url = new URL(window.location.href);
+          url.hash = heading.id;
+          window.history.pushState({ doc: getActiveDoc().id }, '', url);
+          scrollToHash(url.hash);
+        });
         outlineListEl.appendChild(link);
       });
     }
@@ -1140,7 +1222,7 @@
       outlineListEl.innerHTML = '';
       contentEl.classList.remove('prd-flow-wide');
       try {
-        const res = await fetch(activeDoc.file);
+        const res = await fetch(activeDoc.file, { cache: 'no-cache' });
         if (!res.ok) throw new Error(res.statusText);
         const md = await res.text();
         contentEl.innerHTML = parseMarkdown(md);
@@ -1154,6 +1236,7 @@
           d.addEventListener('toggle', () => { if (d.open) renderMermaid(); });
         });
         if (resetScroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+        else if (window.location.hash) requestAnimationFrame(() => scrollToHash(window.location.hash, 'auto'));
       } catch (e) {
         contentEl.innerHTML = `<div class="prd-loading">${activeDoc.title} 加载失败，请通过本地 HTTP 服务访问。</div>`;
       }
@@ -1172,6 +1255,7 @@
     });
 
     window.addEventListener('popstate', () => loadDoc(getActiveDoc()));
+    window.addEventListener('hashchange', () => scrollToHash(window.location.hash));
     loadDoc();
   </script>
 </body>

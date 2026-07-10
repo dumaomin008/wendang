@@ -41,6 +41,7 @@ class DocxMarkdownConverter:
         self.assets_dir = self.output_dir / "assets"
         self.media_written: dict[str, str] = {}
         self.list_counters: dict[tuple[str, str], int] = {}
+        self.style_list_counter = 0
 
     def convert(self) -> None:
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -173,6 +174,7 @@ class DocxMarkdownConverter:
         }.get(style_name)
 
         if heading_level:
+            self.style_list_counter = 0
             return f"{'#' * heading_level} {text}"
 
         num_id_el = paragraph.find("./w:pPr/w:numPr/w:numId", NS)
@@ -181,6 +183,7 @@ class DocxMarkdownConverter:
         ilvl = attr(ilvl_el, "w:val") if ilvl_el is not None else "0"
 
         if num_id:
+            self.style_list_counter = 0
             fmt = numbering.get(num_id, {}).get(ilvl, "decimal")
             indent = "  " * int(ilvl or "0")
             if fmt == "bullet":
@@ -189,6 +192,11 @@ class DocxMarkdownConverter:
             self.list_counters[key] = self.list_counters.get(key, 0) + 1
             return f"{indent}{self.list_counters[key]}. {text}"
 
+        if style_name in {"List Number", "List Number 2", "List Number 3"}:
+            self.style_list_counter += 1
+            return f"{self.style_list_counter}. {text}"
+
+        self.style_list_counter = 0
         return text
 
     def _images(
