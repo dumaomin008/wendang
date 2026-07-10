@@ -583,6 +583,7 @@
     }
 
     .prd-outline-list {
+      min-height: 0;
       display: grid;
       gap: 4px;
       overflow-y: auto;
@@ -693,12 +694,12 @@
       }
 
       .prd-outline-card {
-        max-height: none;
+        max-height: min(360px, calc(100vh - var(--prd-nav-height) - 48px));
         border-radius: 14px;
       }
 
       .prd-outline-list {
-        overflow: visible;
+        overflow-y: auto;
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
@@ -741,6 +742,8 @@
       }
 
       .prd-outline-list {
+        max-height: 260px;
+        overflow-y: auto;
         grid-template-columns: 1fr;
       }
 
