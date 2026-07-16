@@ -848,6 +848,10 @@
       return VISIBLE_PRD_DOCS.find(doc => doc.id === id) || VISIBLE_PRD_DOCS[0] || PRD_DOCS[0];
     }
 
+    function getCacheVersion() {
+      return new URLSearchParams(window.location.search).get('v') || '';
+    }
+
     function ensureScript(src, globalName) {
       if (window[globalName]) return Promise.resolve(window[globalName]);
       if (!scriptPromises[src]) {
@@ -1181,8 +1185,11 @@
 
     function normalizeAssetPath(src, activeDoc) {
       if (!src || /^(https?:|data:|\/|#)/i.test(src)) return src;
-      if (!activeDoc.assetBase || src.startsWith('../')) return src;
-      return `${activeDoc.assetBase}${src}`;
+      const normalized = !activeDoc.assetBase || src.startsWith('../') ? src : `${activeDoc.assetBase}${src}`;
+      const version = getCacheVersion();
+      if (!version) return normalized;
+      const separator = normalized.includes('?') ? '&' : '?';
+      return `${normalized}${separator}v=${encodeURIComponent(version)}`;
     }
 
     function postProcessImages(activeDoc) {
