@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1710" height="1080" viewBox="0 0 1710 1080" role="img" aria-labelledby="title desc">
+  <title id="title">修改任务信息弹窗示意</title>
+  <desc id="desc">驾驶员信息修改区域增加原牵引车、原挂车车牌号、新牵引车牌、新挂车牌字段。</desc>
+  <defs>
+    <linearGradient id="primary" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-20%" width="120%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#4F46E5" flood-opacity="0.12"/>
+    </filter>
+    <filter id="buttonShadow" x="-20%" y="-30%" width="140%" height="170%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#4F46E5" flood-opacity="0.28"/>
+    </filter>
+    <style>
+      .bg { fill: #F8FAFC; }
+      .surface { fill: #FFFFFF; stroke: #E2E8F0; stroke-width: 1.2; }
+      .panel { fill: #FFFFFF; stroke: #E2E8F0; stroke-width: 1.2; filter: url(#shadow); }
+      .soft { fill: #F8FAFC; stroke: #E2E8F0; stroke-width: 1.2; }
+      .field { fill: #FFFFFF; stroke: #DCE5F2; stroke-width: 1.4; }
+      .field-disabled { fill: #F8FAFC; stroke: #DCE5F2; stroke-width: 1.4; }
+      .title { font: 800 44px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #0F172A; }
+      .subtitle { font: 500 18px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #64748B; }
+      .card-label { font: 500 15px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #64748B; }
+      .card-value { font: 800 18px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #0F172A; }
+      .tab { font: 700 17px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; }
+      .section-title { font: 800 30px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #0F172A; }
+      .num { font: 800 30px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #4F46E5; }
+      .label { font: 700 15px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #334155; }
+      .value { font: 500 20px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #1E293B; }
+      .disabled-value { font: 500 20px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #64748B; }
+      .hint { font: 500 14px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #64748B; }
+      .footer { font: 700 16px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #64748B; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1710" height="1080"/>
+  <circle cx="1190" cy="40" r="280" fill="#7C3AED" opacity="0.08"/>
+  <circle cx="250" cy="260" r="220" fill="#4F46E5" opacity="0.07"/>
+
+  <text class="title" x="24" y="44">修改任务信息</text>
+  <text class="subtitle" x="24" y="78">请谨慎修正任务执行过程中的关键信息，系统会自动记录本次变更。</text>
+
+  <g transform="translate(22 98)">
+    <rect class="surface" x="0" y="0" width="266" height="80" rx="20"/>
+    <rect x="18" y="18" width="44" height="44" rx="12" fill="#EEF2FF"/>
+    <text x="78" y="33" class="card-label">任务单号</text>
+    <text x="78" y="61" class="card-value">RW202405220156</text>
+
+    <rect class="surface" x="282" y="0" width="266" height="80" rx="20"/>
+    <rect x="300" y="18" width="44" height="44" rx="12" fill="#EEF2FF"/>
+    <text x="360" y="33" class="card-label">车牌号</text>
+    <text x="360" y="61" class="card-value">粤B·12345</text>
+
+    <rect class="surface" x="564" y="0" width="266" height="80" rx="20"/>
+    <rect x="582" y="18" width="44" height="44" rx="12" fill="#EEF2FF"/>
+    <text x="642" y="33" class="card-label">当前司机</text>
+    <text x="642" y="61" class="card-value">张师傅</text>
+
+    <rect class="surface" x="846" y="0" width="266" height="80" rx="20"/>
+    <rect x="864" y="18" width="44" height="44" rx="12" fill="#EEF2FF"/>
+    <text x="924" y="33" class="card-label">司机电话</text>
+    <text x="924" y="61" class="card-value">138 8888 8888</text>
+
+    <rect class="surface" x="1128" y="0" width="266" height="80" rx="20"/>
+    <rect x="1146" y="18" width="44" height="44" rx="12" fill="#EEF2FF"/>
+    <text x="1206" y="33" class="card-label">任务状态</text>
+    <text x="1206" y="61" class="card-value">运输中</text>
+
+    <rect class="surface" x="1410" y="0" width="266" height="80" rx="20"/>
+    <rect x="1428" y="18" width="44" height="44" rx="12" fill="#EEF2FF"/>
+    <text x="1488" y="33" class="card-label">运输线路</text>
+    <text x="1488" y="61" class="card-value">广州 → 上海</text>
+  </g>
+
+  <g transform="translate(22 194)">
+    <rect x="0" y="0" width="144" height="48" rx="24" fill="url(#primary)" filter="url(#buttonShadow)"/>
+    <text x="22" y="31" class="tab" fill="#FFFFFF">任务信息修改</text>
+    <rect class="surface" x="158" y="0" width="152" height="48" rx="24"/>
+    <text x="184" y="31" class="tab" fill="#334155">磅单信息修改</text>
+    <rect class="surface" x="324" y="0" width="146" height="48" rx="24"/>
+    <text x="354" y="31" class="tab" fill="#334155">修改日志</text>
+    <circle cx="430" cy="24" r="13" fill="#EEF2FF"/>
+    <text x="426" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" font-weight="800" fill="#4F46E5">2</text>
+  </g>
+
+  <g transform="translate(22 258)">
+    <rect class="panel" x="0" y="0" width="1666" height="188" rx="24"/>
+    <text class="num" x="20" y="54">1.</text>
+    <text class="section-title" x="58" y="54">节点时间修改</text>
+
+    <g transform="translate(20 88)">
+      <text class="label" x="0" y="0">装到达时间</text>
+      <rect class="field" x="0" y="16" width="398" height="58" rx="16"/>
+      <text class="value" x="22" y="53">2024/05/22 08:30</text>
+
+      <text class="label" x="420" y="0">装离开时间</text>
+      <rect class="field" x="420" y="16" width="398" height="58" rx="16"/>
+      <text class="value" x="442" y="53">2024/05/22 09:45</text>
+
+      <text class="label" x="840" y="0">卸到达时间</text>
+      <rect class="field" x="840" y="16" width="398" height="58" rx="16"/>
+      <text class="value" x="862" y="53">2024/05/23 13:20</text>
+
+      <text class="label" x="1260" y="0">卸离开时间</text>
+      <rect class="field" x="1260" y="16" width="384" height="58" rx="16"/>
+      <text class="value" x="1282" y="53">2024/05/23 14:10</text>
+    </g>
+  </g>
+
+  <g transform="translate(22 470)">
+    <rect class="panel" x="0" y="0" width="1666" height="386" rx="24"/>
+    <text class="num" x="20" y="54">2.</text>
+    <text class="section-title" x="58" y="54">驾驶员信息修改</text>
+
+    <g transform="translate(20 90)">
+      <text class="label" x="0" y="0">原司机</text>
+      <rect class="field-disabled" x="0" y="16" width="398" height="58" rx="16"/>
+      <text class="disabled-value" x="22" y="53">张师傅</text>
+
+      <text class="label" x="420" y="0">原司机电话</text>
+      <rect class="field-disabled" x="420" y="16" width="398" height="58" rx="16"/>
+      <text class="disabled-value" x="442" y="53">138 8888 8888</text>
+
+      <text class="label" x="840" y="0">新司机</text>
+      <rect class="field" x="840" y="16" width="398" height="58" rx="16"/>
+      <text class="value" x="862" y="53">李四</text>
+      <text x="1202" y="53" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" fill="#94A3B8">⌄</text>
+      <text class="hint" x="840" y="102">支持按司机姓名、手机号搜索</text>
+
+      <text class="label" x="1260" y="0">新司机电话</text>
+      <rect class="field-disabled" x="1260" y="16" width="384" height="58" rx="16"/>
+      <text class="disabled-value" x="1282" y="53">139 6666 6666</text>
+      <text class="hint" x="1260" y="102">选择新司机后自动带出</text>
+    </g>
+
+    <g transform="translate(20 258)">
+      <text class="label" x="0" y="0">原牵引车</text>
+      <rect class="field-disabled" x="0" y="16" width="398" height="58" rx="16"/>
+      <text class="disabled-value" x="22" y="53">粤B·12345</text>
+
+      <text class="label" x="420" y="0">原挂车车牌号</text>
+      <rect class="field-disabled" x="420" y="16" width="398" height="58" rx="16"/>
+      <text class="disabled-value" x="442" y="53">粤B·G6789</text>
+
+      <text class="label" x="840" y="0">新牵引车牌</text>
+      <rect class="field" x="840" y="16" width="398" height="58" rx="16"/>
+      <text x="1202" y="53" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" fill="#94A3B8">⌄</text>
+
+      <text class="label" x="1260" y="0">新挂车牌</text>
+      <rect class="field" x="1260" y="16" width="384" height="58" rx="16"/>
+      <text x="1608" y="53" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" fill="#94A3B8">⌄</text>
+    </g>
+  </g>
+
+  <line x1="0" y1="1018" x2="1710" y2="1018" stroke="#E2E8F0" stroke-width="1"/>
+  <text class="footer" x="24" y="1060">系统将自动记录修改前后值、修改原因与操作时间。</text>
+  <rect class="surface" x="1290" y="1034" width="192" height="58" rx="16"/>
+  <text x="1369" y="1070" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif" font-size="18" font-weight="800" fill="#334155">取消</text>
+  <rect x="1496" y="1034" width="192" height="58" rx="16" fill="url(#primary)" filter="url(#buttonShadow)"/>
+  <text x="1570" y="1070" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">保存修改</text>
+</svg>
