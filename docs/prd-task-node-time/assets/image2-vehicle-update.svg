@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1710" height="1080" viewBox="0 0 1710 1080" role="img" aria-labelledby="title desc">
   <title id="title">修改任务信息弹窗示意</title>
-  <desc id="desc">驾驶员信息修改区域增加原牵引车、原挂车车牌号、新牵引车牌、新挂车牌字段。</desc>
+  <desc id="desc">驾驶员信息修改区域增加原牵引车、原挂车、新牵引车、新挂车字段。</desc>
   <defs>
     <linearGradient id="primary" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#4F46E5"/>
@@ -137,15 +137,15 @@
       <rect class="field-disabled" x="0" y="16" width="398" height="58" rx="16"/>
       <text class="disabled-value" x="22" y="53">粤B·12345</text>
 
-      <text class="label" x="420" y="0">原挂车车牌号</text>
+      <text class="label" x="420" y="0">原挂车</text>
       <rect class="field-disabled" x="420" y="16" width="398" height="58" rx="16"/>
       <text class="disabled-value" x="442" y="53">粤B·G6789</text>
 
-      <text class="label" x="840" y="0">新牵引车牌</text>
+      <text class="label" x="840" y="0">新牵引车</text>
       <rect class="field" x="840" y="16" width="398" height="58" rx="16"/>
       <text x="1202" y="53" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" fill="#94A3B8">⌄</text>
 
-      <text class="label" x="1260" y="0">新挂车牌</text>
+      <text class="label" x="1260" y="0">新挂车</text>
       <rect class="field" x="1260" y="16" width="384" height="58" rx="16"/>
       <text x="1608" y="53" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" fill="#94A3B8">⌄</text>
     </g>
